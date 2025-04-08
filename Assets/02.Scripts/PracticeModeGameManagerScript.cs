@@ -31,4 +31,20 @@ public class PracticeModeGameManagerScript : MonoBehaviour
             Debug.Log("UI 할당되지 않음");
         }
     }
+
+    // 임시 로직 테스트용 코드
+    /**
+    private void onclick()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            IncreaseStageStep();
+        }
+    }
+
+    void Update()
+    {
+        onclick();
+    }
+    */
 }
