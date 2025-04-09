@@ -43,6 +43,7 @@ public class GameStateManager : MonoBehaviour
                 break;
             case GameState.Play:
                 TheTimerManager.StartTimer();
+                Debug.Log("게임 진행 중");
                 break;
             case GameState.End:
                 TheTimerManager.StopTimer();

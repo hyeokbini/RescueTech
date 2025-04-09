@@ -12,6 +12,7 @@ public class TimerManager : MonoBehaviour
     void Start()
     {
         ResetTimer();       //진행 시간을 초기화
+        UpdateTimerUI();
     }
 
     void Update()
