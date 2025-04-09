@@ -24,7 +24,8 @@ public class GameStartTimerManager : MonoBehaviour
 
     void Update()
     {
-        if (!IsRunning) return;          //타이머가 작동 중이 아니면 반환
+        //타이머가 작동 중이 아니거나 현재 상태가 게임 대기 중이 아니면 반환
+        if (!IsRunning || GameStateManager.Instance.CurrentState != GameState.Wait) return;
 
         CurrentTime -= Time.deltaTime;  //진행 시간을 델타타임 만큼 계속 감소
         UpdateTimerUI();                //진행 시간에 따라 UI도 업데이트
@@ -56,6 +57,7 @@ public class GameStartTimerManager : MonoBehaviour
     {
         //타이머 진행을 멈추고 타이머 UI를 비활성화
         IsRunning = false;
+        ResetTimer();       //재호출 시 0으로 되어 있는 것을 방지
         StartTimerText.gameObject.SetActive(false);
     }
 

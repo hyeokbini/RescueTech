@@ -11,6 +11,13 @@ public class TimerManager : MonoBehaviour
 
     void Start()
     {
+        //UI 컴포넌트 연결 체크
+        if (TimerText == null)
+        {
+            Debug.LogError("TimerText is not assigned to " + gameObject.name);
+            enabled = false;
+            return;
+        }
         ResetTimer();       //진행 시간을 초기화
         UpdateTimerUI();
     }
@@ -46,6 +53,7 @@ public class TimerManager : MonoBehaviour
     {
         //타이머 진행을 멈춤
         IsRunning = false;
+        ResetTimer();       //재호출 시 0으로 되어 있는 것을 방지
         TimerText.text = "00:00:00";
     }
 

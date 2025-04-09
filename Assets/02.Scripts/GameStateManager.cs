@@ -27,6 +27,17 @@ public class GameStateManager : MonoBehaviour
 
     void Start()
     {
+        //UI 컴포넌트 연결 체크
+        if (TheTimerManager == null)
+        {
+            Debug.LogError("TimerManager reference is missing on GameStateManager!");
+            return;
+        }
+        if (FinishText == null)
+        {
+            Debug.LogError("FinishText reference is missing on GameStateManager!");
+            return;
+        }
         //종료 텍스트를 꺼두고 현재 상태를 대기 중으로 설정
         FinishText.gameObject.SetActive(false);
         SetState(GameState.Wait);
