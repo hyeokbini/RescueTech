@@ -16,16 +16,17 @@ public class TimerManager : MonoBehaviour
 
     void Update()
     {
-        if(!IsRunning) return;  //타이머가 진행 중이 아니면 업데이트 되지 않도록 반환
+        //타이머가 진행 중이 아니거나 현재 상태가 게임 진행 중이 아니라면 반환
+        if (!IsRunning || GameStateManager.Instance.CurrentState != GameState.Play) return;
 
         CurrentTime -= Time.deltaTime;  //진행 시간을 델타타임 만큼 계속 감소
         UpdateTimerUI();                //진행 시간에 따라 UI도 업데이트
 
-        if(CurrentTime <= 0)
+        if (CurrentTime <= 0)
         {
-            //진행 시간이 0보다 작거나 같아지면 타이머를 멈춤
+            //진행 시간이 0보다 작거나 같아지면 게임 상태로 종료로 바꿈
             CurrentTime = 0;
-            StopTimer();
+            GameStateManager.Instance.EndGame();
         }
     }
 
@@ -49,7 +50,7 @@ public class TimerManager : MonoBehaviour
 
     private void UpdateTimerUI()
     {
-        //분, 초, 센티초까지 보이도록 세팅
+        //분, 초, 센티초까지 보이도록 UI 세팅
         int minutes = Mathf.FloorToInt(CurrentTime / 60);
         int seconds = Mathf.FloorToInt(CurrentTime % 60);
         int centiseconds = Mathf.FloorToInt((CurrentTime % 1f) * 100);
