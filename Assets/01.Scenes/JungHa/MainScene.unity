@@ -271,7 +271,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &92093551
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3268,6 +3268,68 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1230007226}
   m_CullTransparentMesh: 1
+--- !u!1 &1260313370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1260313372}
+  - component: {fileID: 1260313371}
+  m_Layer: 0
+  m_Name: MainStateManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1260313371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260313370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb7f6d02522644f4d84f97336749a272, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UI_intro: {fileID: 1926044273}
+  UI_tutorial: {fileID: 92093550}
+  tutorialYesBtn: {fileID: 601806164}
+  tutorialNoBtn: {fileID: 298209574}
+  UI_mode: {fileID: 339920323}
+  realModeBtn: {fileID: 2006717858}
+  practicelModeBtn: {fileID: 1214738316}
+  UI_category: {fileID: 1171269021}
+  industryBtn: {fileID: 537511116}
+  naturalBtn: {fileID: 332050554}
+  UI_naturalSituation: {fileID: 1683187273}
+  fireNaturalBtn: {fileID: 419858625}
+  typhoonBtn: {fileID: 1568051731}
+  earthquakeBtn: {fileID: 1224653133}
+  UI_industrySituation: {fileID: 583304052}
+  fireIndustryBtn: {fileID: 1583254641}
+  electronicBtn: {fileID: 168886571}
+  gasBtn: {fileID: 431610664}
+--- !u!4 &1260313372
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1260313370}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 260.25, y: 222.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1405173150
 GameObject:
   m_ObjectHideFlags: 0
@@ -4562,7 +4624,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1926044274
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4805,3 +4867,4 @@ SceneRoots:
   - {fileID: 1594525710}
   - {fileID: 1688241208}
   - {fileID: 211192389}
+  - {fileID: 1260313372}

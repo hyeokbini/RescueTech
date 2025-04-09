@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum MainState
 {
@@ -13,8 +14,44 @@ public enum MainState
 
 public class MainStateManager : MonoBehaviour
 {
+    
     private MainState currentState;
-    private GameObject clearUIPanel;
+    [SerializeField]
+    private GameObject UI_intro;
+    [SerializeField]
+    private GameObject UI_tutorial;
+    [SerializeField]
+    private Button tutorialYesBtn;
+    [SerializeField]
+    private Button tutorialNoBtn;
+    [SerializeField]
+    private GameObject UI_mode;
+    [SerializeField]
+    private Button realModeBtn;
+    [SerializeField]
+    private Button practicelModeBtn;
+    [SerializeField]
+    private GameObject UI_category;
+    [SerializeField]
+    private Button industryBtn;
+    [SerializeField]
+    private Button naturalBtn;
+    [SerializeField]
+    private GameObject UI_naturalSituation;
+    [SerializeField]
+    private Button fireNaturalBtn;
+    [SerializeField]
+    private Button typhoonBtn;
+    [SerializeField]
+    private Button earthquakeBtn;
+    [SerializeField]
+    private GameObject UI_industrySituation;
+    [SerializeField]
+    private Button fireIndustryBtn;
+    [SerializeField]
+    private Button electronicBtn;
+    [SerializeField]
+    private Button gasBtn;
 
     void Start()
     {
