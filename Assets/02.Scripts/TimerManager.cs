@@ -25,7 +25,7 @@ public class TimerManager : MonoBehaviour
     void Update()
     {
         //타이머가 작동 중이 아니거나 현재 상태가 게임 진행 중이 아니라면 반환
-        if (!IsRunning || GameStateManager.Instance.CurrentState != GameState.Play) return;
+        if (!IsRunning || GameStateManager.Instance == null || GameStateManager.Instance.CurrentState != GameState.Play) return;
 
         CurrentTime -= Time.deltaTime;  //진행 시간을 델타타임 만큼 계속 감소
         UpdateTimerUI();                //진행 시간에 따라 UI도 업데이트
