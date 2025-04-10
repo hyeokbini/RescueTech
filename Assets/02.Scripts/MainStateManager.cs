@@ -60,23 +60,14 @@ public class MainStateManager : MonoBehaviour
 
     void Start()
     {
-        SetState(MainState.Intro);
-        introTimer = true;
+        StartCoroutine(CallAfterSeconds(2f));
     }
 
-    // 인트로를 2초동안 보여주기 위해 시간을 센다.
-    void Update()
+    IEnumerator CallAfterSeconds(float delay)
     {
-        if (introTimer)
-        {
-            timer += Time.deltaTime;
-            if (timer >= 2f)
-            {
-                // 2초 후 인트로 내리기
-                SetState(MainState.Tutorial);
-                introTimer = false;
-            }
-        }
+        ShowIntro();
+        yield return new WaitForSeconds(delay);
+        ShowTutorial();
     }
 
     // 상태를 전이하는 메서드
@@ -112,6 +103,7 @@ public class MainStateManager : MonoBehaviour
     // 인트로를 보여주는 메서드
     public void ShowIntro()
     {
+        UI_intro.SetActive(true);
         Debug.Log("프로그램 실행");
     }
 
