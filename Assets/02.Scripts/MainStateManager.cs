@@ -34,7 +34,7 @@ public class MainStateManager : MonoBehaviour
     [SerializeField]
     private Button realModeBtn;
     [SerializeField]
-    private Button practicelModeBtn;
+    private Button practiceModeBtn;
     [SerializeField]
     private GameObject UI_category;
     [SerializeField]
@@ -131,7 +131,7 @@ public class MainStateManager : MonoBehaviour
     {
         Debug.Log("모드 선택 체크");
         UI_mode.SetActive(true);
-        practicelModeBtn.onClick.AddListener(() => {
+        practiceModeBtn.onClick.AddListener(() => {
             Debug.Log("연습 모드 선택");
             isRealMode = false;
             UI_mode.SetActive(false);
