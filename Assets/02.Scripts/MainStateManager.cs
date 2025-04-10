@@ -132,10 +132,16 @@ public class MainStateManager : MonoBehaviour
     }
 
     // 모드 확인 메서드
-    public void ChangeMode()
+    public void SetPracticeMode()
     {
-        isRealMode = !isRealMode;
+        isRealMode = false;
         Debug.Log("연습 모드 선택");
+    }
+
+    public void SetRealMode()
+    {
+        isRealMode = true;
+        Debug.Log("실전 모드 선택");
     }
 
     // 자연 및 산업은 Category로 명명
@@ -149,10 +155,16 @@ public class MainStateManager : MonoBehaviour
     }
 
     // 카테고리 확인 메서드
-    public void ChangeCategory()
+    public void SetIndustry()
     {
-        isNatural = !isNatural;
+        isNatural = false;
         Debug.Log("산업 재난 선택");
+    }
+
+    public void SetNatural()
+    {
+        isNatural = true;
+        Debug.Log("자연 재난 선택");
     }
 
     //각 재난은 Situation으로 명명
@@ -162,6 +174,7 @@ public class MainStateManager : MonoBehaviour
         if (isRealMode)
         {
             // isNatural 로 산업 랜덤 혹은 자연 랜덤 씬 부르기
+            UI_category.SetActive(false);
             Debug.Log("랜덤 씬 변환");
         }
         else
