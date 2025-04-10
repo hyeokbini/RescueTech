@@ -3,21 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum MainState
-{
-    Intro,
-    Tutorial,
-    SelectMode,
-    SelectCategory,
-    SelectSituation
-}
 
 public class MainStateManager : MonoBehaviour
 {
-    
-    private MainState currentState;
-    private float timer = 0f;
-    private bool introTimer = false;
     private bool isRealMode = true;
     private bool isNatural = true;
 
@@ -26,85 +14,31 @@ public class MainStateManager : MonoBehaviour
     [SerializeField]
     private GameObject UI_tutorial;
     [SerializeField]
-    private Button tutorialYesBtn;
-    [SerializeField]
-    private Button tutorialNoBtn;
-    [SerializeField]
     private GameObject UI_mode;
-    [SerializeField]
-    private Button realModeBtn;
-    [SerializeField]
-    private Button practicelModeBtn;
     [SerializeField]
     private GameObject UI_category;
     [SerializeField]
-    private Button industryBtn;
-    [SerializeField]
-    private Button naturalBtn;
-    [SerializeField]
     private GameObject UI_naturalSituation;
     [SerializeField]
-    private Button fireNaturalBtn;
-    [SerializeField]
-    private Button typhoonBtn;
-    [SerializeField]
-    private Button earthquakeBtn;
-    [SerializeField]
     private GameObject UI_industrySituation;
-    [SerializeField]
-    private Button fireIndustryBtn;
-    [SerializeField]
-    private Button electronicBtn;
-    [SerializeField]
-    private Button gasBtn;
 
     void Start()
     {
-        StartCoroutine(CallAfterSeconds(2f));
+        StartCoroutine(ShowIntro(2f));
     }
 
-    IEnumerator CallAfterSeconds(float delay)
+    IEnumerator ShowIntro(float delay)
     {
-        ShowIntro();
+        UI_intro.SetActive(true);
         yield return new WaitForSeconds(delay);
         ShowTutorial();
     }
 
-    // 상태를 전이하는 메서드
-    void SetState(MainState state)
-    {
-        currentState = state;
-
-        switch (currentState)
-        {
-            case MainState.Intro:
-                ShowIntro();
-                break;
-            case MainState.Tutorial:
-                ShowTutorial();
-                break;
-            case MainState.SelectMode:
-                ShowModeBtn();
-                break;
-            case MainState.SelectCategory:
-                ShowCategoryBtn();
-                break;
-            case MainState.SelectSituation:
-                ShowSituationBtn();
-                break;
-        }
-    }
+    
     // 씬 전환 메서드
     public void SceneChange()
     {
         Debug.Log("씬 전환");
-    }
-
-    // 인트로를 보여주는 메서드
-    public void ShowIntro()
-    {
-        UI_intro.SetActive(true);
-        Debug.Log("프로그램 실행");
     }
 
     // 튜토리얼 선택창을 보여주는 메서드
