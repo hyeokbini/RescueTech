@@ -18,8 +18,8 @@ public class MainStateManager : MonoBehaviour
     private MainState currentState;
     private float timer = 0f;
     private bool introTimer = false;
-    private bool isRealMode = false;
-    private bool isNatural = false;
+    private bool isRealMode = true;
+    private bool isNatural = true;
 
     [SerializeField]
     private GameObject UI_intro;
@@ -103,97 +103,83 @@ public class MainStateManager : MonoBehaviour
                 break;
         }
     }
+    // 씬 전환 메서드
+    public void SceneChange()
+    {
+        Debug.Log("씬 전환");
+    }
 
     // 인트로를 보여주는 메서드
-    void ShowIntro()
+    public void ShowIntro()
     {
         Debug.Log("프로그램 실행");
     }
 
     // 튜토리얼 선택창을 보여주는 메서드
-    void ShowTutorial()
+    public void ShowTutorial()
     {
         Debug.Log("사용자 경험 체크");
         UI_intro.SetActive(false);
         UI_tutorial.SetActive(true);
-
-        tutorialYesBtn.onClick.AddListener(() => {
-            UI_tutorial.SetActive(false);
-            SetState(MainState.SelectMode);
-        });
-        tutorialNoBtn.onClick.AddListener(() => {
-            Debug.Log("튜토리얼 씬 전환");
-        });
     }
 
     // 모드 선택창을 보여주는 메서드
-    void ShowModeBtn()
+    public void ShowModeBtn()
     {
         Debug.Log("모드 선택 체크");
+        UI_tutorial.SetActive(false);
         UI_mode.SetActive(true);
-        practicelModeBtn.onClick.AddListener(() => {
-            Debug.Log("연습 모드 선택");
-            isRealMode = false;
-            UI_mode.SetActive(false);
-            SetState(MainState.SelectCategory);
-        });
-        realModeBtn.onClick.AddListener(() => {
-            Debug.Log("실전 모드 선택");
-            isRealMode = true;
-            UI_mode.SetActive(false);
-            SetState(MainState.SelectCategory);
-        });
+    }
+
+    // 모드 확인 메서드
+    public void ChangeMode()
+    {
+        isRealMode = !isRealMode;
+        Debug.Log("연습 모드 선택");
     }
 
     // 자연 및 산업은 Category로 명명
     // 카테고리 선택창을 보여주는 메서드
-    void ShowCategoryBtn()
+    public void ShowCategoryBtn()
     {
         Debug.Log("카테고리 선택 체크");
+        UI_mode.SetActive(false);
         UI_category.SetActive(true);
 
-        naturalBtn.onClick.AddListener(() => {
-            Debug.Log("자연 재난 선택");
-            isNatural = true;
-            
-            // 실전 모드를 선택했으면 씬 전환
-            if (isRealMode) {
-                Debug.Log("자연 재난 랜덤 모드로 씬 전환");
-            }
-            else {
-                UI_category.SetActive(false);
-                SetState(MainState.SelectSituation);
-            }
-        });
+    }
 
-        industryBtn.onClick.AddListener(() => {
-            Debug.Log("산업 재난 선택");
-            isNatural = false;
-
-            // 실전 모드를 선택했으면 씬 전환
-            if (isRealMode) {
-                Debug.Log("산업 재난 랜덤 모드로 씬 전환");
-            }
-            else {
-                UI_category.SetActive(false);
-                SetState(MainState.SelectSituation);
-            }
-        });
-
+    // 카테고리 확인 메서드
+    public void ChangeCategory()
+    {
+        isNatural = !isNatural;
+        Debug.Log("산업 재난 선택");
     }
 
     //각 재난은 Situation으로 명명
     // 재난 상황 선택창을 보여주는 메서드
-    void ShowSituationBtn()
+    public void ShowSituationBtn()
     {
-        if (isNatural){
-            Debug.Log("자연 재난 상황 선택");
-            UI_naturalSituation.SetActive(true);
+        if (isRealMode)
+        {
+            // isNatural 로 산업 랜덤 혹은 자연 랜덤 씬 부르기
+            Debug.Log("랜덤 씬 변환");
         }
-        else {
-            Debug.Log("산업 재난 상황 선택");
-            UI_industrySituation.SetActive(true);
+        else
+        {
+            if (isNatural)
+            {
+                Debug.Log("자연 재난 상황 선택");
+                UI_category.SetActive(false);
+                UI_naturalSituation.SetActive(true);
+            }
+            else 
+            {
+                Debug.Log("산업 재난 상황 선택");
+                UI_category.SetActive(false);
+                UI_industrySituation.SetActive(true);
+            }
         }
+        
 
     }
 }
