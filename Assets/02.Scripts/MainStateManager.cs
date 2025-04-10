@@ -55,7 +55,6 @@ public class MainStateManager : MonoBehaviour
         Debug.Log("모드 선택 체크");
         UI_tutorial.SetActive(false);
         UI_mode.SetActive(true);
-<<<<<<< HEAD
     }
 
     // 모드 확인 메서드
@@ -69,20 +68,6 @@ public class MainStateManager : MonoBehaviour
     {
         isRealMode = true;
         Debug.Log("실전 모드 선택");
-=======
-        practiceModeBtn.onClick.AddListener(() => {
-            Debug.Log("연습 모드 선택");
-            isRealMode = false;
-            UI_mode.SetActive(false);
-            SetState(MainState.SelectCategory);
-        });
-        realModeBtn.onClick.AddListener(() => {
-            Debug.Log("실전 모드 선택");
-            isRealMode = true;
-            UI_mode.SetActive(false);
-            SetState(MainState.SelectCategory);
-        });
->>>>>>> 288fd3f84a9fa0950f43ea678e71d865b1d538ae
     }
 
     // 자연 및 산업은 Category로 명명
