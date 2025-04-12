@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class MainStateManager : MonoBehaviour
 {
-    private bool isRealMode = true;
     private bool isNatural = true;
 
     [SerializeField]
@@ -60,13 +59,13 @@ public class MainStateManager : MonoBehaviour
     // 모드 확인 메서드
     public void SetPracticeMode()
     {
-        isRealMode = false;
+        ModeManagerScript.Instance.isRealMode = false;
         Debug.Log("연습 모드 선택");
     }
 
     public void SetRealMode()
     {
-        isRealMode = true;
+        ModeManagerScript.Instance.isRealMode = true;
         Debug.Log("실전 모드 선택");
     }
 
@@ -97,7 +96,7 @@ public class MainStateManager : MonoBehaviour
     // 재난 상황 선택창을 보여주는 메서드
     public void ShowSituationBtn()
     {
-        if (isRealMode)
+        if (ModeManagerScript.Instance.isRealMode)
         {
             // isNatural 로 산업 랜덤 혹은 자연 랜덤 씬 부르기
             UI_category.SetActive(false);
