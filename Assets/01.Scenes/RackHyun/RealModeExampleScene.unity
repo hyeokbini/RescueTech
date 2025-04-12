@@ -276,9 +276,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a24ea492e677e64fa8f4e90f0646109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartWaitTime: 3
-  StartTimerText: {fileID: 2060827554}
-  StartMessage: {fileID: 1615644292}
+  startWaitTime: 3
+  UI_startTimerText: {fileID: 2060827554}
+  UI_startMessage: {fileID: 1615644292}
 --- !u!1 &756056534
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,9 +420,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d391cefb87e54c48a95d689b27f947b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentState: 0
-  TheTimerManager: {fileID: 1820799515}
-  FinishText: {fileID: 913365787}
+  currentState: 0
+  theTimerManager: {fileID: 1820799515}
+  UI_finishText: {fileID: 913365787}
 --- !u!1 &913365785
 GameObject:
   m_ObjectHideFlags: 0
@@ -851,8 +851,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78f3c17a51feeb944be245045e11479b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeLimit: 10
-  TimerText: {fileID: 1741801114}
+  timeLimit: 10
+  UI_timerText: {fileID: 1741801114}
 --- !u!224 &1820799516
 RectTransform:
   m_ObjectHideFlags: 0
