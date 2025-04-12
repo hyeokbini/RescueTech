@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,6 +9,11 @@ public class TimerManager : MonoBehaviour
     private bool isRunning = false; //타이머 작동 여부
     [SerializeField]
     private Text UI_timerText;      //타이머 텍스트 UI
+    [SerializeField]
+    private Text UI_startTimerText; //시작 타이머 텍스트 UI
+    [SerializeField]
+    private Text UI_startMessage;   //게임 시작 텍스트 UI
+    private float startCurrentTime; //시작 타이머 진행 시간
 
     void Start()
     {
@@ -20,6 +26,10 @@ public class TimerManager : MonoBehaviour
         }
         ResetTimer();       //진행 시간을 초기화
         UpdateTimerUI();
+        //게임 시작 타이머 UI를 꺼뒀다가 코루틴 적용
+        UI_startTimerText.gameObject.SetActive(false);
+        UI_startMessage.gameObject.SetActive(false);
+        StartCoroutine(StartTimerCoroutine(3f));
     }
 
     void Update()
@@ -65,5 +75,39 @@ public class TimerManager : MonoBehaviour
         int centiseconds = Mathf.FloorToInt((currentTime % 1f) * 100);
 
         UI_timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, centiseconds);
+    }
+
+    private IEnumerator StartTimerCoroutine(float time)
+    {
+        UI_startTimerText.gameObject.SetActive(true);   //게임 시작 타이머 UI 활성화
+        startCurrentTime = time;                        //진행시간을 time으로 초기화
+        while (startCurrentTime > 0)                    //진행시간이 0이 될 때까지 반복
+        {
+            startCurrentTime -= Time.deltaTime;
+            UpdateStartTimerUI();
+            if(startCurrentTime <= 0)
+                UI_startTimerText.text = "00:00";
+            yield return null;
+        }
+        GameStateManager.instance.SetState(GameState.Play); //게임 진행 중으로 상태 업데이트
+        StartCoroutine(HideGameStartTimer());               //게임 시작 UI를 0.5초 뒤에 사라지도록 코루틴 적용
+    }
+
+    private void UpdateStartTimerUI()
+    {
+        //초, 센티초까지 보이도록 UI 세팅
+        int seconds = Mathf.FloorToInt(startCurrentTime % 60);
+        int centiseconds = Mathf.FloorToInt((startCurrentTime % 1f) * 100);
+
+        UI_startTimerText.text = string.Format("{0:00}:{1:00}", seconds, centiseconds);
+    }
+
+    //0.5초 뒤에 게임 시작 UI를 사라지도록 하기 위한 Coroutine
+    private IEnumerator HideGameStartTimer()
+    {
+        UI_startTimerText.gameObject.SetActive(false);
+        UI_startMessage.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        UI_startMessage.gameObject.SetActive(false);
     }
 }
