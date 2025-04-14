@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class RealModeStageFlowManager : MonoBehaviour
 {
     [SerializeField]
+    private GameStateManager theGameStateManager;   //게임 상태 매니저를 사용하기 위한 변수
+    [SerializeField]
     private int stageStep;          //전체 스테이지 스텝
     private int currentStep;        //현재 스테이지 스텝
     [SerializeField]
@@ -14,14 +16,16 @@ public class RealModeStageFlowManager : MonoBehaviour
 
     void Start()
     {
+        //UI 비활성화
         if(UI_scoreText != null)
-            UI_scoreText.gameObject.SetActive(false);       //UI 비활성화
+            UI_scoreText.gameObject.SetActive(false);
+        theGameStateManager.SetState(GameState.Wait);
     }
 
     public void StartStage()
     {
         //현재 상태가 Play가 아니면 스테이지 시작 않고 반환
-        if(GameStateManager.instance.currentState != GameState.Play) return;
+        if(theGameStateManager.currentState != GameState.Play) return;
         
         ResetStep();                //스텝 초기화
         ResetScore();               //점수 초기화
@@ -36,13 +40,13 @@ public class RealModeStageFlowManager : MonoBehaviour
     public void IncreaseStep()
     {
         //현재 상태가 Play가 아니면 스테이지 시작 않고 반환
-        if(GameStateManager.instance.currentState != GameState.Play) return;
+        if(theGameStateManager.currentState != GameState.Play) return;
 
         currentStep++;                                    //현재 스테이지 스텝을 +1
         Debug.Log($"스테이지 Step {currentStep} 시작");     //로그로 확인
         if(currentStep == stageStep)                      //현재 스텝과 전체 스텝이 같은지 체크                      
         {
-            GameStateManager.instance.EndGame();          //스텝이 같다면 게임 상태 매니저의 EndGame 호출
+            theGameStateManager.SetState(GameState.End);  //스텝이 같다면 게임 상태를 종료로 업데이트
             return;
         }
     }
@@ -64,7 +68,7 @@ public class RealModeStageFlowManager : MonoBehaviour
     public void AddScore(int amount)
     {
         //현재 상태가 Play가 아니면 스테이지 시작 않고 반환
-        if(GameStateManager.instance.currentState != GameState.Play) return;
+        if(theGameStateManager.currentState != GameState.Play) return;
 
         totalScore += amount;       //amount만큼 총 점수에 더함
     }

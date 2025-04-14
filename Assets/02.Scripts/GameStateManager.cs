@@ -10,39 +10,17 @@ public enum GameState
 
 public class GameStateManager : MonoBehaviour
 {
-    public static GameStateManager instance;        //싱글톤 패턴 적용을 위한 변수
     public GameState currentState = GameState.Wait; //현재 상태를 체크하기 위한 변수
     [SerializeField]
     private TimerManager theTimerManager;           //타이머 매니저를 이용하여 진행 상태 체크
     [SerializeField]
-    private Text UI_finishText;                     //종료 텍스트 UI
-    [SerializeField]
     private RealModeStageFlowManager theStageFlowManager;   //실전모드 스테이지 플로우 매니저 변수
-
-    private void Awake()
-    {
-        if (instance == null)
-            instance = this;
-        else
-            Destroy(gameObject);
-    }
 
     void Start()
     {
         //UI 컴포넌트 연결 체크
-        if (theTimerManager == null)
-        {
-            Debug.LogError("TimerManager reference is missing on GameStateManager!");
-            return;
-        }
-        if (UI_finishText == null)
-        {
-            Debug.LogError("FinishText reference is missing on GameStateManager!");
-            return;
-        }
-        //종료 텍스트를 꺼두고 현재 상태를 대기 중으로 설정
-        UI_finishText.gameObject.SetActive(false);
-        SetState(GameState.Wait);
+        if (theTimerManager == null) return;
+        theTimerManager.FinishUIOff();
     }
 
     public void SetState(GameState NewState)
@@ -62,15 +40,9 @@ public class GameStateManager : MonoBehaviour
             case GameState.End:
                 theTimerManager.StopTimer();        //타이머 멈춤
                 theStageFlowManager.FinishStage();  //스테이지 종료
-                UI_finishText.gameObject.SetActive(true);
+                theTimerManager.FinishUIOn();       //종료 UI 활성화화
                 Debug.Log("게임 종료");
                 break;
         }
-    }
-
-    public void EndGame()
-    {
-        //게임 종료로 상태 변경
-        SetState(GameState.End);
     }
 }

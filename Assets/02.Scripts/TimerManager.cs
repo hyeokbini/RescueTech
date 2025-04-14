@@ -14,28 +14,27 @@ public class TimerManager : MonoBehaviour
     [SerializeField]
     private Text UI_startMessage;   //게임 시작 텍스트 UI
     private float startCurrentTime; //시작 타이머 진행 시간
+    [SerializeField]
+    private Text UI_finishText;     //종료 텍스트 UI
+    [SerializeField]
+    private GameStateManager theGameStateManager;   //게임 상태 매니저를 사용하기 위한 변수
 
     void Start()
     {
         //UI 컴포넌트 연결 체크
-        if (UI_timerText == null)
-        {
-            Debug.LogError("TimerText is not assigned to " + gameObject.name);
-            enabled = false;
-            return;
-        }
+        if (UI_timerText == null || UI_finishText == null) return;
         ResetTimer();       //진행 시간을 초기화
         UpdateTimerUI();
         //게임 시작 타이머 UI를 꺼뒀다가 코루틴 적용
         UI_startTimerText.gameObject.SetActive(false);
         UI_startMessage.gameObject.SetActive(false);
-        StartCoroutine(StartTimerCoroutine(3f));
+        StartCoroutine(StartTimerCoroutine(3.5f));
     }
 
     void Update()
     {
         //타이머가 작동 중이 아니거나 현재 상태가 게임 진행 중이 아니라면 반환
-        if (!isRunning || GameStateManager.instance == null || GameStateManager.instance.currentState != GameState.Play) return;
+        if (!isRunning || theGameStateManager == null || theGameStateManager.currentState != GameState.Play) return;
 
         currentTime -= Time.deltaTime;  //진행 시간을 델타타임 만큼 계속 감소
         UpdateTimerUI();                //진행 시간에 따라 UI도 업데이트
@@ -44,7 +43,7 @@ public class TimerManager : MonoBehaviour
         {
             //진행 시간이 0보다 작거나 같아지면 게임 상태로 종료로 바꿈
             currentTime = 0;
-            GameStateManager.instance.EndGame();
+            theGameStateManager.SetState(GameState.End);
         }
     }
 
@@ -89,7 +88,7 @@ public class TimerManager : MonoBehaviour
                 UI_startTimerText.text = "00:00";
             yield return null;
         }
-        GameStateManager.instance.SetState(GameState.Play); //게임 진행 중으로 상태 업데이트
+        theGameStateManager.SetState(GameState.Play); //게임 진행 중으로 상태 업데이트
         StartCoroutine(HideGameStartTimer());               //게임 시작 UI를 0.5초 뒤에 사라지도록 코루틴 적용
     }
 
@@ -97,9 +96,8 @@ public class TimerManager : MonoBehaviour
     {
         //초, 센티초까지 보이도록 UI 세팅
         int seconds = Mathf.FloorToInt(startCurrentTime % 60);
-        int centiseconds = Mathf.FloorToInt((startCurrentTime % 1f) * 100);
 
-        UI_startTimerText.text = string.Format("{0:00}:{1:00}", seconds, centiseconds);
+        UI_startTimerText.text = seconds.ToString();
     }
 
     //0.5초 뒤에 게임 시작 UI를 사라지도록 하기 위한 Coroutine
@@ -109,5 +107,15 @@ public class TimerManager : MonoBehaviour
         UI_startMessage.gameObject.SetActive(true);
         yield return new WaitForSeconds(0.5f);
         UI_startMessage.gameObject.SetActive(false);
+    }
+
+    public void FinishUIOff()
+    {
+        UI_finishText.gameObject.SetActive(false);
+    }
+
+    public void FinishUIOn()
+    {
+        UI_finishText.gameObject.SetActive(true);
     }
 }
