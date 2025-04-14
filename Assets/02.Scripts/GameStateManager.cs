@@ -16,6 +16,8 @@ public class GameStateManager : MonoBehaviour
     private TimerManager theTimerManager;           //타이머 매니저를 이용하여 진행 상태 체크
     [SerializeField]
     private Text UI_finishText;                     //종료 텍스트 UI
+    [SerializeField]
+    private RealModeStageFlowManager theStageFlowManager;   //실전모드 스테이지 플로우 매니저 변수
 
     private void Awake()
     {
@@ -53,11 +55,13 @@ public class GameStateManager : MonoBehaviour
                 Debug.Log("게임 대기 중");
                 break;
             case GameState.Play:
-                theTimerManager.StartTimer();
+                theTimerManager.StartTimer();       //타이머 시작
+                theStageFlowManager.StartStage();   //스테이지 시작
                 Debug.Log("게임 진행 중");
                 break;
             case GameState.End:
-                theTimerManager.StopTimer();
+                theTimerManager.StopTimer();        //타이머 멈춤
+                theStageFlowManager.FinishStage();  //스테이지 종료
                 UI_finishText.gameObject.SetActive(true);
                 Debug.Log("게임 종료");
                 break;
