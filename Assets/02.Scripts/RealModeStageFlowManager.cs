@@ -14,7 +14,8 @@ public class RealModeStageFlowManager : MonoBehaviour
 
     void Start()
     {
-        UI_scoreText.gameObject.SetActive(false);       //UI 비활성화
+        if(UI_scoreText != null)
+            UI_scoreText.gameObject.SetActive(false);       //UI 비활성화
     }
 
     public void StartStage()
@@ -48,8 +49,11 @@ public class RealModeStageFlowManager : MonoBehaviour
 
     public void FinishStage()
     {
-        UI_scoreText.text = "점수: " + totalScore;
-        UI_scoreText.gameObject.SetActive(true);
+        if(UI_scoreText != null)
+        {
+            UI_scoreText.text = "점수: " + totalScore;
+            UI_scoreText.gameObject.SetActive(true);
+        }
     }
 
     private void ResetScore()
