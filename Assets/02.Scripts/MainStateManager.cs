@@ -82,12 +82,24 @@ public class MainStateManager : MonoBehaviour
     // 카테고리 확인 메서드
     public void SetIndustry()
     {
+        // 실전 모드 선택시, 이 버튼을 누르는 시점에서 바로 씬 전환되어야 함
+        if(ModeManagerScript.Instance.isRealMode)
+        {
+            int randSceneIdx = Random.Range(3, 6);
+            GetComponent<SceneLoadButtonScript>().LoadScene(randSceneIdx);
+        }
         isNatural = false;
         Debug.Log("산업 재난 선택");
     }
 
     public void SetNatural()
     {
+        // 실전 모드 선택시, 이 버튼을 누르는 시점에서 바로 씬 전환되어야 함
+        if(ModeManagerScript.Instance.isRealMode)
+        {
+            int randSceneIdx = Random.Range(0, 3);
+            GetComponent<SceneLoadButtonScript>().LoadScene(randSceneIdx);
+        }
         isNatural = true;
         Debug.Log("자연 재난 선택");
     }
