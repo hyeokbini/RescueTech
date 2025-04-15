@@ -1,69 +1,121 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TimerManager : MonoBehaviour
 {
-    public float TimeLimit = 10f;   //시간 제한(10초로 임시 설정)
-    private float CurrentTime;      //진행 시간
-    private bool IsRunning = false; //타이머 작동 여부
+    public float timeLimit = 10f;   //시간 제한(10초로 임시 설정)
+    private float currentTime;      //진행 시간
+    private bool isRunning = false; //타이머 작동 여부
     [SerializeField]
-    private Text TimerText;         //타이머 텍스트 UI
+    private Text UI_timerText;      //타이머 텍스트 UI
+    [SerializeField]
+    private Text UI_startTimerText; //시작 타이머 텍스트 UI
+    [SerializeField]
+    private Text UI_startMessage;   //게임 시작 텍스트 UI
+    private float startCurrentTime; //시작 타이머 진행 시간
+    [SerializeField]
+    private Text UI_finishText;     //종료 텍스트 UI
+    [SerializeField]
+    private GameStateManager theGameStateManager;   //게임 상태 매니저를 사용하기 위한 변수
 
     void Start()
     {
         //UI 컴포넌트 연결 체크
-        if (TimerText == null)
-        {
-            Debug.LogError("TimerText is not assigned to " + gameObject.name);
-            enabled = false;
-            return;
-        }
+        if (UI_timerText == null || UI_finishText == null) return;
         ResetTimer();       //진행 시간을 초기화
         UpdateTimerUI();
+        //게임 시작 타이머 UI를 꺼뒀다가 코루틴 적용
+        UI_startTimerText.gameObject.SetActive(false);
+        UI_startMessage.gameObject.SetActive(false);
+        StartCoroutine(StartTimerCoroutine(3.5f));
     }
 
     void Update()
     {
         //타이머가 작동 중이 아니거나 현재 상태가 게임 진행 중이 아니라면 반환
-        if (!IsRunning || GameStateManager.Instance == null || GameStateManager.Instance.CurrentState != GameState.Play) return;
+        if (!isRunning || theGameStateManager == null || theGameStateManager.currentState != GameState.Play) return;
 
-        CurrentTime -= Time.deltaTime;  //진행 시간을 델타타임 만큼 계속 감소
+        currentTime -= Time.deltaTime;  //진행 시간을 델타타임 만큼 계속 감소
         UpdateTimerUI();                //진행 시간에 따라 UI도 업데이트
 
-        if (CurrentTime <= 0)
+        if (currentTime <= 0)
         {
             //진행 시간이 0보다 작거나 같아지면 게임 상태로 종료로 바꿈
-            CurrentTime = 0;
-            GameStateManager.Instance.EndGame();
+            currentTime = 0;
+            theGameStateManager.SetState(GameState.End);
         }
     }
 
     private void ResetTimer()
     {
-        CurrentTime = TimeLimit;
+        currentTime = timeLimit;
     }
 
     public void StartTimer()
     {
         //타이머가 진행되도록 함
-        IsRunning = true;
+        isRunning = true;
     }
 
     public void StopTimer()
     {
         //타이머 진행을 멈춤
-        IsRunning = false;
+        isRunning = false;
         ResetTimer();       //재호출 시 0으로 되어 있는 것을 방지
-        TimerText.text = "00:00:00";
+        UI_timerText.text = "00:00:00";
     }
 
     private void UpdateTimerUI()
     {
         //분, 초, 센티초까지 보이도록 UI 세팅
-        int minutes = Mathf.FloorToInt(CurrentTime / 60);
-        int seconds = Mathf.FloorToInt(CurrentTime % 60);
-        int centiseconds = Mathf.FloorToInt((CurrentTime % 1f) * 100);
+        int minutes = Mathf.FloorToInt(currentTime / 60);
+        int seconds = Mathf.FloorToInt(currentTime % 60);
+        int centiseconds = Mathf.FloorToInt((currentTime % 1f) * 100);
 
-        TimerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, centiseconds);
+        UI_timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, centiseconds);
+    }
+
+    private IEnumerator StartTimerCoroutine(float time)
+    {
+        UI_startTimerText.gameObject.SetActive(true);   //게임 시작 타이머 UI 활성화
+        startCurrentTime = time;                        //진행시간을 time으로 초기화
+        while (startCurrentTime > 0)                    //진행시간이 0이 될 때까지 반복
+        {
+            startCurrentTime -= Time.deltaTime;
+            UpdateStartTimerUI();
+            if(startCurrentTime <= 0)
+                UI_startTimerText.text = "00:00";
+            yield return null;
+        }
+        theGameStateManager.SetState(GameState.Play); //게임 진행 중으로 상태 업데이트
+        StartCoroutine(HideGameStartTimer());               //게임 시작 UI를 0.5초 뒤에 사라지도록 코루틴 적용
+    }
+
+    private void UpdateStartTimerUI()
+    {
+        //초, 센티초까지 보이도록 UI 세팅
+        int seconds = Mathf.FloorToInt(startCurrentTime % 60);
+
+        UI_startTimerText.text = seconds.ToString();
+    }
+
+    //0.5초 뒤에 게임 시작 UI를 사라지도록 하기 위한 Coroutine
+    private IEnumerator HideGameStartTimer()
+    {
+        UI_startTimerText.gameObject.SetActive(false);
+        UI_startMessage.gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        UI_startMessage.gameObject.SetActive(false);
+    }
+
+    public void FinishUIOff()
+    {
+        UI_finishText.gameObject.SetActive(false);
+    }
+
+    public void FinishUIOn()
+    {
+        UI_finishText.gameObject.SetActive(true);
     }
 }

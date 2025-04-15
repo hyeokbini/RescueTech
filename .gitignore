@@ -75,3 +75,6 @@ crashlytics-build.properties
 
 # Ignore VSCode folder
 .vscode/
+
+# OS junk
+.DS_Store
