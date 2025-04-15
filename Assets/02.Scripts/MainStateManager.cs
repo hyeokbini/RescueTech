@@ -20,6 +20,10 @@ public class MainStateManager : MonoBehaviour
     private GameObject UI_naturalSituation;
     [SerializeField]
     private GameObject UI_industrySituation;
+    [SerializeField]
+    private GameObject UI_naturalSelectButton;
+    [SerializeField]
+    private GameObject UI_industrySelectButton;
 
     void Start()
     {
@@ -86,7 +90,7 @@ public class MainStateManager : MonoBehaviour
         if(ModeManagerScript.Instance.isRealMode)
         {
             int randSceneIdx = Random.Range(3, 6);
-            GetComponent<SceneLoadButtonScript>().LoadScene(randSceneIdx);
+            UI_industrySelectButton.GetComponent<SceneLoadButtonScript>().LoadScene(randSceneIdx);
         }
         isNatural = false;
         Debug.Log("산업 재난 선택");
@@ -97,8 +101,8 @@ public class MainStateManager : MonoBehaviour
         // 실전 모드 선택시, 이 버튼을 누르는 시점에서 바로 씬 전환되어야 함
         if(ModeManagerScript.Instance.isRealMode)
         {
-            int randSceneIdx = Random.Range(0, 3);
-            GetComponent<SceneLoadButtonScript>().LoadScene(randSceneIdx);
+            int randSceneIdx = /*Random.Range(0, 3);*/ 0;
+            UI_naturalSelectButton.GetComponent<SceneLoadButtonScript>().LoadScene(randSceneIdx);
         }
         isNatural = true;
         Debug.Log("자연 재난 선택");

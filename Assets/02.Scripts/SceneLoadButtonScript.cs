@@ -6,11 +6,6 @@ public class SceneLoadButtonScript : MonoBehaviour
 {
     [SerializeField] private string sceneName;
 
-    private void Awake()
-    {
-        GetComponent<Button>().onClick.AddListener(LoadScene);
-    }
-
     // 연습 모드 상황에서 버튼을 클릭하면 해당되는 씬으로 연결
     public void LoadScene()
     {
