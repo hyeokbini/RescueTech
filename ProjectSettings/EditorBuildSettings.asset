@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/01.Scenes/HyeokBin/Scene1.unity
     guid: 4172b1af9d5729b4e8556af6c54f21e6
   - enabled: 1
-    path: Assets/01.Scenes/HyeokBin/Scene2.unity
+    path: Assets/01.Scenes/HyeokBin/TyphoonScene.unity
     guid: 4ed57bba87a77474ea1cdf5b7900d16a
   - enabled: 1
     path: Assets/01.Scenes/HyeokBin/Scene3.unity
