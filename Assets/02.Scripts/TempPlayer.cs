@@ -9,8 +9,6 @@ public class TempPlayer : MonoBehaviour
     [SerializeField]
     private Camera playerCamera;                    //카메라 컴포넌트
     [SerializeField]
-    private GameStateManager theGameStateManager;   //게임 상태 매니저를 사용하기 위한 변수
-    [SerializeField]
     private float moveSpeed = 5f;                   //이동 속도
     [SerializeField]
     private float mouseSensitivity = 5f;            //마우스 속도
