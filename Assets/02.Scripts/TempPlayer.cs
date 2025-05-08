@@ -21,9 +21,6 @@ public class TempPlayer : MonoBehaviour
 
     void Update()
     {
-        //타이머가 작동 중이 아니거나 현재 상태가 게임 진행 중이 아니라면 반환
-        if (theGameStateManager == null || theGameStateManager.currentState != GameState.Play) return;
-
         //마우스 회전
         float mouseX = Input.GetAxis("Mouse X");    //마우스 x
         float mouseY = Input.GetAxis("Mouse Y");    //마우스 y
