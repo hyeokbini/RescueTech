@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shader Graphs_Outline
+  m_Name: Shader_Outline
   m_Shader: {fileID: -6465566751694194690, guid: 28832d6fe5ce24cd3a05d63572362f3c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -54,5 +54,5 @@ Material:
     - _QueueOffset: 0
     - _Scale: 1.03
     m_Colors:
-    - _Color: {r: 4, g: 1.9377239, b: 0.43396235, a: 0}
+    - _Color: {r: 2.7216942, g: 0.81510824, b: 0, a: 1}
   m_BuildTextureStacks: []
