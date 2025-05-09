@@ -17,11 +17,21 @@ public class Outline : MonoBehaviour {
   private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
 
 
+  public float OutlineWidth {
+    get { return outlineWidth; }
+    set {
+      outlineWidth = value;
+      needsUpdate = true;
+    }
+  }
+
   [Serializable]
   private class ListVector3 {
     public List<Vector3> data;
   }
 
+  [SerializeField, Range(0f, 10f)]
+  private float outlineWidth = 2f;
 
   [Header("Optional")]
 
@@ -39,6 +49,7 @@ public class Outline : MonoBehaviour {
   private Material outlineMaskMaterial;
   private Material outlineFillMaterial;
 
+  private bool needsUpdate;
 
   void Awake() {
 
@@ -47,7 +58,7 @@ public class Outline : MonoBehaviour {
 
     // Instantiate outline materials
     outlineMaskMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineMask"));
-    outlineFillMaterial = Instantiate(Resources.Load<Material>(@"Materials/Shader_Outline"));
+    outlineFillMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineFill"));
 
     outlineMaskMaterial.name = "OutlineMask (Instance)";
     outlineFillMaterial.name = "OutlineFill (Instance)";
@@ -55,6 +66,8 @@ public class Outline : MonoBehaviour {
     // Retrieve or generate smooth normals
     LoadSmoothNormals();
 
+    // Apply material properties immediately
+    needsUpdate = true;
   }
 
   void OnEnable() {
@@ -70,7 +83,30 @@ public class Outline : MonoBehaviour {
     }
   }
 
+  void OnValidate() {
 
+    // Update material properties
+    needsUpdate = true;
+
+    // Clear cache when baking is disabled or corrupted
+    if (!precomputeOutline && bakeKeys.Count != 0 || bakeKeys.Count != bakeValues.Count) {
+      bakeKeys.Clear();
+      bakeValues.Clear();
+    }
+
+    // Generate smooth normals when baking is enabled
+    if (precomputeOutline && bakeKeys.Count == 0) {
+      Bake();
+    }
+  }
+
+  void Update() {
+    if (needsUpdate) {
+      needsUpdate = false;
+
+      UpdateMaterialProperties();
+    }
+  }
 
   void OnDisable() {
     foreach (var renderer in renderers) {
@@ -204,4 +240,10 @@ public class Outline : MonoBehaviour {
     mesh.SetTriangles(mesh.triangles, mesh.subMeshCount - 1);
   }
 
+  void UpdateMaterialProperties() {
+
+    outlineMaskMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
+    outlineFillMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
+    outlineFillMaterial.SetFloat("_OutlineWidth", outlineWidth);
+  }
 }

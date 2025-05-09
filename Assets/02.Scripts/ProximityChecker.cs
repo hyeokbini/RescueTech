@@ -5,7 +5,7 @@ public class ProximityChecker : MonoBehaviour
 {
     public GameObject highlights;
     private Transform player;
-    public float triggerDistance = 1.5f;
+    public float triggerDistance = 1f;
     public float checkInterval = 0.2f; // 거리 체크 주기 (초 단위)
 
     void Start()
