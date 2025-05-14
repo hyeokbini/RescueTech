@@ -157,8 +157,23 @@ public class MainStateManager : MonoBehaviour
 
     }
     public void BackBtn(){
-        objectList[currentUI].SetActive(false);
-        objectList[currentUI - 1].SetActive(true);
+        // 산업재해 선택은 두 단계 전으로 올라감
+        if (currentUI == 5){
+            // 현재 ui 비활성화
+            objectList[5].SetActive(false);
+            // 그 전 단계 ui 활성화
+            objectList[3].SetActive(true);
+            // 현재 ui 설정
+            currentUI = 3;
+        }
+        else {
+            // 현재 ui 비활성화
+            objectList[currentUI].SetActive(false);
+            // 그 전 단계 ui 활성화
+            objectList[currentUI - 1].SetActive(true);
+            // 현재 ui 설정
+            currentUI -= 1;
+        }
     }
 }
 
