@@ -25,14 +25,31 @@ public class MainStateManager : MonoBehaviour
     [SerializeField]
     private GameObject UI_industrySelectButton;
 
+    public GameObject[] objectList;
+    private int currentUI;
+
+
     void Start()
     {
+        // 게임 오브젝트 배열 생성
+        objectList = new GameObject[8]; 
+
+        objectList[0] = UI_intro;
+        objectList[1] = UI_tutorial;
+        objectList[2] = UI_mode;
+        objectList[3] = UI_category;
+        objectList[4] = UI_naturalSituation;
+        objectList[5] = UI_industrySituation;
+        objectList[6] = UI_naturalSelectButton;
+        objectList[7] = UI_industrySelectButton;
+        
         StartCoroutine(ShowIntro(2f));
     }
 
     IEnumerator ShowIntro(float delay)
     {
-        UI_intro.SetActive(true);
+        currentUI = 0;
+        objectList[currentUI].SetActive(true);
         yield return new WaitForSeconds(delay);
         ShowTutorial();
     }
@@ -48,16 +65,18 @@ public class MainStateManager : MonoBehaviour
     public void ShowTutorial()
     {
         Debug.Log("사용자 경험 체크");
-        UI_intro.SetActive(false);
-        UI_tutorial.SetActive(true);
+        currentUI = 1;
+        objectList[currentUI - 1].SetActive(false);
+        objectList[currentUI].SetActive(true);
     }
 
     // 모드 선택창을 보여주는 메서드
     public void ShowModeBtn()
     {
         Debug.Log("모드 선택 체크");
-        UI_tutorial.SetActive(false);
-        UI_mode.SetActive(true);
+        currentUI = 2;
+        objectList[currentUI - 1].SetActive(false);
+        objectList[currentUI].SetActive(true);
     }
 
     // 모드 확인 메서드
@@ -78,9 +97,9 @@ public class MainStateManager : MonoBehaviour
     public void ShowCategoryBtn()
     {
         Debug.Log("카테고리 선택 체크");
-        UI_mode.SetActive(false);
-        UI_category.SetActive(true);
-
+        currentUI = 3;
+        objectList[currentUI - 1].SetActive(false);
+        objectList[currentUI].SetActive(true);
     }
 
     // 카테고리 확인 메서드
@@ -90,7 +109,7 @@ public class MainStateManager : MonoBehaviour
         if(ModeManagerScript.Instance.isRealMode)
         {
             int randSceneIdx = Random.Range(3, 6);
-            UI_industrySelectButton.GetComponent<SceneLoadButtonScript>().LoadScene(randSceneIdx);
+            objectList[7].GetComponent<SceneLoadButtonScript>().LoadScene(randSceneIdx);
         }
         isNatural = false;
         Debug.Log("산업 재난 선택");
@@ -102,7 +121,7 @@ public class MainStateManager : MonoBehaviour
         if(ModeManagerScript.Instance.isRealMode)
         {
             int randSceneIdx = /*Random.Range(0, 3);*/ 0;
-            UI_naturalSelectButton.GetComponent<SceneLoadButtonScript>().LoadScene(randSceneIdx);
+            objectList[6].GetComponent<SceneLoadButtonScript>().LoadScene(randSceneIdx);
         }
         isNatural = true;
         Debug.Log("자연 재난 선택");
@@ -115,7 +134,6 @@ public class MainStateManager : MonoBehaviour
         if (ModeManagerScript.Instance.isRealMode)
         {
             // isNatural 로 산업 랜덤 혹은 자연 랜덤 씬 부르기
-            UI_category.SetActive(false);
             Debug.Log("랜덤 씬 변환");
         }
         else
@@ -123,17 +141,39 @@ public class MainStateManager : MonoBehaviour
             if (isNatural)
             {
                 Debug.Log("자연 재난 상황 선택");
-                UI_category.SetActive(false);
-                UI_naturalSituation.SetActive(true);
+                currentUI = 4;
+                objectList[currentUI - 1].SetActive(false);
+                objectList[currentUI].SetActive(true);
             }
             else 
             {
                 Debug.Log("산업 재난 상황 선택");
-                UI_category.SetActive(false);
-                UI_industrySituation.SetActive(true);
+                currentUI = 5;
+                objectList[currentUI - 2].SetActive(false);
+                objectList[currentUI].SetActive(true);
             }
         }
         
 
     }
+    public void BackBtn(){
+        // 산업재해 선택은 두 단계 전으로 올라감
+        if (currentUI == 5){
+            // 현재 ui 비활성화
+            objectList[5].SetActive(false);
+            // 그 전 단계 ui 활성화
+            objectList[3].SetActive(true);
+            // 현재 ui 설정
+            currentUI = 3;
+        }
+        else {
+            // 현재 ui 비활성화
+            objectList[currentUI].SetActive(false);
+            // 그 전 단계 ui 활성화
+            objectList[currentUI - 1].SetActive(true);
+            // 현재 ui 설정
+            currentUI -= 1;
+        }
+    }
 }
+
