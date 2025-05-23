@@ -5,23 +5,26 @@ using UnityEngine;
 public class EarthquakeManager : MonoBehaviour
 {
     // 지진 사이클 관련 
-    private bool isShaking = false;
-    private float shakingInterval = 5f;
-    private float idleInterval = 3f;
+    [SerializeField] private bool isShaking = false;
+    [SerializeField] private float shakingInterval = 5f;
+    [SerializeField] private float idleInterval = 3f;
 
     // 지진 관련
-    [SerializeField] private float shakeDuration = 5f;
     [SerializeField] private float shakeAmount = 0.8f;      // 지진의 진폭
+    [SerializeField] private float updateInterval = 0.1f;     // 진동의 속도
     [SerializeField] private float speed = 2f;         // 지진의 속도
+    [SerializeField] private float rotationAmount = 5f;
     private float returnDuration = 0.5f;
 
     private Vector3 originalPos;
+    private Quaternion originalRot;
     private Transform originalTransform;
 
     void Start()
     {
         originalTransform = transform;
         originalPos = originalTransform.localPosition;
+        originalRot = originalTransform.localRotation;
 
         StartCoroutine(ShakingCycleCoroutine());
     }
@@ -49,18 +52,33 @@ public class EarthquakeManager : MonoBehaviour
     IEnumerator ShakingCoroutine()
     {
         float currentTime = 0f;
+        float updateTime = 0f;
+        Vector3 targetPos = originalPos;
+        Quaternion targetRot = originalRot;
 
         while (currentTime < shakingInterval)
         {
             currentTime += Time.deltaTime;
-            {
-                // PerlinNoise로 -1 ~ 1 사이에  랜덤값 생성
-                float offsetX = (Mathf.PerlinNoise(Time.time * speed, 0f) - 0.5f) * 2f;
-                float offsetZ = (Mathf.PerlinNoise(0f, Time.time * speed) - 0.5f) * 2f;
-                Vector3 targetPos = originalPos + new Vector3(offsetX, 0f, offsetZ) * shakeAmount;
+            updateTime += Time.deltaTime;
 
-                originalTransform.localPosition = Vector3.Lerp(transform.localPosition, targetPos, speed * Time.deltaTime);
+            if (updateTime >= updateInterval)
+            {
+                updateTime = 0f;
+                float offsetX = Random.Range(-shakeAmount, shakeAmount);
+                float offsetY = Random.Range(-shakeAmount, shakeAmount);
+                float offsetZ = Random.Range(-shakeAmount, shakeAmount);
+                targetPos = originalPos + new Vector3(offsetX, offsetY, offsetZ);
+
+                // 회전 흔들림
+                float rotX = Random.Range(-rotationAmount, rotationAmount);
+                float rotY = Random.Range(-rotationAmount, rotationAmount);
+                float rotZ = Random.Range(-rotationAmount, rotationAmount);
+                targetRot = Quaternion.Euler(rotX, rotY, rotZ) * originalRot;
             }
+            
+            originalTransform.localPosition = Vector3.Lerp(transform.localPosition, targetPos, speed * Time.deltaTime);
+            originalTransform.localRotation = Quaternion.Slerp(originalTransform.localRotation, targetRot, speed * Time.deltaTime);
+
 
             yield return null;
         }
@@ -68,6 +86,7 @@ public class EarthquakeManager : MonoBehaviour
         // 원위치로 돌아올 때도 부드럽게
         float t = 0f;
         Vector3 startPos = transform.localPosition;
+        Quaternion startRot = originalTransform.localRotation;
 
         while (t < returnDuration)
         {
@@ -75,10 +94,12 @@ public class EarthquakeManager : MonoBehaviour
             t += Time.deltaTime;
             float ratio = t / returnDuration;
             transform.localPosition = Vector3.Lerp(startPos, originalPos, ratio);
+            originalTransform.localRotation = Quaternion.Slerp(startRot, originalRot, ratio);
             yield return null;
         }
 
-        transform.localPosition = originalPos;
+        originalTransform.localPosition = originalPos;
+        originalTransform.localRotation = originalRot;
     }
 
 }

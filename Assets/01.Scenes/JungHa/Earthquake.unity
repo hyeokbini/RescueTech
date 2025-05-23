@@ -4631,9 +4631,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 415f385fa694948679cb795e0d9b5fd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shakeDuration: 5
-  shakeAmount: 0.8
+  isShaking: 0
+  shakingInterval: 5
+  idleInterval: 3
+  shakeAmount: 0.6
+  updateInterval: 0.15
   speed: 2
+  rotationAmount: 3
 --- !u!4 &603344635 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: fecdeb865766248128c031ab12bf73be, type: 3}
