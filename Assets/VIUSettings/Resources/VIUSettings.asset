@@ -73,7 +73,8 @@ MonoBehaviour:
   m_enableBindingInterfaceSwitch: 1
   m_bindingInterfaceSwitchKey: 98
   m_bindingInterfaceSwitchKeyModifier: 303
-  m_bindingInterfaceObjectSource: {fileID: 101448, guid: 26a034c83db7bcb4f99de4ddf57cbcfc, type: 3}
+  m_bindingInterfaceObjectSource: {fileID: 101448, guid: 26a034c83db7bcb4f99de4ddf57cbcfc,
+    type: 3}
   m_activateGoogleVRModule: 1
   m_daydreamSyncPadPressToTrigger: 1
   m_autoLoadExternalCameraConfigOnStart: 1
@@ -81,7 +82,7 @@ MonoBehaviour:
   m_enableExternalCameraSwitch: 1
   m_externalCameraSwitchKey: 109
   m_externalCameraSwitchKeyModifier: 303
-  m_activateOculusVRModule: 0
+  m_activateOculusVRModule: 1
   m_oculusVRAndroidManifestPath: 
   m_enableOculusSDKHandRenderModel: 1
   m_enableOculusSDKControllerRenderModel: 1
