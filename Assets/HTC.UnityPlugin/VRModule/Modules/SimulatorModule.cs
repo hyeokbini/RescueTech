@@ -38,7 +38,7 @@ namespace HTC.UnityPlugin.VRModuleManagement
         private const uint RIGHT_INDEX = 1;
         private const uint LEFT_INDEX = 2;
 
-        private static readonly RigidPose s_initHmdPose = new RigidPose(new Vector3(0f, 1.5f, 0f), Quaternion.identity);
+        private static readonly RigidPose s_initHmdPose = new RigidPose(new Vector3(0f, 1.75f, 0f), Quaternion.identity);
         private static RigidPose s_offsetLeftController = RigidPose.identity;
         private static RigidPose s_offsetRightController = RigidPose.identity;
         private static RigidPose s_offsetTracker = RigidPose.identity;
