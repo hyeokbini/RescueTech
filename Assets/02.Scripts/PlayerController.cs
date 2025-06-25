@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
 
                         uiObject.SetActive(true);
 
-                        StartCoroutine(HideUIAfterDelay(uiObject, 10f));
+                        StartCoroutine(HideUIAfterDelay(uiObject, 3f));
                     }
                     else
                     {

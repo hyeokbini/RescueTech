@@ -1,22 +1,18 @@
 using UnityEngine;
 
-public enum InteractType
-{
-    Grab,       // 잡기
-    PutOnHead,  // 올리기 (쿠션)
-}
-
 public class InteractionHandler : MonoBehaviour
 {
     private GameObject target;
+    private Animator animator;
 
     private void Awake()
     {
         // 이 스크립트 붙은 오브젝트의 부모를 target으로 설정
         if (transform.parent != null)
             target = transform.parent.gameObject;
-    }
 
+        animator = target.GetComponent<Animator>();
+    }
 
     public void Grab()
     {
@@ -29,4 +25,8 @@ public class InteractionHandler : MonoBehaviour
         target.transform.localRotation = Quaternion.identity;
     }
 
+    public void Open()
+    {
+        animator.SetTrigger("Open");
+    }
 }
