@@ -9773,6 +9773,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8181240555765956726, guid: 10240bdc492f14f30baa98b4fadfac6e,
+        type: 3}
+      propertyPath: angle
+      value: -120
+      objectReference: {fileID: 0}
+    - target: {fileID: 8181240555765956726, guid: 10240bdc492f14f30baa98b4fadfac6e,
+        type: 3}
+      propertyPath: speed
+      value: 180
+      objectReference: {fileID: 0}
     - target: {fileID: 9166875696602111079, guid: 10240bdc492f14f30baa98b4fadfac6e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -15858,10 +15868,6 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1905312478}
-    - targetCorrespondingSourceObject: {fileID: 1015993619049006, guid: 2124bf19fef159a48bd59af76b69380c,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1905312476}
   m_SourcePrefab: {fileID: 100100000, guid: 2124bf19fef159a48bd59af76b69380c, type: 3}
 --- !u!4 &1905312474 stripped
 Transform:
@@ -15869,33 +15875,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1905312473}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1905312475 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1015993619049006, guid: 2124bf19fef159a48bd59af76b69380c,
-    type: 3}
-  m_PrefabInstance: {fileID: 1905312473}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &1905312476
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1905312475}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5a4fc96c1223a4393bd5d794e63782f4, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &1905312478
 MonoBehaviour:
   m_ObjectHideFlags: 0
