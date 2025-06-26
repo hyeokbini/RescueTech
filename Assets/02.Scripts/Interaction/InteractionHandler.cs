@@ -28,13 +28,17 @@ public class InteractionHandler : MonoBehaviour
         target.transform.localRotation = Quaternion.identity;
     }
 
+    // 머리 위에 배치됨
+    // 제자리 두기는 구현되지 않음
     public void PutOnHead()
-    {
+    {   
+        // 카메라 자식으로 붙이기
         target.transform.SetParent(Camera.main.transform);
         target.transform.localPosition = new Vector3(0, 0.3f, 0);
         target.transform.localRotation = Quaternion.identity;
     }
 
+    // y축 각도와 속도에 맞게 문 회전시킴
     public void Open()
     {
         StopAllCoroutines();
