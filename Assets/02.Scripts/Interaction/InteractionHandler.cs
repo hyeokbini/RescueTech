@@ -4,6 +4,7 @@ using System.Collections;
 public class InteractionHandler : MonoBehaviour
 {
     private GameObject target;
+    private GameObject rightHand;
     private Animator animator;
     public float angle;
     public float speed;
@@ -13,10 +14,18 @@ public class InteractionHandler : MonoBehaviour
         // 이 스크립트 붙은 오브젝트의 부모를 target으로 설정
         if (transform.parent != null)
             target = transform.parent.gameObject;
+        
+        rightHand = GameObject.Find("RightHand");
     }
 
+    // 잡기 클릭 시 단순히 오른쪽 컨트롤러 위에 배치됨
+    // 제자리 두기는 아직 구현되지 않음
     public void Grab()
     {
+        // 컨트롤러 자식으로 붙이기
+        target.transform.SetParent(rightHand.transform);
+        target.transform.localPosition = Vector3.zero;
+        target.transform.localRotation = Quaternion.identity;
     }
 
     public void PutOnHead()
