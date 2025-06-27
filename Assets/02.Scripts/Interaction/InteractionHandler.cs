@@ -8,6 +8,8 @@ public class InteractionHandler : MonoBehaviour
     private Animator animator;
     public float angle;
     public float speed;
+    public float ylocation;
+    private Coroutine RotateCoroutine;
 
     private void Awake()
     {
@@ -34,15 +36,15 @@ public class InteractionHandler : MonoBehaviour
     {   
         // 카메라 자식으로 붙이기
         target.transform.SetParent(Camera.main.transform);
-        target.transform.localPosition = new Vector3(0, 0.3f, 0);
+        target.transform.localPosition = new Vector3(0, ylocation, 0);
         target.transform.localRotation = Quaternion.identity;
     }
 
     // y축 각도와 속도에 맞게 문 회전시킴
     public void Open()
     {
-        StopAllCoroutines();
-        StartCoroutine(RotateY(target, angle, speed));
+        if(RotateCoroutine != null)
+            RotateCoroutine = StartCoroutine(RotateY(target, angle, speed));
     }
 
     private IEnumerator RotateY(GameObject obj, float targetAngle, float speed)
@@ -60,7 +62,7 @@ public class InteractionHandler : MonoBehaviour
 
             obj.transform.Rotate(0f, delta * direction, 0f);
             rotated += delta * direction;
-
+            RotateCoroutine = null;
             yield return null;
         }
     }
