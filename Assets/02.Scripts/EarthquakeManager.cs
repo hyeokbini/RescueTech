@@ -35,14 +35,12 @@ public class EarthquakeManager : MonoBehaviour
         {
             if (isShaking)
             {
-                Debug.Log("흔들림 시작");
                 StartCoroutine(ShakingCoroutine());
                 yield return new WaitForSeconds(shakingInterval);
                 isShaking = false;
             }
             else
             {
-                Debug.Log("안 흔들리는 중");
                 yield return new WaitForSeconds(idleInterval);
                 isShaking = true;
             }
@@ -90,7 +88,6 @@ public class EarthquakeManager : MonoBehaviour
 
         while (t < returnDuration)
         {
-            Debug.Log("원위치");
             t += Time.deltaTime;
             float ratio = t / returnDuration;
             transform.localPosition = Vector3.Lerp(startPos, originalPos, ratio);
