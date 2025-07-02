@@ -41,8 +41,10 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     Debug.Log("오브젝트 누름");
+                    Debug.Log(hitObject);
                     // UI 활성화
                     Transform uiTransform = hitObject.transform.Find($"InteractionUI");
+                    Debug.Log(uiTransform);
                     if (uiTransform != null)
                     {
                         GameObject uiObject = uiTransform.gameObject;
