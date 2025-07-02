@@ -1007,6 +1007,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1703755850}
     m_Modifications:
+    - target: {fileID: -2969033027337008647, guid: 10240bdc492f14f30baa98b4fadfac6e,
+        type: 3}
+      propertyPath: autoHide
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1746115407321309089, guid: 10240bdc492f14f30baa98b4fadfac6e,
         type: 3}
       propertyPath: m_Camera
@@ -1157,11 +1162,7 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1126488879}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5181273352674876122, guid: 10240bdc492f14f30baa98b4fadfac6e,
-        type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1604746179}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10240bdc492f14f30baa98b4fadfac6e, type: 3}
 --- !u!1001 &58865025
 PrefabInstance:
@@ -27469,26 +27470,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1599838861}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1604746178 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5181273352674876122, guid: 10240bdc492f14f30baa98b4fadfac6e,
-    type: 3}
-  m_PrefabInstance: {fileID: 58115777}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1604746179
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1604746178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba170d33b17412540a348e2cbbf9d23e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  autoHide: 0
-  hideDelay: 3
 --- !u!1001 &1606418381
 PrefabInstance:
   m_ObjectHideFlags: 0
