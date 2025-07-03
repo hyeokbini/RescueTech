@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 418553616315306820}
   - component: {fileID: 6442887512598322788}
   - component: {fileID: 8181240555765956726}
+  - component: {fileID: -2969033027337008647}
   m_Layer: 0
   m_Name: InteractionUI
   m_TagString: Untagged
@@ -130,6 +131,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   angle: 0
   speed: 0
+  ylocation: 0
+--- !u!114 &-2969033027337008647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5181273352674876122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba170d33b17412540a348e2cbbf9d23e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  autoHide: 1
+  hideDelay: 3
 --- !u!1 &5559732167865928458
 GameObject:
   m_ObjectHideFlags: 0

@@ -45,17 +45,12 @@ public class PlayerController : MonoBehaviour
                     Transform uiTransform = hitObject.transform.Find($"InteractionUI");
                     if (uiTransform != null)
                     {
-                        GameObject uiObject = uiTransform.gameObject;
-
-                        // 카메라 바라보게 회전
-                        uiObject.transform.LookAt(
-                            uiObject.transform.position + Camera.main.transform.forward,
-                            Camera.main.transform.up
-                        );
-
-                        uiObject.SetActive(true);
-
-                        StartCoroutine(HideUIAfterDelay(uiObject, 3f));
+                        var uiHandler = uiTransform.GetComponent<UITurnOnOffController>();
+                        if (uiHandler != null)
+                        {
+                            uiTransform.LookAt(uiTransform.position + Camera.main.transform.forward, Camera.main.transform.up);
+                            uiHandler.ShowUI();
+                        }
                     }
                     else
                     {
@@ -65,10 +60,5 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-    }
-    private IEnumerator HideUIAfterDelay(GameObject uiObject, float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        uiObject.SetActive(false);
     }
 }
