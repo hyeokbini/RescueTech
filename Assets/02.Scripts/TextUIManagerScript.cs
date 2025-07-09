@@ -32,6 +32,11 @@ public class TextUIManagerScript : MonoBehaviour
         }
     }
 
+    public void DeactiveUIWithText()
+    {
+        textPannel.SetActive(false);
+    }
+
     IEnumerator ActivePannelCoroutine()
     {
         textPannel.SetActive(true);

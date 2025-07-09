@@ -7,7 +7,9 @@ public class TyphoonPlayerScript : MonoBehaviour
     [SerializeField]
     private InteractionHandler handler;
     [SerializeField]
-    private bool isGrabTape = false;
+    private GameObject tape;
+    public bool isGrabTape = false;
+
 
     private void OnEnable()
     {
@@ -21,6 +23,7 @@ public class TyphoonPlayerScript : MonoBehaviour
 
     private void SetGrabTape()
     {
+        tape.GetComponent<MeshCollider>().enabled = false;
         isGrabTape = true;
     }
 }
