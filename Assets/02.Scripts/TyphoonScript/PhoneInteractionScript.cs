@@ -8,7 +8,10 @@ public class PhoneInteractionScript : MonoBehaviour, IInteractable
     private TyphoonPracticeModeManagerScript gameManager;
     [SerializeField]
     private TextUIManagerScript textManager;
-    public bool hasInteracted = false;
+    [SerializeField]
+    private int interactIndex = 3;
+    public int InteractIndex => interactIndex;
+    private bool hasInteracted = false;
     public bool HasInteracted => hasInteracted;
 
     public void GrabPhone()

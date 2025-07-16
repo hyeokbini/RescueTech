@@ -10,7 +10,10 @@ public class WindowInteractionScript : MonoBehaviour, IInteractable
     private WindowListManagerScript listManager;
     [SerializeField]
     private GameObject tape;
-    public bool hasInteracted = false;
+    [SerializeField]
+    private int interactIndex = 1;
+    public int InteractIndex => interactIndex;
+    private bool hasInteracted = false;
     public bool HasInteracted => hasInteracted;
     public void ActiveTape()
     {

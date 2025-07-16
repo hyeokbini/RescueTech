@@ -300,7 +300,7 @@ MonoBehaviour:
   player: {fileID: 876978119}
   listManager: {fileID: 1964379533}
   tape: {fileID: 82210159}
-  hasInteracted: 0
+  interactIndex: 1
 --- !u!1 &6794419
 GameObject:
   m_ObjectHideFlags: 0
@@ -8293,7 +8293,7 @@ MonoBehaviour:
   player: {fileID: 876978119}
   listManager: {fileID: 1964379533}
   tape: {fileID: 1040006641893878568}
-  hasInteracted: 0
+  interactIndex: 1
 --- !u!1 &468148059
 GameObject:
   m_ObjectHideFlags: 0
@@ -8815,7 +8815,7 @@ MonoBehaviour:
   player: {fileID: 876978119}
   listManager: {fileID: 1964379533}
   tape: {fileID: 1424651270}
-  hasInteracted: 0
+  interactIndex: 1
 --- !u!1001 &491162938
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9456,8 +9456,7 @@ MonoBehaviour:
   tvScreen: {fileID: 1991005076}
   gameManager: {fileID: 1393488167}
   textManager: {fileID: 1344606386}
-  Interactidx: 0
-  hasInteracted: 0
+  interactIndex: 0
 --- !u!1 &554544583
 GameObject:
   m_ObjectHideFlags: 0
@@ -10530,7 +10529,7 @@ MonoBehaviour:
   player: {fileID: 876978119}
   listManager: {fileID: 1964379533}
   tape: {fileID: 424308827}
-  hasInteracted: 0
+  interactIndex: 1
 --- !u!1 &639095504
 GameObject:
   m_ObjectHideFlags: 0
@@ -18318,7 +18317,7 @@ MonoBehaviour:
   player: {fileID: 876978119}
   listManager: {fileID: 1964379533}
   tape: {fileID: 1155100617}
-  hasInteracted: 0
+  interactIndex: 1
 --- !u!1001 &1109281645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18487,6 +18486,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: 0
   maxDistance: 10
+  countScript: {fileID: 1393488167}
 --- !u!1001 &1112706281
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -20379,7 +20379,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1393488167}
   textManager: {fileID: 1344606386}
-  hasInteracted: 0
+  interactIndex: 3
 --- !u!1001 &1204175117
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22104,8 +22104,8 @@ MonoBehaviour:
   - "\uBC14\uB78C\uC18C\uB9AC\uAC00 \uC2EC\uC0C1\uCE58 \uC54A\uC2B5\uB2C8\uB2E4.\nTV\uB97C
     \uD2C0\uC5B4 \uBD05\uC2DC\uB2E4."
   - "\uBC14\uB78C\uC73C\uB85C \uC778\uD574 \uCC3D\uBB38\uC774 \uAE68\uC9C0\uB294
-    \uAC83\uC744 \uBC29\uC9C0\uD558\uAE30 \uC704\uD574\n\uD14C\uC774\uD504\uB97C
-    \uCC3E\uC544\uC11C \uCC3D\uBB38\uC744 \uD14C\uC774\uD504\uB85C \uBCF4\uAC15\uD569\uC2DC\uB2E4."
+    \uAC83\uC744 \uBC29\uC9C0\uD558\uAE30 \uC704\uD574\n\uC2DD\uD0C1 \uC704 \uD14C\uC774\uD504\uB97C
+    \uC7A1\uC740 \uD6C4, \uCC3D\uBB38\uC744 \uD14C\uC774\uD504\uB85C \uBCF4\uAC15\uD569\uC2DC\uB2E4."
   - "\uD3ED\uC6B0\uB97C \uB3D9\uBC18\uD55C \uD0DC\uD48D\uC73C\uB85C \uC778\uD55C
     \uB204\uC804 \uD53C\uD574\uB97C \uB9C9\uAE30 \uC704\uD574\n\uB204\uC804 \uCC28\uB2E8\uAE30\uB97C
     \uC791\uB3D9\uC2DC\uD0A4\uC138\uC694."
@@ -22811,7 +22811,7 @@ MonoBehaviour:
   player: {fileID: 876978119}
   listManager: {fileID: 1964379533}
   tape: {fileID: 931807618}
-  hasInteracted: 0
+  interactIndex: 1
 --- !u!1 &1375737910
 GameObject:
   m_ObjectHideFlags: 0
@@ -23892,7 +23892,7 @@ MonoBehaviour:
   player: {fileID: 876978119}
   listManager: {fileID: 1964379533}
   tape: {fileID: 52310116}
-  hasInteracted: 0
+  interactIndex: 1
 --- !u!1001 &1447048496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30680,7 +30680,7 @@ MonoBehaviour:
   textManager: {fileID: 1344606386}
   offSwitch: {fileID: 47177333}
   onSwitch: {fileID: 290833450}
-  hasInteracted: 0
+  interactIndex: 2
 --- !u!1001 &1897527677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31131,7 +31131,7 @@ MonoBehaviour:
   player: {fileID: 876978119}
   listManager: {fileID: 1964379533}
   tape: {fileID: 11587355}
-  hasInteracted: 0
+  interactIndex: 1
 --- !u!1001 &1906098409
 PrefabInstance:
   m_ObjectHideFlags: 0

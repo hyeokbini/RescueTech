@@ -8,7 +8,9 @@ public class PlayerController : MonoBehaviour
 {
     public HandRole hand = HandRole.RightHand;
     public float maxDistance = 10f;
-
+    [SerializeField]
+    private MonoBehaviour countScript;
+    private IManagerObjCount Count => countScript as IManagerObjCount;
 
     void Update()
     {
@@ -52,8 +54,13 @@ public class PlayerController : MonoBehaviour
                         Debug.Log("이미 상호작용된 오브젝트");
                         return;
                     }
+                    if (Count.ObjCount != interactable.InteractIndex)
+                    {
+                        Debug.Log("순서 잘못됨");
+                        return;
+                    }
                     // UI 활성화
-                    Transform uiTransform = hitObject.transform.Find($"InteractionUI");
+                        Transform uiTransform = hitObject.transform.Find($"InteractionUI");
                     Debug.Log(uiTransform);
                     if (uiTransform != null)
                     {
