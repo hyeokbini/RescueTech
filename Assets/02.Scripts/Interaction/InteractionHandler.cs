@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.Events;
+using System;
 
 public class InteractionHandler : MonoBehaviour
 {
@@ -10,13 +12,14 @@ public class InteractionHandler : MonoBehaviour
     public float speed;
     public float ylocation;
     private Coroutine RotateCoroutine;
+    public event Action grabTape;
 
     private void Awake()
     {
         // 이 스크립트 붙은 오브젝트의 부모를 target으로 설정
         if (transform.parent != null)
             target = transform.parent.gameObject;
-        
+
         rightHand = GameObject.Find("RightHand");
     }
 
@@ -28,6 +31,8 @@ public class InteractionHandler : MonoBehaviour
         target.transform.SetParent(rightHand.transform);
         target.transform.localPosition = Vector3.zero;
         target.transform.localRotation = Quaternion.identity;
+        grabTape.Invoke();
+        gameObject.SetActive(false);
     }
 
     // 머리 위에 배치됨

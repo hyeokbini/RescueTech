@@ -8,7 +8,9 @@ public class PlayerController : MonoBehaviour
 {
     public HandRole hand = HandRole.RightHand;
     public float maxDistance = 10f;
-
+    [SerializeField]
+    private MonoBehaviour countScript;
+    private IManagerObjCount Count => countScript as IManagerObjCount;
 
     void Update()
     {
@@ -23,7 +25,7 @@ public class PlayerController : MonoBehaviour
                 // Unity가 내부적으로 UI 버튼 위에 마우스 올린 것처럼 처리 (hover 등)
             }
 
-            
+
             // 트리거를 눌렀으면
             if (ViveInput.GetPressDown(hand, ControllerButton.Trigger))
             {
@@ -41,8 +43,25 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     Debug.Log("오브젝트 누름");
+                    Debug.Log(hitObject);
+                    var interactable = hitObject.GetComponentInChildren<IInteractable>(true);
+                    if (interactable == null)
+                    {
+                        Debug.Log("오류");
+                    }
+                    if (interactable != null && interactable.HasInteracted)
+                    {
+                        Debug.Log("이미 상호작용된 오브젝트");
+                        return;
+                    }
+                    if (Count.ObjCount != interactable.InteractIndex)
+                    {
+                        Debug.Log("순서 잘못됨");
+                        return;
+                    }
                     // UI 활성화
-                    Transform uiTransform = hitObject.transform.Find($"InteractionUI");
+                        Transform uiTransform = hitObject.transform.Find($"InteractionUI");
+                    Debug.Log(uiTransform);
                     if (uiTransform != null)
                     {
                         var uiHandler = uiTransform.GetComponent<UITurnOnOffController>();
