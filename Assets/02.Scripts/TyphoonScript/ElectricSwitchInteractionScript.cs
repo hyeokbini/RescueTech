@@ -12,7 +12,10 @@ public class ElectricSwitchInteractionScript : MonoBehaviour, IInteractable
     private GameObject offSwitch;
     [SerializeField]
     private GameObject onSwitch;
-    public bool hasInteracted = false;
+    [SerializeField]
+    private int interactIndex = 2;
+    public int InteractIndex => interactIndex;
+    private bool hasInteracted = false;
     public bool HasInteracted => hasInteracted;
     public void TurnOnSwitch()
     {

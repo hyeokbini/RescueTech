@@ -11,12 +11,13 @@ public class TVInteractionScript : MonoBehaviour, IInteractable
     [SerializeField]
     private TextUIManagerScript textManager;
     [SerializeField]
-    private int Interactidx = 0;
-    public bool hasInteracted = false;
+    private int interactIndex = 0;
+    public int InteractIndex => interactIndex;
+    private bool hasInteracted = false;
     public bool HasInteracted => hasInteracted;
     public void TurnOnTvScreen()
     {
-        if (hasInteracted && Interactidx != gameManager.currentStepCount) return;
+        if (hasInteracted) return;
         textManager.IncreaseIndex();
         textManager.ActivateUIWithText();
         hasInteracted = true;

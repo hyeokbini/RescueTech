@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TyphoonPracticeModeManagerScript : MonoBehaviour
+public class TyphoonPracticeModeManagerScript : MonoBehaviour, IManagerObjCount
 {
     [SerializeField]
     private int stageStepCount; // 스테이지에서 진행해야 할 총 단계
@@ -12,6 +12,7 @@ public class TyphoonPracticeModeManagerScript : MonoBehaviour
     [SerializeField]
     private TextUIManagerScript textManager;
     private Coroutine endingCoroutine;
+    public int ObjCount => currentStepCount;
     private void Start()
     {
         textManager.ActivateUIWithText();
