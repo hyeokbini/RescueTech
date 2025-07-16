@@ -11,6 +11,10 @@ public class TextUIManagerScript : MonoBehaviour
     private GameObject textPannel;
     [SerializeField]
     private GameObject textObject;
+
+    [SerializeField]
+    private float intervalTime = 10f;
+
     private TextMeshProUGUI textComponent;
     private int currentIndex = 0;
     private Coroutine activePannelCoroutine;
@@ -32,6 +36,11 @@ public class TextUIManagerScript : MonoBehaviour
         }
     }
 
+    public void DeactiveUIWithText()
+    {
+        textPannel.SetActive(false);
+    }
+
     IEnumerator ActivePannelCoroutine()
     {
         textPannel.SetActive(true);
@@ -43,7 +52,7 @@ public class TextUIManagerScript : MonoBehaviour
         }
         textComponent.text = textUIList[currentIndex];
         // 10초 대기
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(intervalTime);
         textPannel.SetActive(false);
         activePannelCoroutine = null;
     }
