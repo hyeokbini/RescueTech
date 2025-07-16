@@ -10,20 +10,24 @@ public class EarthquakePracticeModeGameManagerScript : MonoBehaviour
     [SerializeField] private TextUIManagerScript textUIManager;
     [SerializeField] private float delayBeforeNextStep = 10f;
 
-    private int stageStepCount;
+    [SerializeField] private Transform player;
+    [SerializeField] private Transform respawnPoint;
+
+    [SerializeField] private EarthquakeFadeController earthquakeFadeController;
+    [SerializeField] private float fadeSpeed = 0.05f;
+
+    private int stageStepCount = 9;
     private int currentStepCount = 0;
     private Coroutine autoStepCoroutine;
 
     // 자동으로 넘어갈 단계 인덱스 (0-based)
-    private int[] autoUIIndex = { 1, 2, 5, 7 };
+    private int[] autoUIIndex = { 1, 2, 5, 7};
 
     public int CurrentStepCount => currentStepCount;
     public bool IsAutoStepRunning => autoStepCoroutine != null;
 
     private void Start()
     {
-        // 텍스트 리스트 개수에 맞춰 마지막 인덱스 세팅 (0부터 시작이므로 -1)
-        stageStepCount = 10;
         TriggerStep();
     }
 
@@ -32,7 +36,7 @@ public class EarthquakePracticeModeGameManagerScript : MonoBehaviour
         // 최종 단계 도달하면 클리어 UI만 띄우고 종료
         if (currentStepCount == stageStepCount)
         {
-            CheckStageClear();
+            StartCoroutine(ClearSequence());
             return;
         }
 
@@ -54,8 +58,23 @@ public class EarthquakePracticeModeGameManagerScript : MonoBehaviour
         autoStepCoroutine = null;
     }
 
-    private void CheckStageClear()
+    private IEnumerator ClearSequence()
     {
+        Debug.Log("연습 모드 종료");
+        // 1. 페이드 아웃 (화면 검게)
+        earthquakeFadeController.FadeOut(fadeSpeed);
+        // 페이드 완료될 때까지 대기
+        while (earthquakeFadeController.IsFading) yield return null;
+
+        // 2. 플레이어 위치 이동
+        if (player != null && respawnPoint != null)
+            player.position = respawnPoint.position;
+
+        // 3. 페이드 인 (원래 화면)
+        earthquakeFadeController.FadeIn(fadeSpeed);
+        while (earthquakeFadeController.IsFading) yield return null;
+
+        // 4. 클리어 UI 패널 띄우기
         if (clearUIPanel != null)
             clearUIPanel.SetActive(true);
         else
