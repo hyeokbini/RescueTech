@@ -990,6 +990,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInteracted: 0
+  countScript: {fileID: 0}
   targetAngle: -45
   isStage: 0
   earthquakeStageManager: {fileID: 0}
@@ -11601,6 +11602,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInteracted: 0
+  countScript: {fileID: 0}
   targetAngle: -45
   isStage: 0
   earthquakeStageManager: {fileID: 0}
@@ -21217,6 +21219,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInteracted: 0
+  countScript: {fileID: 637171493}
   targetAngle: 90
   isStage: 1
   earthquakeStageManager: {fileID: 637171493}
@@ -22285,6 +22288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasInteracted: 0
   earthquakeStageManager: {fileID: 637171493}
+  countScript: {fileID: 637171493}
 --- !u!1 &1428312016
 GameObject:
   m_ObjectHideFlags: 0
@@ -22898,9 +22902,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInteracted: 0
+  countScript: {fileID: 637171493}
   targetAngle: -45
   isStage: 0
-  earthquakeStageManager: {fileID: 0}
+  earthquakeStageManager: {fileID: 637171493}
 --- !u!1 &1455615054 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 116882, guid: cb3370c18187bb444b240cfb08dcc02f,
@@ -24431,9 +24436,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInteracted: 0
+  countScript: {fileID: 637171493}
   targetAngle: -90
   isStage: 0
-  earthquakeStageManager: {fileID: 0}
+  earthquakeStageManager: {fileID: 637171493}
 --- !u!1001 &1536464959
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -26266,7 +26272,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hand: 0
   maxDistance: 10
-  countScript: {fileID: 0}
+  countScript: {fileID: 637171493}
 --- !u!4 &1645483277 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4630089789096634, guid: 9c5472d803f92144db65de316dce2caf,
@@ -27051,6 +27057,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInteracted: 0
+  countScript: {fileID: 0}
   targetAngle: -45
   isStage: 0
   earthquakeStageManager: {fileID: 0}
@@ -28857,6 +28864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInteracted: 0
+  countScript: {fileID: 0}
   targetAngle: -90
   isStage: 0
   earthquakeStageManager: {fileID: 0}
@@ -31732,9 +31740,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInteracted: 0
+  countScript: {fileID: 637171493}
   targetAngle: -45
   isStage: 0
-  earthquakeStageManager: {fileID: 0}
+  earthquakeStageManager: {fileID: 637171493}
 --- !u!4 &2021557602 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4480247589143060, guid: 96f82647704d5e943938eb75ec7dcbe6,
@@ -34384,9 +34393,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasInteracted: 0
+  countScript: {fileID: 637171493}
   targetAngle: -45
   isStage: 0
-  earthquakeStageManager: {fileID: 0}
+  earthquakeStageManager: {fileID: 637171493}
 --- !u!1001 &2143143644
 PrefabInstance:
   m_ObjectHideFlags: 0
