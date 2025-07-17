@@ -7,6 +7,13 @@ public class Door : MonoBehaviour, IInteractable
     
     public bool hasInteracted = false;
     public bool HasInteracted => hasInteracted;
+    
+
+    [SerializeField]
+    private MonoBehaviour countScript;
+    private IManagerObjCount Count => countScript as IManagerObjCount;
+
+    public int InteractIndex => Count.ObjCount;
 
     [SerializeField]
     private float targetAngle = -45f;

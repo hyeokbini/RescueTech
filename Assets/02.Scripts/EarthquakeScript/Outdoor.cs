@@ -10,7 +10,8 @@ public class Outdoor : MonoBehaviour
     [SerializeField] private Collider outdoorAreaCollider;
 
     [SerializeField]
-    private int Interactidx = 8;
+    private int interactIndex = 8;
+    public int InteractIndex => interactIndex;
     public bool hasInteracted = false;
     public bool HasInteracted => hasInteracted;
     
@@ -26,7 +27,7 @@ public class Outdoor : MonoBehaviour
     {
         if (hasInteracted) return;
         bool isOutdoor = outdoorAreaCollider.bounds.Contains(hmdTransform.position);
-        if (isOutdoor && earthquakeStageManager.CurrentStepCount == Interactidx){
+        if (isOutdoor && earthquakeStageManager.CurrentStepCount == interactIndex){
             earthquakeStageManager.TriggerStep();
             hasInteracted = true;
         }

@@ -9,7 +9,8 @@ public class GasValve : MonoBehaviour, IInteractable
     private GameObject valve;
     
     [SerializeField]
-    private int Interactidx = 4;
+    private int interactIndex = 4;
+    public int InteractIndex => interactIndex;
     public bool hasInteracted = false;
     public bool HasInteracted => hasInteracted;
 
@@ -26,7 +27,7 @@ public class GasValve : MonoBehaviour, IInteractable
 
     public void TurnValveOn()
     {
-        if (earthquakeStageManager.CurrentStepCount != Interactidx || 
+        if (earthquakeStageManager.CurrentStepCount != interactIndex || 
             earthquakeStageManager.IsAutoStepRunning || 
             hasInteracted) return;
 

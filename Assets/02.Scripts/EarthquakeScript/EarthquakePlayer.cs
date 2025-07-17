@@ -11,7 +11,8 @@ public class EarthquakePlayer : MonoBehaviour
     [SerializeField] private CharacterController characterController;
 
     [SerializeField]
-    private int Interactidx = 6;
+    private int interactIndex = 6;
+    public int InteractIndex => interactIndex;
     public bool hasInteracted = false;
     public bool HasInteracted => hasInteracted;
     
@@ -26,7 +27,7 @@ public class EarthquakePlayer : MonoBehaviour
     void Update()
     {
         // 텍스트가 나오지 않고 해당 단계의 액션이면 숙였는지 확인한다. 
-        if (earthquakeStageManager.CurrentStepCount == Interactidx && !earthquakeStageManager.IsAutoStepRunning) {
+        if (earthquakeStageManager.CurrentStepCount == interactIndex && !earthquakeStageManager.IsAutoStepRunning) {
             HideUnderTable();
         }
     }

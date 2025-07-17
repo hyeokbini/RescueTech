@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using System.Linq;
 
-public class EarthquakePracticeModeGameManagerScript : MonoBehaviour
+public class EarthquakePracticeModeGameManagerScript : MonoBehaviour, IManagerObjCount
 {
     [SerializeField] private GameObject clearUIPanel;
     [SerializeField] private bool autoStepAdvance = true;
@@ -25,6 +25,8 @@ public class EarthquakePracticeModeGameManagerScript : MonoBehaviour
 
     public int CurrentStepCount => currentStepCount;
     public bool IsAutoStepRunning => autoStepCoroutine != null;
+
+    public int ObjCount => currentStepCount;
 
     private void Start()
     {

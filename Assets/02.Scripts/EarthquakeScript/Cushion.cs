@@ -9,7 +9,8 @@ public class Cushion : MonoBehaviour, IInteractable
     private GameObject cushion;
     
     [SerializeField]
-    private int Interactidx = 3;
+    private int interactIndex = 3;
+    public int InteractIndex => interactIndex;
     public bool hasInteracted = false;
     public bool HasInteracted => hasInteracted;
 
@@ -23,7 +24,7 @@ public class Cushion : MonoBehaviour, IInteractable
     public void PutOnHead()
     {   
         // 텍스트가 나오고 있고, 해당 단계의 액션이 아니면 막는다. 
-        if (earthquakeStageManager.CurrentStepCount != Interactidx && !earthquakeStageManager.IsAutoStepRunning) {
+        if (earthquakeStageManager.CurrentStepCount != interactIndex && !earthquakeStageManager.IsAutoStepRunning) {
             Debug.Log(earthquakeStageManager.CurrentStepCount);
             return;
         }
