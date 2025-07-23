@@ -5875,7 +5875,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1476077372}
+      objectReference: {fileID: 1476077378}
     - target: {fileID: 9166875696602111079, guid: 10240bdc492f14f30baa98b4fadfac6e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
@@ -5884,7 +5884,7 @@ PrefabInstance:
     - target: {fileID: 9166875696602111079, guid: 10240bdc492f14f30baa98b4fadfac6e,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: FireModeBasicDoor, Assembly-CSharp
+      value: FireModeDoor, Assembly-CSharp
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8181240555765956726, guid: 10240bdc492f14f30baa98b4fadfac6e, type: 3}
@@ -5894,7 +5894,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5181273352674876122, guid: 10240bdc492f14f30baa98b4fadfac6e,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1476077372}
+      addedObject: {fileID: 1476077378}
   m_SourcePrefab: {fileID: 100100000, guid: 10240bdc492f14f30baa98b4fadfac6e, type: 3}
 --- !u!224 &318995628 stripped
 RectTransform:
@@ -26379,7 +26379,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 318995627}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1476077372
+--- !u!114 &1476077378
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -26388,7 +26388,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1476077365}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcbbbd7a1921da943957b0a7a5662497, type: 3}
+  m_Script: {fileID: 11500000, guid: f956030e3d70cc943877aea40896db2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   firePracticeModeManager: {fileID: 542130985}
