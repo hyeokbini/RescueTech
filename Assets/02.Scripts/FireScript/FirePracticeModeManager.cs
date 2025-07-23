@@ -60,7 +60,20 @@ public class FirePracticeModeManager : MonoBehaviour, IManagerObjCount
 
         // 2. 플레이어 위치 이동
         if (player != null && respawnPoint != null)
-            player.position = respawnPoint.position;
+        {
+            CharacterController controller = player.GetComponent<CharacterController>();
+            if (controller != null)
+            {
+                controller.enabled = false;
+                player.position = respawnPoint.position;
+                controller.enabled = true;
+                Debug.Log($"[리스폰 완료] Player 위치: {player.position}");
+            }
+            else
+            {
+                Debug.LogError("카메라 또는 캐릭터 컨트롤러를 찾지 못함");
+            }
+        }
         towel.PutOffFace();
         // 3. 페이드 인 (원래 화면)
         fireFadeController.FadeIn();
