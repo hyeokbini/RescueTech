@@ -27,13 +27,17 @@ public class GasValve : MonoBehaviour, IInteractable
 
     public void TurnValveOn()
     {
-        if (earthquakeStageManager.CurrentStepCount != interactIndex || 
+        StartCoroutine(RotateAndAdvance());
+        hasInteracted = true;
+        if(ModeManagerScript.Instance.isRealMode){
+            EarthquakeScoreManager.Instance.CompleteAction(ActionType.GasValve);
+        }
+        else {
+            if (earthquakeStageManager.CurrentStepCount != interactIndex || 
             earthquakeStageManager.IsAutoStepRunning || 
             hasInteracted) return;
-
-        StartCoroutine(RotateAndAdvance());
-        earthquakeStageManager.TriggerStep();
-        hasInteracted = true;
+            earthquakeStageManager.TriggerStep();
+        }
     }
 
     private IEnumerator RotateAndAdvance()

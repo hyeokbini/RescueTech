@@ -17,6 +17,7 @@ public class EarthquakeManager : MonoBehaviour
 
     
     [SerializeField] private EarthquakePracticeModeGameManagerScript earthquakeStageManager;
+    [SerializeField] private EarthquakePlayer earthquakePlayer;
     private float returnDuration = 0.5f;
 
     private Vector3 originalPos;
@@ -48,7 +49,7 @@ public class EarthquakeManager : MonoBehaviour
                 isShaking = true;
             }
             
-            if (earthquakeStageManager.CurrentStepCount == 6) {
+            if (earthquakeStageManager.CurrentStepCount == 6 || earthquakePlayer.hasInteracted) {
                 Debug.Log("dd");
                 isShaking = false;
                 break;

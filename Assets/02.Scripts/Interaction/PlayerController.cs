@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
                         Debug.Log("이미 상호작용된 오브젝트");
                         return;
                     }
-                    if (Count.ObjCount != interactable.InteractIndex)
+                    if (Count.ObjCount != interactable.InteractIndex && !ModeManagerScript.Instance.isRealMode)
                     {
                         Debug.Log("순서 잘못됨");
                         return;

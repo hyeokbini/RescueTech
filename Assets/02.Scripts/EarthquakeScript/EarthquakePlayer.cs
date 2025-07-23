@@ -26,10 +26,16 @@ public class EarthquakePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 텍스트가 나오지 않고 해당 단계의 액션이면 숙였는지 확인한다. 
-        if (earthquakeStageManager.CurrentStepCount == interactIndex && !earthquakeStageManager.IsAutoStepRunning) {
+        if(ModeManagerScript.Instance.isRealMode){
             HideUnderTable();
         }
+        else {
+            // 텍스트가 나오지 않고 해당 단계의 액션이면 숙였는지 확인한다. 
+            if (earthquakeStageManager.CurrentStepCount == interactIndex && !earthquakeStageManager.IsAutoStepRunning) {
+                HideUnderTable();
+            }
+        }
+        
     }
 
     public void HideUnderTable()
@@ -45,7 +51,13 @@ public class EarthquakePlayer : MonoBehaviour
         if (isCrouching && isUnderTable)
         {
             Debug.Log("숙임");
-            earthquakeStageManager.TriggerStep();
+
+            if(ModeManagerScript.Instance.isRealMode){
+                EarthquakeScoreManager.Instance.CompleteAction(ActionType.Cover);
+            }
+            else {
+                earthquakeStageManager.TriggerStep();
+            }
             hasInteracted = true;
             return;
         }
