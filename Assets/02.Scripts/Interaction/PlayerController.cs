@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
                     if (interactable == null)
                     {
                         Debug.Log("오류");
+                        return;
                     }
                     if (interactable != null && interactable.HasInteracted)
                     {
