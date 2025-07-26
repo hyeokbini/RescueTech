@@ -13,21 +13,31 @@ public class EarthquakeSceneModeInitializer : MonoBehaviour
 
     private bool isRealMode;
 
-    private void Awake()
+    void Start()
     {
-        isRealMode = ModeManagerScript.Instance.isRealMode;
-        
-        if (!isRealMode)
+        // Null 에러 처리
+        if (ModeManagerScript.Instance == null)
         {
-            practiceManager.SetActive(true);
-            practiceObjects.SetActive(true);
-            realManager.SetActive(false);
+            Debug.LogError("ModeManagerScript.Instance 할당 안됨");
         }
         else
         {
-            practiceManager.SetActive(false);
-            realManager.SetActive(true);
-            realObjects.SetActive(true);
+            isRealMode = ModeManagerScript.Instance.isRealMode;
+
+            if (!isRealMode)
+            {
+                Debug.Log("연습 모드 실행");
+                practiceManager.SetActive(true);
+                practiceObjects.SetActive(true);
+                realManager.SetActive(false);
+            }
+            else
+            {
+                Debug.Log("실전 모드 실행");
+                practiceManager.SetActive(false);
+                realManager.SetActive(true);
+                realObjects.SetActive(true);
+            }
         }
     }
 }
