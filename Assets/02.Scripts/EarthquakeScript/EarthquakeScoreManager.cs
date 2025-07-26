@@ -12,6 +12,12 @@ public enum ActionType
     Cover
 }
 
+/*
+| 키워드(Enum)| 문구(String)       | 점수(int) | 상태(bool) |
+| cushion   | "쿠션으로 머리 보호"   |  +1     | false(기본) |
+| elevator  | "엘레베이터 이용 시도" | -1       | false(기본) |
+| gasvalve  | "가스 불 잠금"       | +1       | false(기본) |
+*/
 public class ActionData
 {
     public string Description { get; private set; }
@@ -43,12 +49,11 @@ public class EarthquakeScoreManager : MonoBehaviour
         else
         {
             Instance = this;
-            // 씬 전환 시에도 파괴되지 않도록 설정
-            DontDestroyOnLoad(gameObject);
             InitActions();
         }
     }
 
+    // 필요한 오브젝트 선언
     private void InitActions()
     {
         actionMap = new Dictionary<ActionType, ActionData>
@@ -60,6 +65,7 @@ public class EarthquakeScoreManager : MonoBehaviour
         };
     }
 
+    // 해당 미션을 수행하면 호출될 함수
     public void CompleteAction(ActionType type)
     {
         if (actionMap.ContainsKey(type)){
@@ -68,6 +74,7 @@ public class EarthquakeScoreManager : MonoBehaviour
         }
     }
 
+    // IsCompleted가 true인 value 중 Description을 선택해서 list로 반환
     public List<string> GetCompletedDescriptions()
     {
         return actionMap.Values

@@ -7,6 +7,7 @@ public class EarthquakeSceneModeInitializer : MonoBehaviour
     [SerializeField] private GameObject practiceManager;
     [SerializeField] private GameObject realManager;
 
+    // 상호 작용하는 오브젝트를 구분한다. 
     [SerializeField] private GameObject practiceObjects;
     [SerializeField] private GameObject realObjects;
 

@@ -13,10 +13,7 @@ public class EarthquakeElevator : MonoBehaviour, IInteractable
     private int interactIndex = -1;
     public int InteractIndex => interactIndex;
 
-    [SerializeField]
-    private GameObject UI_elevator;
-
-    private Coroutine activePannelCoroutine;
+    [SerializeField] private ElevatorUI elevatorUI;
 
     private void Awake()
     {
@@ -25,28 +22,14 @@ public class EarthquakeElevator : MonoBehaviour, IInteractable
             elevator = transform.parent.gameObject;   
     }
 
+    // 엘레베이터 클릭 시 호출
     public void TakeElevator()
     {
         hasInteracted = true;
         // 감점
         EarthquakeScoreManager.Instance.CompleteAction(ActionType.Elevator);
 
-        // 안내 문구 표시
-
-        if (activePannelCoroutine != null)
-        {
-            StopCoroutine(activePannelCoroutine);
-        }
-        activePannelCoroutine = StartCoroutine(ActivePannelCoroutine());
-    }
-
-    IEnumerator ActivePannelCoroutine()
-    {
-        UI_elevator.SetActive(true);
-        // 3초 대기
-        yield return new WaitForSeconds(3f);
-        UI_elevator.SetActive(false);
-        activePannelCoroutine = null;
+        elevatorUI.showUI();
     }
 
 }

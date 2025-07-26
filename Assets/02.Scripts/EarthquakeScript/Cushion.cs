@@ -21,6 +21,7 @@ public class Cushion : MonoBehaviour, IInteractable
             cushion = transform.parent.gameObject;
     }
 
+    // 방법 1. 하나의 함수에서 if문으로 구분
     public void PutOnHead()
     {   
         // 카메라 자식으로 붙이기

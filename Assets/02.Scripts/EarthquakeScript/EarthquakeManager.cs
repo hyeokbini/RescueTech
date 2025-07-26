@@ -34,23 +34,27 @@ public class EarthquakeManager : MonoBehaviour
     }
 
     IEnumerator ShakingCycleCoroutine()
-    {
+    {   
+        // 지진 반복
         while (true)
         {
+            // 지진 
             if (isShaking)
             {
                 StartCoroutine(ShakingCoroutine());
                 yield return new WaitForSeconds(shakingInterval);
                 isShaking = false;
             }
+            // 유휴 
             else
             {
                 yield return new WaitForSeconds(idleInterval);
                 isShaking = true;
             }
             
+            // 연습모드에서 6단계에 왔거나 earthquakePlayer가 동작을 수행했다면(hasInteracted가 true라면)
             if (earthquakeStageManager.CurrentStepCount == 6 || earthquakePlayer.hasInteracted) {
-                Debug.Log("dd");
+                Debug.Log("지진 정지");
                 isShaking = false;
                 break;
             }

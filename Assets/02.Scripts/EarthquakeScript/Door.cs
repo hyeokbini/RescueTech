@@ -46,7 +46,7 @@ public class Door : MonoBehaviour, IInteractable
         }
         
     }
-
+    // 방법 2. 연습모드와 실전모드 함수 구분
     public void Open_R()
     {
         if(RotateCoroutine == null){

@@ -34,12 +34,12 @@ public class EarthquakeRealModeGameManager : MonoBehaviour
     [SerializeField] private EarthquakeFadeController earthquakeFadeController;
     [SerializeField] private float fadeSpeed = 0.05f;
 
-    private int totalScore;         //총 점수
+    private int totalScore;
 
     void Start()
     {
         theGameStateManager.SetState(EarthquakeGameState.Wait);
-        // 삼초 대기 후 게임 시작, 추후 버튼으로 수정 가능
+        // 삼초 대기 후 게임 시작, 추후 시작 버튼 등으로 개선 가능
         StartCoroutine(ShowWaitUI(3f));
     }
 
@@ -85,12 +85,6 @@ public class EarthquakeRealModeGameManager : MonoBehaviour
 
     public void FinishStage()
     {
-        /*
-        if(UI_scoreText != null)
-        {
-            UI_scoreText.text = "점수: " + totalScore;
-            UI_scoreText.gameObject.SetActive(true);
-        }*/
         StartCoroutine(ClearSequence());
     }
 
@@ -110,21 +104,27 @@ public class EarthquakeRealModeGameManager : MonoBehaviour
     private IEnumerator ClearSequence()
     {
         Debug.Log("실전 모드 종료");
+        // 페이드 아웃 & 인
         earthquakeFadeController.FadeOut(fadeSpeed);
         while (earthquakeFadeController.IsFading) yield return null;
 
+        // 리스폰
         if (player != null && respawnPoint != null)
             player.position = respawnPoint.position;
 
         earthquakeFadeController.FadeIn(fadeSpeed);
         while (earthquakeFadeController.IsFading) yield return null;
 
+        // 결과 UI 표시
         if (FinishUI != null){
 
             FinishUI.SetActive(true);
             textComponent = textObject.GetComponent<TextMeshProUGUI>();
+            // 스코어매니저 인스턴스에 GetCompletedDescriptions() 함수로 결과 받아와서
             List<string> resultDescriptions = EarthquakeScoreManager.Instance.GetCompletedDescriptions();
+            // 합친 후
             string resultText = string.Join("\n", resultDescriptions); 
+            // 화면에 출력
             textComponent.text = resultText;
 
         }
