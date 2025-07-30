@@ -35,7 +35,7 @@ public class Door : MonoBehaviour, IInteractable
     {
         if (isStage == false) {
             if(RotateCoroutine == null)
-            RotateCoroutine = StartCoroutine(RotateY(door, targetAngle, 130f));
+                RotateCoroutine = StartCoroutine(RotateY(door, targetAngle, 130f));
             hasInteracted = true;
         } else {
             if (earthquakeStageManager.CurrentStepCount == 8 && !earthquakeStageManager.IsAutoStepRunning) {
@@ -45,6 +45,14 @@ public class Door : MonoBehaviour, IInteractable
             }
         }
         
+    }
+    // 방법 2. 연습모드와 실전모드 함수 구분
+    public void Open_R()
+    {
+        if(RotateCoroutine == null){
+                RotateCoroutine = StartCoroutine(RotateY(door, targetAngle, 130f));
+                hasInteracted = true;
+        }
     }
 
     private IEnumerator RotateY(GameObject obj, float targetAngle, float speed)

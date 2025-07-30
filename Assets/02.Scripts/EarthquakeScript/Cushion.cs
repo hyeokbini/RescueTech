@@ -21,21 +21,28 @@ public class Cushion : MonoBehaviour, IInteractable
             cushion = transform.parent.gameObject;
     }
 
+    // 방법 1. 하나의 함수에서 if문으로 구분
     public void PutOnHead()
     {   
-        // 텍스트가 나오고 있고, 해당 단계의 액션이 아니면 막는다. 
-        if (earthquakeStageManager.CurrentStepCount != interactIndex && !earthquakeStageManager.IsAutoStepRunning) {
-            Debug.Log(earthquakeStageManager.CurrentStepCount);
-            return;
-        }
-
         // 카메라 자식으로 붙이기
         cushion.transform.SetParent(Camera.main.transform);
         cushion.transform.localPosition = new Vector3(0, 0.25f, 0);
         cushion.transform.localRotation = Quaternion.identity;
-        
-        // 다음 스테이지로 넘기기
-        earthquakeStageManager.TriggerStep();
         hasInteracted = true;
+
+        // 실전모드라면 가점
+        if(ModeManagerScript.Instance.isRealMode){
+            EarthquakeScoreManager.Instance.CompleteAction(ActionType.Cushion);
+        }
+        else {
+            // 텍스트가 나오고 있고, 해당 단계의 액션이 아니면 막는다. 
+            if (earthquakeStageManager.CurrentStepCount != interactIndex && !earthquakeStageManager.IsAutoStepRunning) {
+                Debug.Log(earthquakeStageManager.CurrentStepCount);
+                return;
+            }
+            // 다음 스테이지로 넘기기
+            earthquakeStageManager.TriggerStep();
+        }
+        
     }
 }
