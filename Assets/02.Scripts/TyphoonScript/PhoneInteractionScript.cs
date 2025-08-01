@@ -7,6 +7,8 @@ public class PhoneInteractionScript : MonoBehaviour, IInteractable
     [SerializeField]
     private TyphoonPracticeModeManagerScript gameManager;
     [SerializeField]
+    private TyphoonRealModeManagerScript realGameManager; // 추가
+    [SerializeField]
     private TextUIManagerScript textManager;
     [SerializeField]
     private int interactIndex = 3;
@@ -17,8 +19,17 @@ public class PhoneInteractionScript : MonoBehaviour, IInteractable
     public void GrabPhone()
     {
         if (hasInteracted) return;
-        textManager.IncreaseIndex();
+
+        if (!ModeManagerScript.Instance.isRealMode)
+        {
+            textManager.IncreaseIndex();
+            gameManager.IncreaseStageStep();
+        }
+        else
+        {
+            realGameManager.AddScore(100); // 실전 모드 점수 부여
+        }
         hasInteracted = true;
-        gameManager.IncreaseStageStep();
     }
 }
+
