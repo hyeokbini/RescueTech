@@ -27,7 +27,8 @@ public class PhoneInteractionScript : MonoBehaviour, IInteractable
         }
         else
         {
-            realGameManager.AddScore(100); // 실전 모드 점수 부여
+            realGameManager.AddScore(50); // 실전 모드 점수 부여
+            realGameManager.getCompletedActionList[2] = true;
         }
         hasInteracted = true;
     }

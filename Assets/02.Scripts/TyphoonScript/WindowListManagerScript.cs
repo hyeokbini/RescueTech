@@ -12,7 +12,7 @@ public class WindowListManagerScript : MonoBehaviour
     [SerializeField]
     private TextUIManagerScript textManager;
     [SerializeField]
-    private int allWindowCount;
+    public int allWindowCount;
     public int currentWindowCount = 0;
 
     public void IncreaseWindowCount()
@@ -36,6 +36,7 @@ public class WindowListManagerScript : MonoBehaviour
             else
             {
                 realGameManager.AddScore(30); // 실전 모드: 추가점 30점
+                realGameManager.getCompletedActionList[0] = true;
             }
         }
     }

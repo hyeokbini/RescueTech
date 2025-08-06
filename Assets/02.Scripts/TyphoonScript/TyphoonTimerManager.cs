@@ -1,34 +1,25 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class TyphoonTimerManager : MonoBehaviour
 {
-    public float timeLimit = 10f;   //시간 제한(10초로 임시 설정)
+    public float timeLimit = 100f;   //시간 제한(10초로 임시 설정)
     private float currentTime;      //진행 시간
     private bool isRunning = false; //타이머 작동 여부
     [SerializeField]
-    private Text UI_timerText;      //타이머 텍스트 UI
-    [SerializeField]
-    private Text UI_startTimerText; //시작 타이머 텍스트 UI
-    [SerializeField]
-    private Text UI_startMessage;   //게임 시작 텍스트 UI
-    private float startCurrentTime; //시작 타이머 진행 시간
-    [SerializeField]
-    private Text UI_finishText;     //종료 텍스트 UI
+    private TextMeshProUGUI UI_timerText;
     [SerializeField]
     private TyphoonGameStateManager theGameStateManager;   //게임 상태 매니저를 사용하기 위한 변수
 
     void Start()
     {
         //UI 컴포넌트 연결 체크
-        if (UI_timerText == null || UI_finishText == null) return;
+        if (UI_timerText == null) return;
         ResetTimer();       //진행 시간을 초기화
         UpdateTimerUI();
-        //게임 시작 타이머 UI를 꺼뒀다가 코루틴 적용
-        UI_startTimerText.gameObject.SetActive(false);
-        UI_startMessage.gameObject.SetActive(false);
-        StartCoroutine(StartTimerCoroutine(3.5f));
+        StartTimer();
     }
 
     void Update()
@@ -52,12 +43,6 @@ public class TyphoonTimerManager : MonoBehaviour
         currentTime = timeLimit;
     }
 
-    public void StartTimer()
-    {
-        //타이머가 진행되도록 함
-        isRunning = true;
-    }
-
     public void StopTimer()
     {
         //타이머 진행을 멈춤
@@ -74,48 +59,14 @@ public class TyphoonTimerManager : MonoBehaviour
         int centiseconds = Mathf.FloorToInt((currentTime % 1f) * 100);
 
         UI_timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, centiseconds);
+        Debug.Log("타이머 세팅 완");
     }
 
-    private IEnumerator StartTimerCoroutine(float time)
+    public void StartTimer()
     {
-        UI_startTimerText.gameObject.SetActive(true);   //게임 시작 타이머 UI 활성화
-        startCurrentTime = time;                        //진행시간을 time으로 초기화
-        while (startCurrentTime > 0)                    //진행시간이 0이 될 때까지 반복
-        {
-            startCurrentTime -= Time.deltaTime;
-            UpdateStartTimerUI();
-            if(startCurrentTime <= 0)
-                UI_startTimerText.text = "00:00";
-            yield return null;
-        }
-        theGameStateManager.SetState(TyphoonGameState.Play); //게임 진행 중으로 상태 업데이트
-        StartCoroutine(HideGameStartTimer());               //게임 시작 UI를 0.5초 뒤에 사라지도록 코루틴 적용
-    }
-
-    private void UpdateStartTimerUI()
-    {
-        //초, 센티초까지 보이도록 UI 세팅
-        int seconds = Mathf.FloorToInt(startCurrentTime % 60);
-
-        UI_startTimerText.text = seconds.ToString();
-    }
-
-    //0.5초 뒤에 게임 시작 UI를 사라지도록 하기 위한 Coroutine
-    private IEnumerator HideGameStartTimer()
-    {
-        UI_startTimerText.gameObject.SetActive(false);
-        UI_startMessage.gameObject.SetActive(true);
-        yield return new WaitForSeconds(0.5f);
-        UI_startMessage.gameObject.SetActive(false);
-    }
-
-    public void FinishUIOff()
-    {
-        UI_finishText.gameObject.SetActive(false);
-    }
-
-    public void FinishUIOn()
-    {
-        UI_finishText.gameObject.SetActive(true);
+        //타이머가 진행되도록 함
+        isRunning = true;
+        theGameStateManager.SetState(TyphoonGameState.Play);
+        Debug.Log("타이머 시작");
     }
 }

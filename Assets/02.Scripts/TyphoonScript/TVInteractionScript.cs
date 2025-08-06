@@ -15,6 +15,8 @@ public class TVInteractionScript : MonoBehaviour, IInteractable
     [SerializeField]
     private TextUIManagerScript realtextManager;
     [SerializeField]
+    private TyphoonTimerManager timerManager;
+    [SerializeField]
     private int interactIndex = 0;
     public int InteractIndex => interactIndex;
     private bool hasInteracted = false;
@@ -30,6 +32,7 @@ public class TVInteractionScript : MonoBehaviour, IInteractable
         }
         else
         {
+            timerManager.gameObject.SetActive(true);
             realGameManager.StartStage();
             realtextManager.IncreaseIndex();
             realtextManager.ActivateUIWithText();

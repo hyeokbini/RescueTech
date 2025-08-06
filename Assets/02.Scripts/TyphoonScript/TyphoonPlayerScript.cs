@@ -8,8 +8,13 @@ public class TyphoonPlayerScript : MonoBehaviour
     private InteractionHandler handler;
     [SerializeField]
     private GameObject tape;
+    public Vector3 startPosition;
     public bool isGrabTape = false;
 
+    private void Awake()
+    {
+        startPosition = gameObject.transform.position;
+    }
 
     private void OnEnable()
     {
@@ -25,5 +30,11 @@ public class TyphoonPlayerScript : MonoBehaviour
     {
         tape.GetComponent<MeshCollider>().enabled = false;
         isGrabTape = true;
+    }
+
+    public void EndState()
+    {
+        gameObject.GetComponent<PlayerMovement>().gravity = 0;
+        gameObject.transform.position = startPosition;
     }
 }
