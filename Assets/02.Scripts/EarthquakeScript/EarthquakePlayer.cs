@@ -42,7 +42,6 @@ public class EarthquakePlayer : MonoBehaviour
 
     public void HideUnderTable()
     {   
-        if (hasInteracted) return;
         // 숙였는지 확인한다.
         float currentHeight = hmdTransform.position.y;
         bool isCrouching = currentHeight < standingHeight * 0.85f;
