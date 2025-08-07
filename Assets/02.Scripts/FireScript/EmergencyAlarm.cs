@@ -17,17 +17,9 @@ public class EmergencyAlarm : MonoBehaviour, IInteractable
     public void Ring()
     {
         if (hasInteracted) return;
-        if(ModeManagerScript.Instance.isRealMode)
-        {
-            FireScoreManager.Instance.CompleteAction(FireAction.EmergencyAlarm);
-            hasInteracted = true;
-        }
-        else
-        {
-            textUIManager.IncreaseIndex();
-            textUIManager.ActivateUIWithText();
-            hasInteracted = true;
-            firePracticeModeManager.IncreaseStageStep();
-        }
+        textUIManager.IncreaseIndex();
+        textUIManager.ActivateUIWithText();
+        hasInteracted = true;
+        firePracticeModeManager.IncreaseStageStep();
     }
 }
