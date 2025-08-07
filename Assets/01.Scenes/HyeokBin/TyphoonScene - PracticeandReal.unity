@@ -34189,7 +34189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fea07128d0e48a34abec82f39e57a25f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactIndex: 0
+  interactIndex: 1
 --- !u!1001 &2007279908
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36262,7 +36262,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af30ae2647040a34d90514277e7aaffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRealMode: 1
+  isRealMode: 0
 --- !u!4 &2122146132
 Transform:
   m_ObjectHideFlags: 0
