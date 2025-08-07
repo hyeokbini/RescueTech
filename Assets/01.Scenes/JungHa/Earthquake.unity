@@ -8242,7 +8242,7 @@ PrefabInstance:
     - target: {fileID: 2741514586999573498, guid: 894edc677057b42b28be567d8fa86b21,
         type: 3}
       propertyPath: m_text
-      value: "B \uBC84\uD2BC\uC744 \uB20C\uB7EC \uBA54\uC778 \uD654\uBA74\uC73C\uB85C
+      value: "\uADF8\uB9BD \uBC84\uD2BC\uC744 \uB20C\uB7EC \uBA54\uC778 \uD654\uBA74\uC73C\uB85C
         \uB3CC\uC544\uAC00\uAE30"
       objectReference: {fileID: 0}
     - target: {fileID: 2741514586999573498, guid: 894edc677057b42b28be567d8fa86b21,
@@ -8283,7 +8283,7 @@ PrefabInstance:
     - target: {fileID: 4016394963421963454, guid: 894edc677057b42b28be567d8fa86b21,
         type: 3}
       propertyPath: m_Name
-      value: Text (2)
+      value: "\uB3CC\uC544\uAC00"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11988,7 +11988,7 @@ PrefabInstance:
     - target: {fileID: 2741514586999573498, guid: 894edc677057b42b28be567d8fa86b21,
         type: 3}
       propertyPath: m_text
-      value: "B \uBC84\uD2BC\uC744 \uB20C\uB7EC \uBA54\uC778 \uD654\uBA74\uC73C\uB85C
+      value: "\uADF8\uB9BD \uBC84\uD2BC\uC744 \uB20C\uB7EC \uBA54\uC778 \uD654\uBA74\uC73C\uB85C
         \uB3CC\uC544\uAC00\uAE30"
       objectReference: {fileID: 0}
     - target: {fileID: 2741514586999573498, guid: 894edc677057b42b28be567d8fa86b21,
@@ -12029,7 +12029,7 @@ PrefabInstance:
     - target: {fileID: 4016394963421963454, guid: 894edc677057b42b28be567d8fa86b21,
         type: 3}
       propertyPath: m_Name
-      value: Text (2)
+      value: "\uB3CC\uC544\uAC00\uAE30 "
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -19361,7 +19361,7 @@ PrefabInstance:
     - target: {fileID: 4016394963421963454, guid: 894edc677057b42b28be567d8fa86b21,
         type: 3}
       propertyPath: m_Name
-      value: Text (1)
+      value: "\uD53C\uB4DC"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -36504,7 +36504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af30ae2647040a34d90514277e7aaffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRealMode: 0
+  isRealMode: 1
 --- !u!4 &1984971567
 Transform:
   m_ObjectHideFlags: 0
