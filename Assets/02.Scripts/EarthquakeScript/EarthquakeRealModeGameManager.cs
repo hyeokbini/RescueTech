@@ -18,8 +18,6 @@ public class EarthquakeRealModeGameManager : MonoBehaviour
     [SerializeField]
     private GameObject WaitUI;      
     
-    [SerializeField]
-    private GameObject PlayingButtonUI;    
     
     [SerializeField]
     private GameObject FinishUI;    
@@ -61,7 +59,6 @@ public class EarthquakeRealModeGameManager : MonoBehaviour
         ResetScore();               //점수 초기화
         
         WaitUI.SetActive(false);
-        PlayingButtonUI.SetActive(true);
     }
 
     private void ResetStep()
