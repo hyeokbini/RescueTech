@@ -13,14 +13,8 @@ public class TyphoonPracticeModeManagerScript : MonoBehaviour, IManagerObjCount
     private TextUIManagerScript textManager;
     private Coroutine endingCoroutine;
     public int ObjCount => currentStepCount;
-
     private void Start()
     {
-        if (ModeManagerScript.Instance.isRealMode)
-        {
-            gameObject.SetActive(false);
-            return;
-        }
         textManager.ActivateUIWithText();
     }
 

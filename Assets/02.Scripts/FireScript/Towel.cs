@@ -23,11 +23,18 @@ public class Towel : MonoBehaviour, IInteractable
         towel.transform.SetParent(Camera.main.transform);
         towel.transform.localPosition = new Vector3(0,-0.07f,0.1f);
         towel.transform.localRotation = Quaternion.Euler(0, -90f, -90f);
-
-        textUIManager.IncreaseIndex();
-        textUIManager.ActivateUIWithText();
-        hasInteracted = true;
-        firePracticeModeManager.IncreaseStageStep();
+        if(ModeManagerScript.Instance.isRealMode)
+        {
+            FireScoreManager.Instance.CompleteAction(FireAction.Towel);
+            hasInteracted = true;
+        }
+        else
+        {
+            textUIManager.IncreaseIndex();
+            textUIManager.ActivateUIWithText();
+            hasInteracted = true;
+            firePracticeModeManager.IncreaseStageStep();
+        }
     }
 
     public void PutOffFace()

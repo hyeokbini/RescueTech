@@ -17,9 +17,18 @@ public class FireOutdoor : MonoBehaviour, IInteractable
     public void Out()
     {
         if (hasInteracted) return;
-        textUIManager.IncreaseIndex();
-        textUIManager.ActivateUIWithText();
-        hasInteracted = true;
-        firePracticeModeManager.IncreaseStageStep();
+        if(ModeManagerScript.Instance.isRealMode)
+        {
+            FireScoreManager.Instance.CompleteAction(FireAction.OutDoor);
+            FireRealModeFlowManager.Instance.EndStage();
+            hasInteracted = true;
+        }
+        else
+        {
+            textUIManager.IncreaseIndex();
+            textUIManager.ActivateUIWithText();
+            hasInteracted = true;
+            firePracticeModeManager.IncreaseStageStep();
+        }
     }
 }

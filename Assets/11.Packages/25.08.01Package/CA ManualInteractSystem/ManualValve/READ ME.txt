@@ -1,0 +1,6 @@
+CA Manual Valve System v1.0 
+Note: Unity's Standard Asset is required.
+
+The Manual Valve System is a tool that allows you to make any rotatable object into a manually interactable valve. Turning the valve will allow for some realistic results like slowly open a heavy gate or turn off steam leaks from a pipe etc. 
+
+If you have any questions or concerns please contact me via chillasart@gmail.com 

@@ -29,10 +29,29 @@ public class FireModePhone : MonoBehaviour, IInteractable
 
     public void CallTo119()
     {
-        textUIManager.IncreaseIndex();
-        textUIManager.ActivateUIWithText();
-        hasInteracted = true;
-        firePracticeModeManager.IncreaseStageStep();
-        phoneUI.SetActive(false);
+        if (hasInteracted) return;
+        if(ModeManagerScript.Instance.isRealMode)
+        {
+            FireScoreManager.Instance.CompleteAction(FireAction.Phone_119);
+            hasInteracted = true;
+        }
+        else
+        {
+            textUIManager.IncreaseIndex();
+            textUIManager.ActivateUIWithText();
+            hasInteracted = true;
+            firePracticeModeManager.IncreaseStageStep();
+            phoneUI.SetActive(false);
+        }
+    }
+
+    public void UseAnotherApp()
+    {
+        if (hasInteracted) return;
+        if(ModeManagerScript.Instance.isRealMode)
+        {
+            FireScoreManager.Instance.CompleteAction(FireAction.Phone_Another);
+            hasInteracted = true;
+        }
     }
 }
