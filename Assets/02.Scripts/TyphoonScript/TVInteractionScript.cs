@@ -7,15 +7,9 @@ public class TVInteractionScript : MonoBehaviour, IInteractable
     [SerializeField]
     private GameObject tvScreen;
     [SerializeField]
-    private TyphoonPracticeModeManagerScript pracitceGameManager;
+    private TyphoonPracticeModeManagerScript gameManager;
     [SerializeField]
-    private TyphoonRealModeManagerScript realGameManager;
-    [SerializeField]
-    private TextUIManagerScript practicetextManager;
-    [SerializeField]
-    private TextUIManagerScript realtextManager;
-    [SerializeField]
-    private TyphoonTimerManager timerManager;
+    private TextUIManagerScript textManager;
     [SerializeField]
     private int interactIndex = 0;
     public int InteractIndex => interactIndex;
@@ -24,21 +18,10 @@ public class TVInteractionScript : MonoBehaviour, IInteractable
     public void TurnOnTvScreen()
     {
         if (hasInteracted) return;
-        if (!ModeManagerScript.Instance.isRealMode)
-        {
-            practicetextManager.IncreaseIndex();
-            practicetextManager.ActivateUIWithText();
-            pracitceGameManager.IncreaseStageStep();
-        }
-        else
-        {
-            timerManager.gameObject.SetActive(true);
-            realGameManager.StartStage();
-            realtextManager.IncreaseIndex();
-            realtextManager.ActivateUIWithText();
-            realGameManager.IncreaseStep(); // 실전 모드에서는 실전용 호출
-        }
+        textManager.IncreaseIndex();
+        textManager.ActivateUIWithText();
         hasInteracted = true;
+        gameManager.IncreaseStageStep();
         tvScreen.SetActive(true);
         gameObject.SetActive(false); // 한번 켠 이후로는 UI 비활성화
     }

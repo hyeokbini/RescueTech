@@ -7,8 +7,6 @@ public class ElectricSwitchInteractionScript : MonoBehaviour, IInteractable
     [SerializeField]
     private TyphoonPracticeModeManagerScript gameManager;
     [SerializeField]
-    private TyphoonRealModeManagerScript realGameManager; // 추가
-    [SerializeField]
     private TextUIManagerScript textManager;
     [SerializeField]
     private GameObject offSwitch;
@@ -19,24 +17,13 @@ public class ElectricSwitchInteractionScript : MonoBehaviour, IInteractable
     public int InteractIndex => interactIndex;
     private bool hasInteracted = false;
     public bool HasInteracted => hasInteracted;
-
     public void TurnOnSwitch()
     {
         if (hasInteracted) return;
-
-        if (!ModeManagerScript.Instance.isRealMode)
-        {
-            textManager.IncreaseIndex();
-            textManager.ActivateUIWithText();
-            gameManager.IncreaseStageStep();
-        }
-        else
-        {
-            realGameManager.AddScore(100); // 실전 모드 점수 부여
-            realGameManager.getCompletedActionList[1] = true;
-        }
-
+        textManager.IncreaseIndex();
+        textManager.ActivateUIWithText();
         hasInteracted = true;
+        gameManager.IncreaseStageStep();
         offSwitch.gameObject.SetActive(false);
         onSwitch.gameObject.SetActive(true);
         gameObject.SetActive(false);
