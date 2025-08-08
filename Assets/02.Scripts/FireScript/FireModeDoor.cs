@@ -24,10 +24,18 @@ public class FireModeDoor : MonoBehaviour, IInteractable
         if (hasInteracted) return;
         if(rotateCoroutine == null)
             rotateCoroutine = StartCoroutine(RotateY(door, targetAngle, 130f));
-        textUIManager.IncreaseIndex();
-        textUIManager.ActivateUIWithText();
-        hasInteracted = true;
-        firePracticeModeManager.IncreaseStageStep();
+        if(ModeManagerScript.Instance.isRealMode)
+        {
+            FireScoreManager.Instance.CompleteAction(FireAction.Stair);
+            hasInteracted = true;
+        }
+        else
+        {
+            textUIManager.IncreaseIndex();
+            textUIManager.ActivateUIWithText();
+            hasInteracted = true;
+            firePracticeModeManager.IncreaseStageStep();
+        }
     }
 
     private IEnumerator RotateY(GameObject obj, float targetAngle, float speed)
