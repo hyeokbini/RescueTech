@@ -13906,6 +13906,7 @@ GameObject:
   - component: {fileID: 876978117}
   - component: {fileID: 876978116}
   - component: {fileID: 876978119}
+  - component: {fileID: 876978120}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -13991,6 +13992,19 @@ MonoBehaviour:
   tape: {fileID: 1924833500}
   startPosition: {x: 0, y: 0, z: 0}
   isGrabTape: 0
+--- !u!114 &876978120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 876978115}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5d3ecb3d8652514b90b5c382e66bdc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: 0
 --- !u!1 &877573639
 GameObject:
   m_ObjectHideFlags: 0
