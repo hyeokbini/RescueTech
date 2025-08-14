@@ -108,7 +108,7 @@ public class MainStateManager : MonoBehaviour
         // 실전 모드 선택시, 이 버튼을 누르는 시점에서 바로 씬 전환되어야 함
         if(ModeManagerScript.Instance.isRealMode)
         {
-            int randSceneIdx = Random.Range(3, 6);
+            int randSceneIdx = Random.Range(4, 7);
             objectList[7].GetComponent<SceneLoadButtonScript>().LoadScene(randSceneIdx);
         }
         isNatural = false;
@@ -120,7 +120,7 @@ public class MainStateManager : MonoBehaviour
         // 실전 모드 선택시, 이 버튼을 누르는 시점에서 바로 씬 전환되어야 함
         if(ModeManagerScript.Instance.isRealMode)
         {
-            int randSceneIdx = /*Random.Range(0, 3);*/ 0;
+            int randSceneIdx = Random.Range(1, 4);
             objectList[6].GetComponent<SceneLoadButtonScript>().LoadScene(randSceneIdx);
         }
         isNatural = true;
