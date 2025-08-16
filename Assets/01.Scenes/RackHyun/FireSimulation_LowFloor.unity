@@ -96,7 +96,8 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000000, guid: 17359f07b1a5f8f46860a419fdbd721f,
+    type: 2}
   m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
@@ -4818,7 +4819,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   textUIList:
   - "\uD654\uC7AC\uAC00 \uBC1C\uC0DD\uD588\uC2B5\uB2C8\uB2E4. \uC9C0\uC2DC\uC5D0
-    \uB530\uB77C \uB300\uD53C\uD569\uC2DC\uB2E4. \uC77C\uB2E8 \uC8FC\uBCC0\uC5D0
+    \uB530\uB77C \uB300\uD53C\uD569\uC2DC\uB2E4. \n\uC77C\uB2E8 \uC8FC\uBCC0\uC5D0
     \uBD88\uC774 \uB09C \uC0AC\uC2E4\uC744 \uC54C\uB9AC\uACE0 \uBE44\uC0C1\uBCA8\uC744
     \uC6B8\uB9BD\uC2DC\uB2E4."
   - "\uC774\uC81C \uC5F0\uB77D \uC218\uB2E8\uC744 \uCC3E\uC544 119\uC5D0 \uC2E0\uACE0\uB97C
