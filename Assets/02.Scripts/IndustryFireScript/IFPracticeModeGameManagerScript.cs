@@ -8,7 +8,7 @@ public class IFPracticeModeGameManagerScript : MonoBehaviour, IManagerObjCount
     [SerializeField] private GameObject clearUIPanel;
     [SerializeField] private TextUIManagerScript textUIManager;
     [SerializeField] private IFFadeController fadeController;
-    [SerializeField] private float fadeSpeed = 0.05f;
+    [SerializeField] private float fadeSpeed = 0.1f;
 
     [SerializeField] private float delayBeforeNextStep = 10f;
 
