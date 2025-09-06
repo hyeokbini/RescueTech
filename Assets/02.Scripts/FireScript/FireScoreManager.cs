@@ -104,8 +104,7 @@ public class FireScoreManager : MonoBehaviour
     {
         // 색상 지정
         const string fatalColor = "#FF3333";
-        const string wrongColor = "#FF5555";
-        const string goodColor = "#0066FF";
+        const string leftColor = "#FFFFFF";
 
         string color;
         string prefix;
@@ -115,15 +114,10 @@ public class FireScoreManager : MonoBehaviour
             color = fatalColor;
             prefix = "치명: ";
         }
-        else if (a.Score < 0)
+        else
         {
-            color = wrongColor;
-            prefix = "잘못: ";
-        }
-        else // score > 0
-        {
-            color = goodColor;
-            prefix = "정상: ";
+            color = leftColor;
+            prefix = "";
         }
 
         // Description을 색으로 감싸기 (접두사 + 설명)

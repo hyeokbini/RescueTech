@@ -13,7 +13,7 @@ public class FireTimerManager : MonoBehaviour
     [SerializeField]
     private Text UI_startTimerText; //시작 타이머 텍스트 UI
     [SerializeField]
-    private Text UI_startMessage;   //게임 시작 텍스트 UI
+    private GameObject startUI;     //게임 시작 텍스트 UI
     private float startCurrentTime; //시작 타이머 진행 시간
     [SerializeField]
     private FireGameStateManager theGameStateManager;   //게임 상태 매니저를 사용하기 위한 변수
@@ -26,7 +26,7 @@ public class FireTimerManager : MonoBehaviour
         UpdateTimerUI();
         //게임 시작 타이머 UI를 꺼뒀다가 코루틴 적용
         UI_startTimerText.gameObject.SetActive(false);
-        UI_startMessage.gameObject.SetActive(false);
+        startUI.SetActive(false);
         StartCoroutine(StartTimerCoroutine(3.5f));
     }
 
@@ -103,8 +103,8 @@ public class FireTimerManager : MonoBehaviour
     private IEnumerator HideGameStartTimer()
     {
         UI_startTimerText.gameObject.SetActive(false);
-        UI_startMessage.gameObject.SetActive(true);
+        startUI.SetActive(true);
         yield return new WaitForSeconds(3f);
-        UI_startMessage.gameObject.SetActive(false);
+        startUI.SetActive(false);
     }
 }
