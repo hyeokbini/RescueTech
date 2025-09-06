@@ -15,7 +15,9 @@ public class SwitchInteractionScript : MonoBehaviour, IInteractable
     [SerializeField]
     private GameObject onSwitch;
     [SerializeField]
-    private int interactIndex = 0;
+    private ElectricPlayerScript electricPlayer;
+    [SerializeField]
+    private int interactIndex = 1;
     public int InteractIndex => interactIndex;
     private bool hasInteracted = false;
     public bool HasInteracted => hasInteracted;

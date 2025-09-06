@@ -6,6 +6,8 @@ public class ElectricPlayerScript : MonoBehaviour
 {
     public Vector3 startPosition;
 
+    public bool isWearGlove = false;
+
     private void Awake()
     {
         startPosition = gameObject.transform.position;
