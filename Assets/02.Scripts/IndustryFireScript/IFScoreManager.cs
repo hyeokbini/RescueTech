@@ -18,12 +18,16 @@ public class IFActionData
     public string Description { get; private set; }
     public int Score { get; private set; }
     public bool IsCompleted { get; set; }
+    public int CurrentCount { get; set; }
+    public int TargetCount { get; set; } 
 
-    public IFActionData(string description, int score)
+    public IFActionData(string description, int score, int targetCount = 1)
     {
         Description = description;
         Score = score;
         IsCompleted = false;
+        CurrentCount = 0;
+        TargetCount = targetCount;
     }
 }
 
@@ -53,7 +57,7 @@ public class IFScoreManager : MonoBehaviour
     {
         actionMap = new Dictionary<IFActionType, IFActionData>
         {
-            { IFActionType.RemovableItems, new IFActionData("가연성 물질을 제거했습니다.", 1) },
+            { IFActionType.RemovableItems, new IFActionData("가연성 물질을 제거했습니다.", 1, 8) },
             { IFActionType.FireCover, new IFActionData("불티 방지 커버를 설치했습니다.", 1) },
             { IFActionType.CallSupervisor, new IFActionData("감독관을 호출했습니다.", 1) },
             { IFActionType.StopPainting, new IFActionData("도장 작업을 중지 요청했습니다.", 1) },
@@ -64,8 +68,30 @@ public class IFScoreManager : MonoBehaviour
     public void CompleteAction(IFActionType type)
     {
         if (actionMap.ContainsKey(type)){
-            actionMap[type].IsCompleted = true;
-            Debug.Log(type + "미션 완료");
+            var action = actionMap[type];
+
+            if (type == IFActionType.RemovableItems)
+            {
+                // '가연성 물질 제거' 미션인 경우, 개수 증가
+                if (action.CurrentCount < action.TargetCount)
+                {
+                    action.CurrentCount++;
+                    Debug.Log("가연성 물질 미션 진행: (" + action.CurrentCount + "/" + action.TargetCount + ")");
+                }
+
+                // 목표 개수에 도달하면 IsCompleted를 true로 설정
+                if (action.CurrentCount == action.TargetCount)
+                {
+                    action.IsCompleted = true;
+                    Debug.Log("가연성 물질 미션 완료");
+                }
+            }
+            else
+            {
+                // 다른 미션은 즉시 완료 처리
+                action.IsCompleted = true;
+                Debug.Log(type + " 미션 완료");
+            }
         }
     }
 
@@ -73,8 +99,16 @@ public class IFScoreManager : MonoBehaviour
     public List<string> GetCompletedDescriptions()
     {
         return actionMap.Values
-            .Where(a => a.IsCompleted)
-            .Select(a => a.Description)
+            // 미션을 완료한 경우 & 가연성 물질 제거 미션 1개 이상 성공한 경우 
+            .Where(a => a.IsCompleted || (a.CurrentCount > 0 && actionMap.First(kv => kv.Value == a).Key == IFActionType.RemovableItems))
+            .Select(a => {
+                if (actionMap.ContainsValue(a) && actionMap.First(kv => kv.Value == a).Key == IFActionType.RemovableItems)
+                {   
+                    // 가연성 물질 제거 미션은 개수까지 표현
+                    return $"{a.Description} ({a.CurrentCount}/{a.TargetCount})";
+                }
+                return a.Description;
+            })
             .ToList();
     }
 }
