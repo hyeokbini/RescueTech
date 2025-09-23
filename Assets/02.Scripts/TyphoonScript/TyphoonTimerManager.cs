@@ -13,7 +13,7 @@ public class TyphoonTimerManager : MonoBehaviour
     [SerializeField]
     private TyphoonGameStateManager theGameStateManager;   //게임 상태 매니저를 사용하기 위한 변수
 
-    void Start()
+    void Awake()
     {
         //UI 컴포넌트 연결 체크
         if (UI_timerText == null) return;

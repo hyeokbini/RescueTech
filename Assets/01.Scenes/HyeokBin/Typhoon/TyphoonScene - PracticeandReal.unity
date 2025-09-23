@@ -7217,7 +7217,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   theGameStateManager: {fileID: 1472752615}
-  stageStep: 0
+  stageStep: 4
+  currentStep: 0
   feedbackCanvas: {fileID: 1855343884}
   feedbackText: {fileID: 1746539228}
   textManager: {fileID: 95549883}
