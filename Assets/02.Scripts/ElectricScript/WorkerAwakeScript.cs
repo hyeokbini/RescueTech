@@ -23,6 +23,7 @@ public class WorkerAwakeScript : MonoBehaviour
     // 감전 시작
     public void StartShock()
     {
+        rb.isKinematic = true;
         if (shockCoroutine != null)
         {
             StopShock();
@@ -34,6 +35,7 @@ public class WorkerAwakeScript : MonoBehaviour
     // 감전 종료 + 튕김
     public void StopShock()
     {
+        rb.isKinematic = false;
         if (shockCoroutine != null)
         {
             StopCoroutine(shockCoroutine);

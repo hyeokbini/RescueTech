@@ -115,7 +115,8 @@ public class TyphoonRealModeManagerScript : MonoBehaviour
         {
             feedBack += "시간 내에 모든 대비를 마쳤습니다!\n\n";
         }
-        feedBack += "점수 : " + totalScore;
+        feedBack += "점수 : " + totalScore + "\n\n";
+        feedBack += "그립 버튼으로 메인 씬으로 돌아가기";
         return feedBack;
     }
 }

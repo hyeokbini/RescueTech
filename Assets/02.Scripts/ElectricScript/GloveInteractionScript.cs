@@ -6,8 +6,8 @@ public class GloveInteractionScript : MonoBehaviour, IInteractable
 {
     [SerializeField]
     private ElectricPracticeManagerScript practiceGameManager;
-    //[SerializeField]
-    //private ElectricRealModeManagerScript realGameManager; // 추가
+    [SerializeField]
+    private ElectricRealManagerScript realGameManager; // 추가
     [SerializeField]
     private TextUIManagerScript textManager;
     [SerializeField]
@@ -38,8 +38,8 @@ public class GloveInteractionScript : MonoBehaviour, IInteractable
         }
         else
         {
-            //realGameManager.AddScore(100); // 실전 모드 점수 부여
-            //realGameManager.getCompletedActionList[1] = true;
+            realGameManager.AddScore(100); // 실전 모드 점수 부여
+            realGameManager.getCompletedActionList[0] = true;
         }
 
         if (leftGlove != null && leftController != null)
