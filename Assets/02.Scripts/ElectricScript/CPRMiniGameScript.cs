@@ -6,6 +6,8 @@ using TMPro;
 
 public class CPRSimulator : MonoBehaviour
 {
+    [SerializeField]
+    private ElectricPracticeManagerScript practiceGameManager;
     public HandRole hand = HandRole.RightHand;
 
     // 미니게임 켜진동안 바깥 상호작용은 잠시 꺼두기
@@ -76,6 +78,8 @@ public class CPRSimulator : MonoBehaviour
         {
             isActive = false;
             Debug.Log("⏰ CPR 세션 종료");
+            practiceGameManager.IncreaseStageStep();
+            gameObject.SetActive(false);
             return;
         }
 

@@ -51,9 +51,9 @@ public class ElectricPracticeManagerScript : MonoBehaviour, IManagerObjCount
 
     IEnumerator EndingCoroutine()
     {
-        yield return StartCoroutine(GetComponent<TyphoonEndingFadeInOutScript>().FadeCoroutine());
+        yield return StartCoroutine(GetComponent<ElectricEndingFadeInOutScript>().FadeCoroutine());
         clearUIPanel.SetActive(true);
-        clearTextcomponent.text = "연습 모드가 종료되었습니다.\n\n태풍이 완전히 지나갈 때까지는 연락 매체를 통해 외부와 소통하며\n\n실내에서 대기하는 것이 좋습니다.\n\n그립 버튼으로 메인 씬으로 돌아가기";
+        clearTextcomponent.text = "연습 모드가 종료되었습니다.\n\n실제 상황에서는 119가 언제 도착할 지 모르기 때문에\n\n계속해서 심폐소생술을 실시해주어야 합니다.\n\n그립 버튼으로 메인 씬으로 돌아가기";
         endingCoroutine = null;
     }
 
