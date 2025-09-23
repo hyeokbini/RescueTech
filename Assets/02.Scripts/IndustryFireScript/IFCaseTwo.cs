@@ -5,7 +5,6 @@ using UnityEngine;
 public class IFCaseTwo : MonoBehaviour
 {
     [SerializeField] private IFPracticeModeGameManagerScript practiceStageManager;
-    [SerializeField] private int zoneStepIndex = 2;
     [SerializeField] private GameObject fireCover; // 두어야하는 오브젝트
     [SerializeField] private Collider targetZone; // 두어야하는 위치
 

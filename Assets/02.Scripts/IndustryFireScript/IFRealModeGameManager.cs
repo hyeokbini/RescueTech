@@ -32,6 +32,9 @@ public class IFRealModeGameManager : MonoBehaviour
     [SerializeField] private IFFadeController IFFadeController;
     [SerializeField] private float fadeSpeed = 0.05f;
 
+
+    [SerializeField] private GameObject timerManager;
+
     private int totalScore;
 
     void Start()
@@ -58,6 +61,7 @@ public class IFRealModeGameManager : MonoBehaviour
         ResetStep();                //스텝 초기화
         ResetScore();               //점수 초기화
         
+        timerManager.SetActive(true);
         WaitUI.SetActive(false);
     }
 
@@ -104,17 +108,18 @@ public class IFRealModeGameManager : MonoBehaviour
         // 페이드 아웃 & 인
         IFFadeController.FadeOut(fadeSpeed);
         while (IFFadeController.IsFading) yield return null;
-
+/*
         // 리스폰
         if (player != null && respawnPoint != null)
             player.position = respawnPoint.position;
-
+*/
         IFFadeController.FadeIn(fadeSpeed);
         while (IFFadeController.IsFading) yield return null;
 
         // 결과 UI 표시
         if (FinishUI != null){
-/*
+
+            timerManager.SetActive(false);
             FinishUI.SetActive(true);
             textComponent = textObject.GetComponent<TextMeshProUGUI>();
             // 스코어매니저 인스턴스에 GetCompletedDescriptions() 함수로 결과 받아와서
@@ -123,7 +128,7 @@ public class IFRealModeGameManager : MonoBehaviour
             string resultText = string.Join("\n", resultDescriptions); 
             // 화면에 출력
             textComponent.text = resultText;
-*/
+
         }
         else
             Debug.Log("UI 할당되지 않음");

@@ -5,7 +5,6 @@ using UnityEngine;
 public class IFCaseThree : MonoBehaviour
 {
     [SerializeField] private IFPracticeModeGameManagerScript practiceStageManager;
-    [SerializeField] private int zoneStepIndex = 3;
     [SerializeField] private GameObject target; // 작업자 오브젝트
 
     // 미션 완료 멘트

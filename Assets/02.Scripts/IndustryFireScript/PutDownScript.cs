@@ -36,6 +36,11 @@ public class PutDownScript : MonoBehaviour, IInteractable
 
         fireCover.transform.localPosition = new Vector3(850f, -0.71f, 534.5f);
         fireCover.transform.rotation = Quaternion.Euler(-90f, 0f, 0f);
+        
+        // 실전모드라면 가점
+        if(ModeManagerScript.Instance.isRealMode){
+            IFScoreManager.Instance.CompleteAction(IFActionType.FireCover);
+        }
 
         hasInteracted = true;
     }

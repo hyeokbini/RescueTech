@@ -5,7 +5,6 @@ using UnityEngine;
 public class IFCaseFive : MonoBehaviour
 {
     [SerializeField] private IFPracticeModeGameManagerScript practiceStageManager;
-    [SerializeField] private int zoneStepIndex = 5;
     [SerializeField] private GameObject target; // 없애야하는 타겟 오브젝트
 
     // 미션 완료 멘트

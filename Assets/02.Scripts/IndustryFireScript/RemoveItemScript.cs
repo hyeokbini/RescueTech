@@ -28,11 +28,16 @@ public class RemoveItemScript : MonoBehaviour, IInteractable
     public void RemoveItem()
     {   
         // 실전모드라면 가점
-        /*
         if(ModeManagerScript.Instance.isRealMode){
-            EarthquakeScoreManager.Instance.CompleteAction(ActionType.Cushion);
-        }*/
-
+            // 타겟 아이템이 페인팅이라면 
+            if(target.name == "Painting"){
+                IFScoreManager.Instance.CompleteAction(IFActionType.StopPainting);
+            }
+            else {
+                IFScoreManager.Instance.CompleteAction(IFActionType.RemovableItems);
+            }
+        }
+        
         // 아이템 비활성화 시키기
         if (target != null)
         {

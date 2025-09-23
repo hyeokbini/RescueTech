@@ -29,7 +29,6 @@ public class IFSceneModeInitializer : MonoBehaviour
             {
                 Debug.Log("연습 모드 실행");
                 practiceManager.SetActive(true);
-                practiceObjects.SetActive(true);
                 realManager.SetActive(false);
             }
             else
@@ -37,7 +36,6 @@ public class IFSceneModeInitializer : MonoBehaviour
                 Debug.Log("실전 모드 실행");
                 practiceManager.SetActive(false);
                 realManager.SetActive(true);
-                realObjects.SetActive(true);
             }
         }
     }

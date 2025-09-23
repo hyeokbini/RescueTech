@@ -29,10 +29,10 @@ public class SetActive : MonoBehaviour, IInteractable
     public void AddItem()
     {   
         // 실전모드라면 가점
-        /*
         if(ModeManagerScript.Instance.isRealMode){
-            EarthquakeScoreManager.Instance.CompleteAction(ActionType.Cushion);
-        }*/
+            IFScoreManager.Instance.CompleteAction(IFActionType.CallSupervisor);
+        }
+
 
         // 아이템 활성화 시키기
         if (target != null)
