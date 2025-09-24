@@ -40057,7 +40057,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af30ae2647040a34d90514277e7aaffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRealMode: 1
+  isRealMode: 0
 --- !u!4 &986093307
 Transform:
   m_ObjectHideFlags: 0
