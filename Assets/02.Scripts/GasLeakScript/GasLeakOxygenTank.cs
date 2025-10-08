@@ -13,13 +13,13 @@ public class GasLeakOxygenTank : MonoBehaviour, IInteractable
     public bool HasInteracted => hasInteracted;
     private GameObject target;
     private GameObject rightHand;
+    public bool isGrab = false;
 
     private void Awake()
     {
         // 이 스크립트 붙은 오브젝트의 부모를 target으로 설정
         if (transform.parent != null)
             target = transform.parent.gameObject;
-
         rightHand = GameObject.Find("RightHand");
     }
 
@@ -31,6 +31,12 @@ public class GasLeakOxygenTank : MonoBehaviour, IInteractable
         target.transform.localRotation = Quaternion.identity;
         gameObject.SetActive(false);
         hasInteracted = true;
+        isGrab = true;
         gasPracticeModeManager.IncreaseStageStep();
+    }
+
+    public void UnGrab()
+    {
+        target.SetActive(false);
     }
 }

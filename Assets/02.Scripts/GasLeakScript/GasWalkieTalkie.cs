@@ -19,7 +19,7 @@ public class GasWalkieTalkie : MonoBehaviour, IInteractable
         if (hasInteracted) return;
         if(ModeManagerScript.Instance.isRealMode)
         {
-            
+            GasLeakScoreManager.Instance.CompleteAction(GasAction.WalkieTalkie);
             hasInteracted = true;
         }
         else

@@ -80,6 +80,49 @@ public class FireScoreManager : MonoBehaviour
         Debug.Log($"Action Completed: {type} (Fatal: {isFatal})");
     }
 
+    // 매뉴얼에 맞는 행동 배열
+    private static readonly FireAction[] PositivePool = new FireAction[]
+    {
+        FireAction.EmergencyAlarm, FireAction.Phone_119,
+        FireAction.Towel, FireAction.Stair, FireAction.OutDoor
+    };
+
+    // 매뉴얼에 맞지 않는 행동 배열
+    private static readonly FireAction[] NegativeList = new FireAction[]
+    {
+        FireAction.Phone_Another, FireAction.Elevator
+    };
+
+    // 올바른 행동을 취한 개수 반환 함수
+    private int CountCompletedPositives() => PositivePool.Count(a => actionMap[a].IsCompleted);
+    // 올바르지 않은 행동을 취한 개수 반환 함수(등급 하락 요소)
+    private int CountCompletedNegatives() => NegativeList.Count(a => actionMap[a].IsCompleted);
+    // 불에 끼어들었는지 체크(등급 최하 지급 요소)
+    private bool IsInFire() => actionMap.TryGetValue(FireAction.Fire, out var d) && d.IsCompleted;
+
+    // 등급 반환
+    public char ComputeGrade()
+    {
+        if (IsInFire())
+            return 'F';
+        int pos = CountCompletedPositives();
+        char grade = (pos >= 5) ? 'A' : (pos >= 3 ? 'B' : 'C');
+        int neg = CountCompletedNegatives();
+        for (int i = 0; i < neg; i++)
+        {
+            if (grade == 'C') break;
+            if (grade == 'A') grade = 'B';
+            else if (grade == 'B') grade = 'C';
+        }
+        return grade;
+    }
+
+    public string GetGrade()
+    {
+        var g = ComputeGrade();
+        return $"{g}";
+    }
+
     public string GetFormattedResults()
     {
         // 우선순위 정렬(치명적 실패-점수(오름차순))

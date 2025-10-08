@@ -99,15 +99,16 @@ public class FireRealModeFlowManager : MonoBehaviour
         }
         towel.PutOffFace();
         // 3. 결과 UI 표시
-        if (FinishUI != null && scoreText != null){
-            scoreText.text = "점수: " + totalScore;
+        if (FinishUI != null && scoreText != null)
+        {
+            scoreText.text = FireScoreManager.Instance.GetGrade();
             scoreText.gameObject.SetActive(true);
-            FinishUI.SetActive(true);
             textComponent = textObject.GetComponent<TextMeshProUGUI>();
             // 스코어매니저 인스턴스에 결과 받아와서 출력
             string results = FireScoreManager.Instance.GetFormattedResults();
             textComponent.richText = true;
             textComponent.text = results;
+            FinishUI.SetActive(true);
         }
         else
             Debug.Log("UI 할당되지 않음");

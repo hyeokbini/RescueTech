@@ -16,6 +16,8 @@ public class GasLeakValve : MonoBehaviour, IInteractable
     private float raiseDistance = 2f;
     [SerializeField]
     private float raiseDuration = 3.0f;
+    [SerializeField]
+    private GameObject gas;
     public int InteractIndex => interactIndex;
     private bool hasInteracted = false;
     public bool HasInteracted => hasInteracted;
@@ -25,9 +27,10 @@ public class GasLeakValve : MonoBehaviour, IInteractable
         if (hasInteracted) return;
         if(wallRaiseCoroutine == null)
             wallRaiseCoroutine = StartCoroutine(Raise(wall, raiseDistance, raiseDuration));
+        gas.SetActive(false);
         if (ModeManagerScript.Instance.isRealMode)
         {
-            
+            GasLeakScoreManager.Instance.CompleteAction(GasAction.Valve);
             hasInteracted = true;
         }
         else

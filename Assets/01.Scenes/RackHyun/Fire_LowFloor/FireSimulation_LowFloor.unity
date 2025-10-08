@@ -22833,7 +22833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14763ec0c77a5d441a9fdfb34c816dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeLimit: 180
+  timeLimit: 100
   UI_timerText: {fileID: 575074836}
   UI_startTimerText: {fileID: 1052543378}
   startUI: {fileID: 770303635}
@@ -36672,7 +36672,7 @@ PrefabInstance:
     - target: {fileID: 978523842945028925, guid: 894edc677057b42b28be567d8fa86b21,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 148
+      value: 290
       objectReference: {fileID: 0}
     - target: {fileID: 978523842945028925, guid: 894edc677057b42b28be567d8fa86b21,
         type: 3}
@@ -36697,7 +36697,7 @@ PrefabInstance:
     - target: {fileID: 2741514586999573498, guid: 894edc677057b42b28be567d8fa86b21,
         type: 3}
       propertyPath: m_fontSize
-      value: 40
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2741514586999573498, guid: 894edc677057b42b28be567d8fa86b21,
         type: 3}
@@ -36717,7 +36717,7 @@ PrefabInstance:
     - target: {fileID: 2741514586999573498, guid: 894edc677057b42b28be567d8fa86b21,
         type: 3}
       propertyPath: m_fontSizeBase
-      value: 40
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 2741514586999573498, guid: 894edc677057b42b28be567d8fa86b21,
         type: 3}
@@ -39054,6 +39054,7 @@ GameObject:
   - component: {fileID: 1809159602}
   - component: {fileID: 1809159601}
   - component: {fileID: 1809159600}
+  - component: {fileID: 1809159603}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -39123,6 +39124,19 @@ Transform:
   - {fileID: 994665423}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -191.27, z: 0}
+--- !u!114 &1809159603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809159599}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5d3ecb3d8652514b90b5c382e66bdc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hand: 0
 --- !u!1001 &1811323817
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -45593,7 +45607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af30ae2647040a34d90514277e7aaffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isRealMode: 0
+  isRealMode: 1
 --- !u!4 &2129707197
 Transform:
   m_ObjectHideFlags: 0

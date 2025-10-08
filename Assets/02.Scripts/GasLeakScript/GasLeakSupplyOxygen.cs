@@ -13,20 +13,16 @@ public class GasLeakSupplyOxygen : MonoBehaviour, IInteractable
     public int InteractIndex => interactIndex;
     private bool hasInteracted = false;
     public bool HasInteracted => hasInteracted;
-    private GameObject oxygenTank;
-
-    private void Awake()
-    {
-        oxygenTank = GameObject.Find("OxygenTank Variant");
-    }
+    [SerializeField]
+    private GasLeakOxygenTank oxygenTank;
 
     public void SupplyOxygen()
     {
-        if (hasInteracted) return;
-        oxygenTank.gameObject.SetActive(false);
+        if (hasInteracted || !oxygenTank.isGrab) return;
+        oxygenTank.UnGrab();
         if (ModeManagerScript.Instance.isRealMode)
         {
-
+            GasLeakScoreManager.Instance.CompleteAction(GasAction.OxygenTank);
             hasInteracted = true;
         }
         else

@@ -27,7 +27,7 @@ public class GasWear : MonoBehaviour
         {
             if (ModeManagerScript.Instance.isRealMode)
             {
-
+                GasLeakScoreManager.Instance.CompleteAction(GasAction.MaskGlove);
             }
             else
             {

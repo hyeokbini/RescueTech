@@ -18,7 +18,7 @@ public class GasWindowManager : MonoBehaviour
         anyWindowOpened = true;
         if (ModeManagerScript.Instance.isRealMode)
         {
-
+            GasLeakScoreManager.Instance.CompleteAction(GasAction.Window);
         }
         else
         {

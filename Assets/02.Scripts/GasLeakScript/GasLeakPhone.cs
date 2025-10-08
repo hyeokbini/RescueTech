@@ -41,15 +41,16 @@ public class GasLeakPhone : MonoBehaviour, IInteractable
             return;
         }
         hasInteracted = true;
-        if(ModeManagerScript.Instance.isRealMode)
+        if (ModeManagerScript.Instance.isRealMode)
         {
             OnBtnClick(index);
-            FireScoreManager.Instance.CompleteAction(FireAction.Phone_119);
+            GasLeakScoreManager.Instance.CompleteAction(GasAction.Phone_119);
         }
         else
         {
             gasPracticeModeManager.IncreaseStageStep();
         }
+        phoneUI.SetActive(false);
     }
 
     public void UseAnotherApp(int index)
@@ -61,7 +62,7 @@ public class GasLeakPhone : MonoBehaviour, IInteractable
         }
         if(ModeManagerScript.Instance.isRealMode)
         {
-            FireScoreManager.Instance.CompleteAction(FireAction.Phone_Another);
+            GasLeakScoreManager.Instance.CompleteAction(GasAction.Phone_Another);
             hasInteracted = true;
             OnBtnClick(index);
         }

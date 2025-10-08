@@ -35,7 +35,7 @@ public class GasLeakInfectedPerson : MonoBehaviour, IInteractable
         gasFadeController.FadeIn();
         if (ModeManagerScript.Instance.isRealMode)
         {
-
+            GasLeakScoreManager.Instance.CompleteAction(GasAction.Person);
             hasInteracted = true;
         }
         else

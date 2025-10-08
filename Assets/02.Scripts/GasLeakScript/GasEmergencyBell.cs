@@ -18,7 +18,7 @@ public class GasEmergencyBell : MonoBehaviour, IInteractable
         if (hasInteracted) return;
         if (ModeManagerScript.Instance.isRealMode)
         {
-
+            GasLeakScoreManager.Instance.CompleteAction(GasAction.EmergencyAlarm);
             hasInteracted = true;
         }
         else
