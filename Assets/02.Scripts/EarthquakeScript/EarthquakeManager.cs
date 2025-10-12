@@ -24,8 +24,13 @@ public class EarthquakeManager : MonoBehaviour
     private Quaternion originalRot;
     private Transform originalTransform;
 
+
+    [SerializeField] private AudioSource earthquakeSource;
+    [SerializeField] private AudioClip earthquakeClip;
+
     void Start()
     {
+        //earthquakeSource.clip = earthquakeClip;
         originalTransform = transform;
         originalPos = originalTransform.localPosition;
         originalRot = originalTransform.localRotation;
@@ -41,6 +46,7 @@ public class EarthquakeManager : MonoBehaviour
             // 지진 
             if (isShaking)
             {
+                earthquakeSource.PlayOneShot(earthquakeClip, 3.5f);
                 StartCoroutine(ShakingCoroutine());
                 yield return new WaitForSeconds(shakingInterval);
                 isShaking = false;

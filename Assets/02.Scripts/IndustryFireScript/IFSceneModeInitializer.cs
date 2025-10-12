@@ -10,11 +10,13 @@ public class IFSceneModeInitializer : MonoBehaviour
     // 상호 작용하는 오브젝트를 구분한다. 
     [SerializeField] private GameObject directionObjects;
 
+    [SerializeField] private AudioSource backgoundAudio;
 
     private bool isRealMode;
 
     void Start()
     {
+        backgoundAudio.Play();
         // Null 에러 처리
         if (ModeManagerScript.Instance == null)
         {

@@ -24,6 +24,9 @@ public class Door : MonoBehaviour, IInteractable
 
     private Coroutine RotateCoroutine;
 
+    [SerializeField] private AudioSource doorSource;
+    [SerializeField] private AudioClip doorClip;
+
     private void Awake()
     {
         // 이 스크립트 붙은 오브젝트의 부모를 target으로 설정
@@ -33,6 +36,7 @@ public class Door : MonoBehaviour, IInteractable
 
     public void Open()
     {
+        doorSource.PlayOneShot(doorClip, 1f);
         if (isStage == false) {
             if(RotateCoroutine == null)
                 RotateCoroutine = StartCoroutine(RotateY(door, targetAngle, 130f));
@@ -46,9 +50,9 @@ public class Door : MonoBehaviour, IInteractable
         }
         
     }
-    // 방법 2. 연습모드와 실전모드 함수 구분
     public void Open_R()
     {
+        doorSource.PlayOneShot(doorClip, 1f);
         if(RotateCoroutine == null){
                 RotateCoroutine = StartCoroutine(RotateY(door, targetAngle, 130f));
                 hasInteracted = true;
