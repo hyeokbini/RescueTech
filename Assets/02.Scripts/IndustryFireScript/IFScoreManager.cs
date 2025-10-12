@@ -111,4 +111,44 @@ public class IFScoreManager : MonoBehaviour
             })
             .ToList();
     }
+
+    public string GetGrade()
+    {
+        // 총 점수 계산
+        int completedMission = actionMap.Values.Where(a => a.IsCompleted).Count();
+        var scores = actionMap.Values
+        .Select(a =>
+        {
+            // RemovableItems인 경우 CurrentCount를 반환
+            if (actionMap.First(kv => kv.Value == a).Key == IFActionType.RemovableItems)
+            {
+                return a.CurrentCount;
+            }
+            // 그 외의 경우 IsCompleted가 true면 1, 아니면 0을 반환
+            else
+            {
+                return a.IsCompleted ? 1 : 0;
+            }
+        })
+        .Sum(); // 계산된 점수들의 합계
+        
+
+        // 총 점수가 11점이면 S 
+        // 가연성 물질도 모두 치우고, 나머지 미션도 성공한 경우
+        if (scores == 11){
+            return "A";
+        }
+        // 총 4개 미션 중 n개만 미션을 성공했을 때
+        switch (completedMission)
+        {
+            case 3:
+                return "A";
+            case 2:
+                return "B";
+            default:
+                return "C";
+        }
+
+
+    }
 }

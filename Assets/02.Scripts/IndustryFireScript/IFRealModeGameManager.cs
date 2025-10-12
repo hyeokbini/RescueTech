@@ -12,8 +12,6 @@ public class IFRealModeGameManager : MonoBehaviour
     [SerializeField]
     private int stageStep;          //전체 스테이지 스텝
     private int currentStep;        //현재 스테이지 스텝
-    [SerializeField]
-    private Text UI_scoreText;      //점수 텍스트 UI
     
     [SerializeField]
     private GameObject WaitUI;      
@@ -24,6 +22,10 @@ public class IFRealModeGameManager : MonoBehaviour
     [SerializeField]
     private GameObject textObject;  
     private TextMeshProUGUI textComponent;
+
+    [SerializeField]
+    private GameObject gradeTextObject;  
+    private TextMeshProUGUI gradeComponent;
 
 
     [SerializeField] private Transform player;
@@ -124,10 +126,22 @@ public class IFRealModeGameManager : MonoBehaviour
             textComponent = textObject.GetComponent<TextMeshProUGUI>();
             // 스코어매니저 인스턴스에 GetCompletedDescriptions() 함수로 결과 받아와서
             List<string> resultDescriptions = IFScoreManager.Instance.GetCompletedDescriptions();
-            // 합친 후
-            string resultText = string.Join("\n", resultDescriptions); 
+
+            string resultText;
+            // 아무 미션 성공하지 못한 경우
+            if(resultDescriptions.Count == 0){
+                resultText = "화재 예방을 하지 못했습니다.";
+            }else{
+                resultText = string.Join("\n", resultDescriptions); 
+            }
             // 화면에 출력
             textComponent.text = resultText;
+
+            // 스코어 매니저 GetScore() 함수로 결과 받아와서
+            gradeComponent = gradeTextObject.GetComponent<TextMeshProUGUI>();
+            string grade = IFScoreManager.Instance.GetGrade();
+            // 받은 결과를 화면에 출력
+            gradeComponent.text = grade;
 
         }
         else
