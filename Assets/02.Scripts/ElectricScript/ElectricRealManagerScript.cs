@@ -24,6 +24,8 @@ public class ElectricRealManagerScript : MonoBehaviour
     [SerializeField]
     private TextUIManagerScript textManager;
 
+    private Coroutine endingCoroutine;
+
     // 0. 장갑을 꼈는지
     // 1. 스위치를 눌렀는지 -> 0 없이 1 하면 게임오버
     // 2. 119 요청을 주변사람에게 했는지
@@ -79,11 +81,19 @@ public class ElectricRealManagerScript : MonoBehaviour
             c.enabled = false;
         }
         textManager.DeactiveUIWithText();
-        if (feedbackCanvas != null)
-        {
-            feedbackCanvas.gameObject.SetActive(true);
-            feedbackText.text = GetFeedbackText();
-        }
+        endingCoroutine = StartCoroutine(EndingCoroutine());
+    }
+
+    public void SetFeedBack()
+    {
+        feedbackCanvas.gameObject.SetActive(true);
+        feedbackText.text = GetFeedbackText();
+    }
+
+    IEnumerator EndingCoroutine()
+    {
+        yield return StartCoroutine(GetComponent<ElectricEndingFadeInOutScript>().FadeCoroutine());
+        endingCoroutine = null;
     }
 
     public void SetEndState()
@@ -111,13 +121,15 @@ public class ElectricRealManagerScript : MonoBehaviour
         {
             feedBack += "게임 오버\n\n";
             feedBack += "장갑을 끼지 않고 구조를 시도하면 추가 사고가 일어날 수 있습니다!\n\n";
-            return feedBack; // 게임오버
+            feedBack += "점수 : " + totalScore + "\n\n";
+            feedBack += "그립 버튼으로 메인 씬으로 돌아가기";
+            return feedBack;
+            // 게임오버
         }
         if (!getCompletedActionList[3])
         {
             feedBack += "게임 오버\n\n";
             feedBack += "CPR이 제대로 진행되지 않았습니다.\n\n";
-            return feedBack; // 게임오버
         }
         if (!getCompletedActionList[1])
         {

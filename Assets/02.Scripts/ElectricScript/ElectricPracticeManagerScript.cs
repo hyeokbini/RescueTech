@@ -49,11 +49,15 @@ public class ElectricPracticeManagerScript : MonoBehaviour, IManagerObjCount
         endingCoroutine = StartCoroutine(EndingCoroutine());
     }
 
+    public void SetFeedBack()
+    {
+        clearUIPanel.SetActive(true);
+        clearTextcomponent.text = "연습 모드가 종료되었습니다.\n\n실제 상황에서는 119가 언제 도착할 지 모르기 때문에\n\n계속해서 심폐소생술을 실시해주어야 합니다.\n\n그립 버튼으로 메인 씬으로 돌아가기";
+    }
+
     IEnumerator EndingCoroutine()
     {
         yield return StartCoroutine(GetComponent<ElectricEndingFadeInOutScript>().FadeCoroutine());
-        clearUIPanel.SetActive(true);
-        clearTextcomponent.text = "연습 모드가 종료되었습니다.\n\n실제 상황에서는 119가 언제 도착할 지 모르기 때문에\n\n계속해서 심폐소생술을 실시해주어야 합니다.\n\n그립 버튼으로 메인 씬으로 돌아가기";
         endingCoroutine = null;
     }
 
