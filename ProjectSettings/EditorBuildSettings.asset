@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/01.Scenes/JungHa/MainScene.unity
     guid: 606ad5d2ef5fe434cae0a0842a2478c3
   - enabled: 1
-    path: Assets/01.Scenes/RackHyun/FireSimulation_LowFloor.unity
+    path: Assets/01.Scenes/RackHyun/Fire_LowFloor/FireSimulation_LowFloor.unity
     guid: 7793cf065ddec94418826b4edbfd6dfa
   - enabled: 1
     path: Assets/01.Scenes/HyeokBin/Typhoon/TyphoonScene - PracticeandReal.unity

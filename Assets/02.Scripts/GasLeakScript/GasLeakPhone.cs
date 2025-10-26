@@ -1,0 +1,89 @@
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class GasLeakPhone : MonoBehaviour, IInteractable
+{
+    [SerializeField]
+    private GasPracticeModeManager gasPracticeModeManager;
+    [SerializeField]
+    private TextUIManagerScript textUIManager;
+    [SerializeField]
+    private GameObject phoneUI;
+    [SerializeField]
+    private int interactIndex = 8;
+    public int InteractIndex => interactIndex;
+    private bool hasInteracted = false;
+    public bool HasInteracted => hasInteracted;
+    [SerializeField]
+    private GameObject btnClickUI;
+    public List<string> btnClickText;
+    private bool isCoroutineRunning = false;
+
+    void Start()
+    {
+        phoneUI.SetActive(false);
+        btnClickUI.SetActive(false);
+    }
+
+    public void TurnOnPhone()
+    {
+        if (hasInteracted) return;
+        phoneUI.SetActive(true);
+    }
+
+    public void CallTo119(int index)
+    {
+        if (hasInteracted)
+        {
+            OnBtnClick(3);
+            return;
+        }
+        hasInteracted = true;
+        if (ModeManagerScript.Instance.isRealMode)
+        {
+            OnBtnClick(index);
+            GasLeakScoreManager.Instance.CompleteAction(GasAction.Phone_119);
+        }
+        else
+        {
+            gasPracticeModeManager.IncreaseStageStep();
+        }
+        phoneUI.SetActive(false);
+    }
+
+    public void UseAnotherApp(int index)
+    {
+        if (hasInteracted && ModeManagerScript.Instance.isRealMode)
+        {
+            OnBtnClick(3);
+            return;
+        }
+        if(ModeManagerScript.Instance.isRealMode)
+        {
+            GasLeakScoreManager.Instance.CompleteAction(GasAction.Phone_Another);
+            hasInteracted = true;
+            OnBtnClick(index);
+        }
+    }
+
+    public void OnBtnClick(int index)
+    {
+        if (isCoroutineRunning) return;
+        if (btnClickText == null || btnClickUI == null) return;
+        if (index < 0 || index >= btnClickText.Count) return;
+        TextMeshProUGUI textComponent = btnClickUI.GetComponentInChildren<TextMeshProUGUI>();
+        textComponent.text = btnClickText[index];
+        StartCoroutine(UICoroutine());
+    }
+
+    private IEnumerator UICoroutine()
+    {
+        isCoroutineRunning = true;
+        btnClickUI.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        btnClickUI.SetActive(false);
+        isCoroutineRunning = false;
+    }
+}
