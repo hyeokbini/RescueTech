@@ -32,6 +32,7 @@ public class ElectricSwitchInteractionScript : MonoBehaviour, IInteractable
         }
         else
         {
+            realGameManager.IncreaseStep();
             realGameManager.AddScore(100); // 실전 모드 점수 부여
             realGameManager.getCompletedActionList[1] = true;
         }
