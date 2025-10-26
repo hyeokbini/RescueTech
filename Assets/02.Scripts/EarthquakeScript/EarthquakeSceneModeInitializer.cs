@@ -12,10 +12,13 @@ public class EarthquakeSceneModeInitializer : MonoBehaviour
     [SerializeField] private GameObject realObjects;
 
 
+    [SerializeField] private AudioSource backgoundAudio;
+
     private bool isRealMode;
 
     void Start()
     {
+        backgoundAudio.Play();
         // Null 에러 처리
         if (ModeManagerScript.Instance == null)
         {

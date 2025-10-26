@@ -35,6 +35,7 @@ public class WindowListManagerScript : MonoBehaviour
             }
             else
             {
+                realGameManager.IncreaseStep();
                 realGameManager.AddScore(30); // 실전 모드: 추가점 30점
                 realGameManager.getCompletedActionList[0] = true;
             }
