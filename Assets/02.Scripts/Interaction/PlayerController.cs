@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     private MonoBehaviour countScript;
     private IManagerObjCount Count => countScript as IManagerObjCount;
 
+    [SerializeField] private AudioClip clickSound;
+
     void Update()
     {
         Ray ray = new Ray(transform.position, transform.forward);
@@ -34,6 +36,7 @@ public class PlayerController : MonoBehaviour
                 if (hitObject.GetComponent<Button>() != null)
                 {
                     Debug.Log("버튼 누름");
+                    AudioSource.PlayClipAtPoint(clickSound, transform.position);
                     var pointerEvent = new PointerEventData(EventSystem.current)
                     {
                         position = Camera.main.WorldToScreenPoint(hit.point)

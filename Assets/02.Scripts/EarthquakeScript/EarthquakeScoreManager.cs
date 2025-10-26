@@ -82,4 +82,31 @@ public class EarthquakeScoreManager : MonoBehaviour
             .Select(a => a.Description)
             .ToList();
     }
+
+    public string GetGrade()
+    {
+        // 총 점수 계산
+        int completedMission = actionMap.Values.Where(a => a.IsCompleted).Count();
+        var scores = actionMap.Values
+        .Select(a =>
+        {
+            return a.IsCompleted ? 1 : 0;
+        })
+        .Sum(); // 계산된 점수들의 합계
+        
+        // 최대 점수 3, 최저 점수 -1
+        switch (completedMission)
+        {
+            case 3:
+                return "S";
+            case 2:
+                return "A";
+            case 1:
+                return "B";
+            default:
+                return "C";
+        }
+
+
+    }
 }

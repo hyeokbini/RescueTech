@@ -28,9 +28,11 @@ public class MainStateManager : MonoBehaviour
     public GameObject[] objectList;
     private int currentUI;
 
+    [SerializeField] private AudioSource backgoundAudio;
 
     void Start()
-    {
+    {   
+        backgoundAudio.Play();
         // 게임 오브젝트 배열 생성
         objectList = new GameObject[8]; 
 
@@ -43,7 +45,7 @@ public class MainStateManager : MonoBehaviour
         objectList[6] = UI_naturalSelectButton;
         objectList[7] = UI_industrySelectButton;
         
-        StartCoroutine(ShowIntro(2f));
+        StartCoroutine(ShowIntro(4f));
     }
 
     IEnumerator ShowIntro(float delay)
