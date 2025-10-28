@@ -22,6 +22,12 @@ public class CPRSimulator : MonoBehaviour
     [SerializeField] private TMP_Text countdownText;
     [SerializeField] private TMP_Text timerText;
 
+    [Header("Result Feedback")]
+    [SerializeField] private GameObject goodImage;  
+    [SerializeField] private GameObject badImage;   
+    private GameObject lastActiveImage;             
+    private Coroutine hideCoroutine;                
+
     [Header("Health Gauge (실전 모드 전용)")]
     [SerializeField] private Slider healthBar;  // ⬅️ 슬라이더로 표현되는 세로 게이지
     [SerializeField] private float maxHealth = 100f;
@@ -60,6 +66,12 @@ public class CPRSimulator : MonoBehaviour
             currentHealth = maxHealth;
             healthBar.value = 1f;
         }
+
+        // 이미지 초기화
+        if (goodImage != null) goodImage.SetActive(false);
+        if (badImage != null) badImage.SetActive(false);
+        lastActiveImage = null;
+        hideCoroutine = null;
 
         StartCoroutine(CountdownRoutine());
     }
@@ -157,6 +169,8 @@ public class CPRSimulator : MonoBehaviour
 
                 if (isRealMode)
                     Heal(successHealAmount);
+
+                ShowResultImage(goodImage);
             }
             else
             {
@@ -165,7 +179,63 @@ public class CPRSimulator : MonoBehaviour
 
                 if (isRealMode)
                     Damage(failDamageAmount);
+
+                ShowResultImage(badImage);
             }
+        }
+    }
+
+    private void ShowResultImage(GameObject target)
+    {
+        if (target == null) return;
+
+        // 같은 이미지가 이미 켜져 있는 경우: 타이머만 재시작
+        if (lastActiveImage == target && target.activeSelf)
+        {
+            // 기존 코루틴 재시작: 멈추고 다시 시작
+            if (hideCoroutine != null)
+            {
+                StopCoroutine(hideCoroutine);
+            }
+            hideCoroutine = StartCoroutine(HideAfterDelay(target, 0.5f));
+            return;
+        }
+
+        // 다른 이미지가 켜져 있다면 (종류가 다를 때만) 기존꺼 끄기
+        if (lastActiveImage != null && lastActiveImage != target)
+        {
+            lastActiveImage.SetActive(false);
+
+            // 기존 자동숨김 코루틴이 있으면 정리
+            if (hideCoroutine != null)
+            {
+                StopCoroutine(hideCoroutine);
+                hideCoroutine = null;
+            }
+        }
+
+        // 대상 이미지 켜기
+        target.SetActive(true);
+        lastActiveImage = target;
+
+        // 자동으로 0.5초 후에 끄기
+        if (hideCoroutine != null)
+        {
+            StopCoroutine(hideCoroutine);
+        }
+        hideCoroutine = StartCoroutine(HideAfterDelay(target, 0.5f));
+    }
+
+    private IEnumerator HideAfterDelay(GameObject target, float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // 타깃이 여전히 마지막으로 켜진 이미지면 끈다
+        if (target == lastActiveImage)
+        {
+            target.SetActive(false);
+            lastActiveImage = null;
+            hideCoroutine = null;
         }
     }
 
