@@ -11,6 +11,9 @@ public class IFCaseThree : MonoBehaviour
     [SerializeField] private TextUIManagerScript textUIManager;
     [SerializeField] private float postTextDuration = 10f;
 
+    [SerializeField] private GameObject preDerectionObj;
+    [SerializeField] private GameObject curDerectionObj;
+
     private bool missionCompleted;
     private Coroutine checkMissionCoroutine;
 
@@ -40,6 +43,8 @@ public class IFCaseThree : MonoBehaviour
             {
                 missionCompleted = true;
                 Debug.Log("3구역 미션 완료 다음 단계로 진행");
+                preDerectionObj.SetActive(false);
+                curDerectionObj.SetActive(true);
                 StartCoroutine(clearedMission());
                 yield break;
             }

@@ -11,6 +11,8 @@ public class IFCaseFive : MonoBehaviour
     [SerializeField] private TextUIManagerScript textUIManager;
     [SerializeField] private float postTextDuration = 10f;
 
+    [SerializeField] private GameObject preDerectionObj;
+
     private List<int> cleanedIndex = new List<int>();
     private bool missionCompleted;
     private Coroutine checkMissionCoroutine;
@@ -42,6 +44,7 @@ public class IFCaseFive : MonoBehaviour
             {
                 missionCompleted = true;
                 Debug.Log("5구역 미션 완료");
+                preDerectionObj.SetActive(false);
                 // 바로 종료 코루틴 실행
                 StartCoroutine(practiceStageManager.ClearSequenceDirect());
                 yield break;

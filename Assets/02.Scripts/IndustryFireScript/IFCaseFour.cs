@@ -15,6 +15,10 @@ public class IFCaseFour : MonoBehaviour
     private bool missionCompleted;
     private Coroutine checkMissionCoroutine;
 
+
+    [SerializeField] private GameObject preDerectionObj;
+    [SerializeField] private GameObject curDerectionObj;
+
     private void OnEnable()
     {
         if (checkMissionCoroutine == null) checkMissionCoroutine = StartCoroutine(checkMission());
@@ -52,7 +56,9 @@ public class IFCaseFour : MonoBehaviour
             if (cleanedIndex.Count >= targets.Count)
             {
                 missionCompleted = true;
-                Debug.Log("1구역 미션 완료 다음 단계로 진행");
+                Debug.Log("4구역 미션 완료 다음 단계로 진행");
+                preDerectionObj.SetActive(false);
+                curDerectionObj.SetActive(true);
                 StartCoroutine(clearedMission());   
                 yield break;                            
             }
