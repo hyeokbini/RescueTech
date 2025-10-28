@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 
@@ -61,6 +62,7 @@ public class MainStateManager : MonoBehaviour
     public void SceneChange()
     {
         Debug.Log("씬 전환");
+        SceneManager.LoadScene("VRPracticeScene");
     }
 
     // 튜토리얼 선택창을 보여주는 메서드
