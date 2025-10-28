@@ -15,6 +15,8 @@ public class TyphoonRealModeManagerScript : MonoBehaviour
     private Canvas feedbackCanvas;
     [SerializeField]
     private TextMeshProUGUI feedbackText;      //점수 텍스트 UI
+    [SerializeField]
+    private GameObject gradeText;      //등급 텍스트 오브젝트
     private int totalScore;         //총 점수
 
     [SerializeField]
@@ -23,6 +25,8 @@ public class TyphoonRealModeManagerScript : MonoBehaviour
     private TyphoonPlayerScript player;
     [SerializeField]
     private WindowListManagerScript window;
+
+    private Coroutine endingCoroutine;
 
     // 0. 테이프로 창문을 다 막았는지
     // 1. 누전 차단기를 내렸는지
@@ -76,11 +80,26 @@ public class TyphoonRealModeManagerScript : MonoBehaviour
     public void FinishStage()
     {
         player.EndState();
-        if (feedbackCanvas != null)
+        foreach (var c in player.GetComponentsInChildren<PlayerController>(true))
         {
-            feedbackCanvas.gameObject.SetActive(true);
-            feedbackText.text = GetFeedbackText();
+            c.enabled = false;
         }
+        textManager.DeactiveUIWithText();
+        endingCoroutine = StartCoroutine(EndingCoroutine());
+    }
+
+    public void SetFeedBack()
+    {
+        feedbackCanvas.gameObject.SetActive(true);
+        feedbackText.text = GetFeedbackText();
+        gradeText.SetActive(true);
+        gradeText.GetComponent<TextMeshProUGUI>().text = GetGradeText();
+    }
+
+    IEnumerator EndingCoroutine()
+    {
+        yield return StartCoroutine(GetComponent<TyphoonEndingFadeInOutScript>().FadeCoroutine());
+        endingCoroutine = null;
     }
 
     private void ResetScore()
@@ -119,4 +138,24 @@ public class TyphoonRealModeManagerScript : MonoBehaviour
         feedBack += "그립 버튼으로 메인 씬으로 돌아가기";
         return feedBack;
     }
+
+    private string GetGradeText()
+    {
+        // 완료된 태스크 개수 계산
+        int completedCount = 0;
+        foreach (bool done in getCompletedActionList)
+        {
+            if (done) completedCount++;
+        }
+
+        // 완료 개수 기준 등급 분기
+        switch (completedCount)
+        {
+            case 3: return "S"; // 모든 태스크 완료
+            case 2: return "A";
+            case 1: return "B";
+            default: return "C"; // 0개 완료
+        }
+    }
+
 }
