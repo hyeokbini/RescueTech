@@ -7,6 +7,10 @@ public class TyphoonEndingFadeInOutScript : MonoBehaviour
     [SerializeField]
     private Image fadeImage;            // 페이드 인/아웃 할 이미지
     private Coroutine fadeCoroutine;    // 코루틴 중복 방지용
+    [SerializeField]
+    private TyphoonRealModeManagerScript realManagerScript;
+    [SerializeField]
+    private TyphoonPracticeModeManagerScript practiceManagerScript;
 
     public IEnumerator FadeCoroutine(float speed = 0.01f)
     {
@@ -22,6 +26,14 @@ public class TyphoonEndingFadeInOutScript : MonoBehaviour
     private IEnumerator FadeSequence(float speed)
     {
         yield return StartCoroutine(FadeOutCoroutine(speed));
+        if (ModeManagerScript.Instance.isRealMode)
+        {
+            realManagerScript.SetFeedBack();
+        }
+        else
+        {
+            practiceManagerScript.SetFeedBack();
+        }
         yield return new WaitForSeconds(1f);
         yield return StartCoroutine(FadeInCoroutine(speed));
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class ElectricRealManagerScript : MonoBehaviour
 {
@@ -19,6 +20,8 @@ public class ElectricRealManagerScript : MonoBehaviour
     private Canvas feedbackCanvas;
     [SerializeField]
     private TextMeshProUGUI feedbackText;      //점수 텍스트 UI
+    [SerializeField]
+    private GameObject gradeText;      //등급 텍스트 오브젝트
     private int totalScore;         //총 점수
 
     [SerializeField]
@@ -88,6 +91,8 @@ public class ElectricRealManagerScript : MonoBehaviour
     {
         feedbackCanvas.gameObject.SetActive(true);
         feedbackText.text = GetFeedbackText();
+        gradeText.SetActive(true);
+        gradeText.GetComponent<TextMeshProUGUI>().text = GetGradeText(); // ✅ 등급 표시 추가
     }
 
     IEnumerator EndingCoroutine()
@@ -121,7 +126,6 @@ public class ElectricRealManagerScript : MonoBehaviour
         {
             feedBack += "게임 오버\n\n";
             feedBack += "장갑을 끼지 않고 구조를 시도하면 추가 사고가 일어날 수 있습니다!\n\n";
-            feedBack += "점수 : " + totalScore + "\n\n";
             feedBack += "그립 버튼으로 메인 씬으로 돌아가기";
             return feedBack;
             // 게임오버
@@ -143,8 +147,37 @@ public class ElectricRealManagerScript : MonoBehaviour
         {
             feedBack += "성공적으로 감전사고 환자에 대한 응급처치를 마쳤습니다!\n\n";
         }
-        feedBack += "점수 : " + totalScore + "\n\n";
         feedBack += "그립 버튼으로 메인 씬으로 돌아가기";
         return feedBack;
     }
+
+    private string GetGradeText()
+    {
+        // 게임 오버 조건이면 무조건 F
+        if (!getCompletedActionList[0] || !getCompletedActionList[3])
+            return "F";
+
+        // 점수 기준 우선 체크 (800점 이상이면 SS)
+        if (totalScore >= 800)
+            return "SS";
+
+        // 완료된 태스크 개수 계산
+        int completedCount = 0;
+        foreach (bool done in getCompletedActionList)
+        {
+            if (done) completedCount++;
+        }
+
+        // 개수별 등급 분기
+        switch (completedCount)
+        {
+            case 4: return "S"; // 완벽 수행
+            case 3: return "A";
+            case 2: return "B";
+            case 1: return "C";
+            default: return "F"; // 아무 것도 안함
+        }
+    }
+
+
 }

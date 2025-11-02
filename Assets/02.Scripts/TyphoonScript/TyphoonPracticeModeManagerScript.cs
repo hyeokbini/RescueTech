@@ -49,11 +49,15 @@ public class TyphoonPracticeModeManagerScript : MonoBehaviour, IManagerObjCount
         endingCoroutine = StartCoroutine(EndingCoroutine());
     }
 
+    public void SetFeedBack()
+    {
+        clearUIPanel.SetActive(true);
+        clearTextcomponent.text = "연습 모드가 종료되었습니다.\n\n태풍이 완전히 지나갈 때까지는 연락 매체를 통해 외부와 소통하며\n\n실내에서 대기하는 것이 좋습니다.\n\n그립 버튼으로 메인 씬으로 돌아가기";
+    }
+
     IEnumerator EndingCoroutine()
     {
         yield return StartCoroutine(GetComponent<TyphoonEndingFadeInOutScript>().FadeCoroutine());
-        clearUIPanel.SetActive(true);
-        clearTextcomponent.text = "연습 모드가 종료되었습니다.\n\n태풍이 완전히 지나갈 때까지는 연락 매체를 통해 외부와 소통하며\n\n실내에서 대기하는 것이 좋습니다.\n\n그립 버튼으로 메인 씬으로 돌아가기";
         endingCoroutine = null;
     }
 
