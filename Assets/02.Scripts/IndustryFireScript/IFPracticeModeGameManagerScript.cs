@@ -22,9 +22,12 @@ public class IFPracticeModeGameManagerScript : MonoBehaviour, IManagerObjCount
     public int CurrentStepCount => currentStepCount;
     public int ObjCount => currentStepCount;
 
+    [SerializeField] private GameObject derectionObj;
+
     private void Start()
     {
         Debug.Log("연습모드 시작");
+        derectionObj.SetActive(true);
         TriggerStep(); 
     }
 

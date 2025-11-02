@@ -12,6 +12,9 @@ public class IFCaseTwo : MonoBehaviour
     [SerializeField] private TextUIManagerScript textUIManager;
     [SerializeField] private float postTextDuration = 10f;
 
+    [SerializeField] private GameObject preDerectionObj;
+    [SerializeField] private GameObject curDerectionObj;
+
 
     [SerializeField] private FireCoverScript fireCoverScript;
 
@@ -48,6 +51,8 @@ public class IFCaseTwo : MonoBehaviour
             if(!fireCoverScript.isCarrying && targetZone.bounds.Intersects(coverCol.bounds)){
                 missionCompleted = true;
                 Debug.Log("2구역 미션 완료 → 다음 단계로 진행");
+                preDerectionObj.SetActive(false);
+                curDerectionObj.SetActive(true);
                 StartCoroutine(clearedMission());
                 yield break;
             }

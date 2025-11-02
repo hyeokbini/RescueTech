@@ -11,6 +11,9 @@ public class IFCaseOne : MonoBehaviour
     [SerializeField] private TextUIManagerScript textUIManager;
     [SerializeField] private float postTextDuration = 10f;
 
+    [SerializeField] private GameObject preDerectionObj;
+    [SerializeField] private GameObject curDerectionObj;
+
     private List<int> cleanedIndex = new List<int>();
     private bool missionCompleted;
     private Coroutine checkMissionCoroutine;
@@ -53,6 +56,8 @@ public class IFCaseOne : MonoBehaviour
             {
                 missionCompleted = true;
                 Debug.Log("1구역 미션 완료 다음 단계로 진행");
+                preDerectionObj.SetActive(false);
+                curDerectionObj.SetActive(true);
                 StartCoroutine(clearedMission());   
                 yield break;                            
             }
