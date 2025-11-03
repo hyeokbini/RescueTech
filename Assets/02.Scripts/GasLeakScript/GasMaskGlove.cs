@@ -56,6 +56,8 @@ public class GasMaskGlove : MonoBehaviour, IInteractable
                     rightModel.gameObject.SetActive(false);
                 }
             }
+            
+            this.gameObject.SetActive(false);
         }
         else if (gasWearType == GasWearType.Mask)
         {
