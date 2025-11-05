@@ -1274,7 +1274,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -2212,7 +2212,7 @@ PrefabInstance:
     - target: {fileID: 6667402393872249569, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8829451551789304537, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
@@ -5353,7 +5353,7 @@ PrefabInstance:
     - target: {fileID: 6667402393872249569, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8829451551789304537, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
@@ -10077,7 +10077,7 @@ PrefabInstance:
     - target: {fileID: 6667402393872249569, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8829451551789304537, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
@@ -10569,7 +10569,7 @@ PrefabInstance:
     - target: {fileID: 6667402393872249569, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6860310887368847533, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
@@ -11275,7 +11275,7 @@ PrefabInstance:
     - target: {fileID: 6667402393872249569, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8829451551789304537, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
@@ -20917,7 +20917,7 @@ PrefabInstance:
     - target: {fileID: 6667402393872249569, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6860310887368847533, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
@@ -26565,7 +26565,7 @@ PrefabInstance:
     - target: {fileID: 6667402393872249569, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8829451551789304537, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
@@ -29495,6 +29495,7 @@ MonoBehaviour:
   hand: 0
   maxDistance: 10
   countScript: {fileID: 542130985}
+  clickSound: {fileID: 8300000, guid: 1e7a587164fcbef45b40536469e6c432, type: 3}
 --- !u!1001 &1440709194
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32020,7 +32021,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -39427,7 +39428,7 @@ PrefabInstance:
     - target: {fileID: 6667402393872249569, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8829451551789304537, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
@@ -40545,12 +40546,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -42599,7 +42600,7 @@ PrefabInstance:
     - target: {fileID: 6667402393872249569, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8829451551789304537, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
@@ -43987,7 +43988,7 @@ PrefabInstance:
     - target: {fileID: 6667402393872249569, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8829451551789304537, guid: 8206b722d11501a449d6a278cca2adfa,
         type: 3}
