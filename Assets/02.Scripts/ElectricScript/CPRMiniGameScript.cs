@@ -3,7 +3,8 @@ using HTC.UnityPlugin.Vive;
 using Valve.VR.InteractionSystem;
 using System.Collections;
 using TMPro;
-using UnityEngine.UI; // ⬅️ 슬라이더용
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class CPRSimulator : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class CPRSimulator : MonoBehaviour
     private Coroutine hideCoroutine;                
 
     [Header("Health Gauge (실전 모드 전용)")]
-    [SerializeField] private Slider healthBar;  // ⬅️ 슬라이더로 표현되는 세로 게이지
+    [SerializeField] private Slider healthBar;  
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float healthDrainPerSecond = 2f;
     [SerializeField] private float successHealAmount = 5f;
@@ -39,6 +40,17 @@ public class CPRSimulator : MonoBehaviour
     [SerializeField] private float bpm = 100f;
     [SerializeField] private float duration = 30f;
     [SerializeField] private float perfectRange = 20f;
+
+    [Header("Open/Close Animation (Tablet style)")]
+    [SerializeField] private RectTransform rootPanel;               // 전체패널 (슬라이드용)
+    [SerializeField] private RectTransform tabletScreenRect;       // 내부 화면 (X축으로 펼치는 대상)
+    [SerializeField] private CanvasGroup tabletScreenCanvasGroup;  // 내부 화면 알파
+    [SerializeField] private float slideDuration = 0.4f;
+    [SerializeField] private Ease slideEase = Ease.OutBack;
+    [SerializeField] private float screenRevealDuration = 0.4f;
+    [SerializeField] private Ease screenEase = Ease.OutCubic;
+
+    private bool isAnimating = false;
 
     private float timer;
     private bool isActive = false;
@@ -50,16 +62,18 @@ public class CPRSimulator : MonoBehaviour
 
     void OnEnable()
     {
-        playerController.enabled = false;
+        // 플레이어 제어 잠금
+        if (playerController != null)
+            playerController.enabled = false;
+
         timer = 0f;
         successCount = 0;
         failCount = 0;
         isActive = false;
 
-        // 실전 모드 여부 확인 (예시: 매니저에서 플래그 가져오기)
-        isRealMode = ModeManagerScript.Instance.isRealMode;
+        isRealMode = ModeManagerScript.Instance != null && ModeManagerScript.Instance.isRealMode;
 
-        // ⬇️ 생명 게이지 초기화
+        // 생명 게이지 준비(단, 실제 표시/활성화는 Open 애니메이션과 연결 가능)
         if (healthBar != null)
         {
             healthBar.gameObject.SetActive(isRealMode);
@@ -73,12 +87,15 @@ public class CPRSimulator : MonoBehaviour
         lastActiveImage = null;
         hideCoroutine = null;
 
-        StartCoroutine(CountdownRoutine());
+        // 애니메이션으로 열기 -> 애니메이션 끝난 뒤 Countdown 시작
+        PlayOpenAnimation();
     }
 
     void OnDisable()
     {
-        playerController.enabled = true;
+        // 안전하게 플레이어 제어 복구
+        if (playerController != null)
+            playerController.enabled = true;
     }
 
     IEnumerator CountdownRoutine()
@@ -102,7 +119,7 @@ public class CPRSimulator : MonoBehaviour
     {
         if (!isActive) return;
 
-        // 제한 시간 체크
+        // (기존 Update 로직: 타이머, 위치 이동, 입력 체크 등)
         timer += Time.deltaTime;
         float remain = Mathf.Max(0, duration - timer);
 
@@ -131,7 +148,7 @@ public class CPRSimulator : MonoBehaviour
         float xPos = Mathf.Lerp(-maxRange, maxRange, pingpong);
         circle.anchoredPosition = new Vector2(xPos, circle.anchoredPosition.y);
 
-        // 생명 게이지 감소 (실전 모드 전용)
+        // health drain
         if (isRealMode && healthBar != null)
         {
             currentHealth -= healthDrainPerSecond * Time.deltaTime;
@@ -242,24 +259,24 @@ public class CPRSimulator : MonoBehaviour
     private void Heal(float amount)
     {
         currentHealth = Mathf.Min(maxHealth, currentHealth + amount);
-        healthBar.value = currentHealth / maxHealth;
+        if (healthBar != null) healthBar.value = currentHealth / maxHealth;
     }
 
     private void Damage(float amount)
     {
         currentHealth = Mathf.Max(0f, currentHealth - amount);
-        healthBar.value = currentHealth / maxHealth;
+        if (healthBar != null) healthBar.value = currentHealth / maxHealth;
     }
 
     private void EndSession()
     {
         isActive = false;
         Debug.Log("⏰ CPR 세션 종료");
+
         if (isRealMode)
         {
-            // 성공 횟수에 따른 점수 추가
-            int scorePerSuccess = 10;   // 성공 1회당 10점
-            int scorePerFail = -5;      // 실패 1회당 -5점
+            int scorePerSuccess = 10;
+            int scorePerFail = -5;
             int totalCprScore = successCount * scorePerSuccess + failCount * scorePerFail;
 
             realGameManager.AddScore(totalCprScore);
@@ -269,6 +286,97 @@ public class CPRSimulator : MonoBehaviour
         {
             practiceGameManager.IncreaseStageStep();
         }
-        gameObject.SetActive(false);
+
+        // 닫기 애니메이션 재생하고 최종적으로 비활성화
+        PlayCloseAnimation();
     }
+
+    // ----------------------- 애니메이션 관련 함수 (NewInventoryUI 방식 재사용) -----------------------
+    private void PlayOpenAnimation()
+    {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        gameObject.SetActive(true);
+
+        // rootPanel 시작 위치 (화면 아래)
+        if (rootPanel != null)
+        {
+            Vector2 startPos = new Vector2(rootPanel.anchoredPosition.x, -Screen.height * 0.5f);
+            rootPanel.anchoredPosition = startPos;
+        }
+
+        if (tabletScreenCanvasGroup != null)
+            tabletScreenCanvasGroup.alpha = 0f;
+
+        Sequence seq = DOTween.Sequence();
+        seq.Append(rootPanel.DOAnchorPosY(0f, slideDuration).SetEase(slideEase));
+        seq.AppendCallback(() =>
+        {
+            // 내부 화면 리빌(가운데에서 X축으로 펼치며 알파 증가)
+            PlayInnerReveal();
+        });
+    }
+
+    private void PlayInnerReveal()
+    {
+        if (tabletScreenRect == null || tabletScreenCanvasGroup == null)
+        {
+            isAnimating = false;
+            // 애니메이션 없으면 바로 카운트다운 시작
+            StartCoroutine(CountdownRoutine());
+            return;
+        }
+
+        // 초기 스케일
+        tabletScreenRect.localScale = new Vector3(0f, 1f, 1f);
+
+        Sequence seq = DOTween.Sequence();
+        seq.Append(tabletScreenRect.DOScaleX(1f, screenRevealDuration * 0.8f).SetEase(screenEase));
+        seq.Join(tabletScreenCanvasGroup.DOFade(1f, screenRevealDuration).SetEase(Ease.OutQuad));
+        seq.OnComplete(() =>
+        {
+            tabletScreenRect.localScale = Vector3.one;
+            tabletScreenCanvasGroup.alpha = 1f;
+            isAnimating = false;
+
+            // 애니메이션이 끝난 뒤 카운트다운 시작
+            StartCoroutine(CountdownRoutine());
+        });
+    }
+
+    private void PlayCloseAnimation()
+    {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        Sequence seq = DOTween.Sequence();
+
+        // 내부 화면 먼저 가로로 접으면서 페이드아웃
+        if (tabletScreenRect != null && tabletScreenCanvasGroup != null)
+        {
+            seq.Append(tabletScreenRect.DOScaleX(0f, screenRevealDuration * 0.8f).SetEase(screenEase));
+            seq.Join(tabletScreenCanvasGroup.DOFade(0f, screenRevealDuration).SetEase(Ease.OutQuad));
+        }
+
+        // 그리고 전체 패널 아래로 슬라이드
+        if (rootPanel != null)
+        {
+            seq.Append(rootPanel.DOAnchorPosY(-Screen.height, slideDuration).SetEase(slideEase));
+        }
+
+        seq.OnComplete(() =>
+        {
+            // 초기화
+            if (tabletScreenRect != null) tabletScreenRect.localScale = Vector3.one;
+            if (tabletScreenCanvasGroup != null) tabletScreenCanvasGroup.alpha = 1f;
+
+            isAnimating = false;
+
+            // 비활성화 및 플레이어 제어 복구
+            gameObject.SetActive(false);
+            if (playerController != null) playerController.enabled = true;
+        });
+    }
+    // ----------------------------------------------------------------------------------------------
 }
