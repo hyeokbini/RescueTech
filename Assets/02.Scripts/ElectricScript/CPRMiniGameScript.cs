@@ -24,13 +24,13 @@ public class CPRSimulator : MonoBehaviour
     [SerializeField] private TMP_Text timerText;
 
     [Header("Result Feedback")]
-    [SerializeField] private GameObject goodImage;  
-    [SerializeField] private GameObject badImage;   
-    private GameObject lastActiveImage;             
-    private Coroutine hideCoroutine;                
+    [SerializeField] private GameObject goodImage;
+    [SerializeField] private GameObject badImage;
+    private GameObject lastActiveImage;
+    private Coroutine hideCoroutine;
 
     [Header("Health Gauge (실전 모드 전용)")]
-    [SerializeField] private Slider healthBar;  
+    [SerializeField] private Slider healthBar;
     [SerializeField] private float maxHealth = 100f;
     [SerializeField] private float healthDrainPerSecond = 2f;
     [SerializeField] private float successHealAmount = 5f;
@@ -77,9 +77,12 @@ public class CPRSimulator : MonoBehaviour
         if (healthBar != null)
         {
             healthBar.gameObject.SetActive(isRealMode);
-            currentHealth = maxHealth;
-            healthBar.value = 1f;
+
+            // 시작 체력을 50%로 변경
+            currentHealth = maxHealth * 0.5f;
+            healthBar.value = currentHealth / maxHealth;
         }
+
 
         // 이미지 초기화
         if (goodImage != null) goodImage.SetActive(false);
