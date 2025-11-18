@@ -31,6 +31,8 @@ public class MainStateManager : MonoBehaviour
 
     [SerializeField] private AudioSource backgoundAudio;
 
+    [SerializeField] private float fadeSpeed = 0.01f; 
+
     void Start()
     {   
         backgoundAudio.Play();
@@ -52,9 +54,46 @@ public class MainStateManager : MonoBehaviour
     IEnumerator ShowIntro(float delay)
     {
         currentUI = 0;
-        objectList[currentUI].SetActive(true);
+        GameObject introPanel = objectList[currentUI]; 
+        introPanel.SetActive(true);
+
+        Image introImage = introPanel.GetComponent<Image>();
+
+        Color startColor = introImage.color;
+        startColor.a = 0f;
+        introImage.color = startColor;
+        
+        // 페이드 인
+        yield return StartCoroutine(FadeTo(introImage, 1f, fadeSpeed));
+
+        // 이미지 대기
         yield return new WaitForSeconds(delay);
+        
+        // 페이드 아웃 
+        yield return StartCoroutine(FadeTo(introImage, 0f, fadeSpeed));
+        
+        // 비활성화
+        introPanel.SetActive(false); 
+        
         ShowTutorial();
+    }
+
+    IEnumerator FadeTo(Image image, float targetAlpha, float speed)
+    {
+        float direction = (targetAlpha > image.color.a) ? 1f : -1f;
+        Color color = image.color;
+
+        while ( (direction > 0 && color.a < targetAlpha) || (direction < 0 && color.a > targetAlpha) )
+        {
+            color.a += speed * direction;
+            
+            color.a = Mathf.Clamp01(color.a);
+            
+            image.color = color;
+            yield return new WaitForSeconds(0.01f);
+        }
+        color.a = targetAlpha;
+        image.color = color;
     }
 
     
