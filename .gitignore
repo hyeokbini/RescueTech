@@ -80,4 +80,4 @@ crashlytics-build.properties
 .DS_Store
 
 # Ignore Private Repository
-/RescueTech/[Aa]ssets/00.PrivateAsset
+/[Aa]ssets/00.PrivateAsset
