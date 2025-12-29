@@ -78,3 +78,6 @@ crashlytics-build.properties
 
 # OS junk
 .DS_Store
+
+# Ignore Private Repository
+/RescueTech/[Aa]ssets/00.PrivateAsset
